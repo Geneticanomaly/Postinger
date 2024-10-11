@@ -1,4 +1,16 @@
 services:
+    server:
+        image: postinger-backend-dev
+        build:
+            context: .
+            dockerfile: dev.Dockerfile
+        volumes:
+            - ./:/usr/src/app
+        ports:
+            - 3003:3003
+        environment:
+            - POSTGRES_URL=postgres://the_username:the_password@db:5432/the_database
+
     db:
         image: postgres:latest
         ports:
