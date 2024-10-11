@@ -6,30 +6,30 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
-export default class Bookmark extends Model<InferAttributes<Bookmark>, InferCreationAttributes<Bookmark>> {
+export default class Follow extends Model<InferAttributes<Follow>, InferCreationAttributes<Follow>> {
     declare id: CreationOptional<number>;
-    declare postId: number;
-    declare userId: string;
+    declare followerId: string;
+    declare followingId: string;
 }
 
-Bookmark.init(
+Follow.init(
     {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        postId: {
-            type: DataTypes.INTEGER,
+        followerId: {
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: 'posts',
+                model: 'users',
                 key: 'id',
             },
         },
-        userId: {
+        followingId: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -42,11 +42,12 @@ Bookmark.init(
         sequelize,
         underscored: true,
         timestamps: false,
-        tableName: 'bookmarks',
+        modelName: 'follow',
+        tableName: 'follows',
         indexes: [
             {
                 unique: true,
-                fields: ['postId', 'userId'],
+                fields: ['followerId', 'followingId'],
             },
         ],
     }

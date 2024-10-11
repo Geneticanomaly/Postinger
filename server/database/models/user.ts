@@ -7,7 +7,7 @@ import {
     UUIDV4,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
 export default class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
     declare id: CreationOptional<string>;
@@ -79,6 +79,7 @@ User.init(
         sequelize,
         underscored: true,
         timestamps: true,
+        modelName: 'user',
         tableName: 'users',
     }
 );

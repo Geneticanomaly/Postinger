@@ -6,7 +6,7 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
 export default class Repost extends Model<InferAttributes<Repost>, InferCreationAttributes<Repost>> {
     declare id: CreationOptional<number>;
@@ -42,6 +42,7 @@ Repost.init(
         sequelize,
         underscored: true,
         timestamps: false,
+        modelName: 'repost',
         tableName: 'reposts',
         indexes: [
             {

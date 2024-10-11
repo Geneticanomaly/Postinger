@@ -6,26 +6,32 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
-export default class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
+export default class Comment extends Model<InferAttributes<Comment>, InferCreationAttributes<Comment>> {
     declare id: CreationOptional<number>;
+    declare postId: number;
     declare userId: string;
-    declare content: string;
-    declare image: CreationOptional<string>;
-    declare likes: number;
-    declare comments: number;
-    declare reposts: number;
+    declare content: CreationOptional<string | null>;
+    declare image: CreationOptional<string | null>;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
 
-Post.init(
+Comment.init(
     {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
+        },
+        postId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'posts',
+                key: 'id',
+            },
         },
         userId: {
             type: DataTypes.UUID,
@@ -37,26 +43,11 @@ Post.init(
         },
         content: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         image: {
             type: DataTypes.STRING,
             allowNull: true,
-        },
-        likes: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-        },
-        comments: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-        },
-        reposts: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
@@ -64,7 +55,8 @@ Post.init(
     {
         sequelize,
         underscored: true,
-        timestamps: true,
-        tableName: 'posts',
+        timestamps: false,
+        modelName: 'comment',
+        tableName: 'comments',
     }
 );

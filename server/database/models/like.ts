@@ -6,7 +6,7 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
 export default class Like extends Model<InferAttributes<Like>, InferCreationAttributes<Like>> {
     declare id: CreationOptional<number>;
@@ -42,6 +42,7 @@ Like.init(
         sequelize,
         underscored: true,
         timestamps: false,
+        modelName: 'like',
         tableName: 'likes',
         indexes: [
             {

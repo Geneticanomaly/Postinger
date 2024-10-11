@@ -6,7 +6,7 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
 export default class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message>> {
     declare id: CreationOptional<number>;

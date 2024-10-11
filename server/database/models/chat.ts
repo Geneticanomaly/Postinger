@@ -1,27 +1,29 @@
 import {
     type CreationOptional,
+    DataTypes,
     type InferAttributes,
     type InferCreationAttributes,
-    DataTypes,
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
-export default class Follow extends Model<InferAttributes<Follow>, InferCreationAttributes<Follow>> {
+export default class Chat extends Model<InferAttributes<Chat>, InferCreationAttributes<Chat>> {
     declare id: CreationOptional<number>;
-    declare followerId: string;
-    declare followingId: string;
+    declare userId1: string;
+    declare userId2: string;
+    declare createdAt: CreationOptional<Date>;
+    declare updatedAt: CreationOptional<Date>;
 }
 
-Follow.init(
+Chat.init(
     {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
             autoIncrement: true,
         },
-        followerId: {
+        userId1: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -29,7 +31,7 @@ Follow.init(
                 key: 'id',
             },
         },
-        followingId: {
+        userId2: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
@@ -37,17 +39,14 @@ Follow.init(
                 key: 'id',
             },
         },
+        createdAt: DataTypes.DATE,
+        updatedAt: DataTypes.DATE,
     },
     {
         sequelize,
         underscored: true,
-        timestamps: false,
-        tableName: 'follows',
-        indexes: [
-            {
-                unique: true,
-                fields: ['followerId', 'followingId'],
-            },
-        ],
+        timestamps: true,
+        modelName: 'chat',
+        tableName: 'chats',
     }
 );

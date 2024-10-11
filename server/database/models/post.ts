@@ -6,23 +6,21 @@ import {
     Model,
 } from 'sequelize';
 
-import { sequelize } from '../util/db';
+import { sequelize } from '../../util/db';
 
-export default class Notification extends Model<
-    InferAttributes<Notification>,
-    InferCreationAttributes<Notification>
-> {
+export default class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
     declare id: CreationOptional<number>;
     declare userId: string;
-    declare fromId: string;
-    declare type: 'like' | 'comment' | 'follow';
-    declare resourceId: CreationOptional<number>;
-    declare isRead: CreationOptional<boolean>;
+    declare content: string;
+    declare image: CreationOptional<string>;
+    declare likes: number;
+    declare comments: number;
+    declare reposts: number;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
 
-Notification.init(
+Post.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -37,25 +35,28 @@ Notification.init(
                 key: 'id',
             },
         },
-        fromId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'users',
-                key: 'id',
-            },
-        },
-        type: {
-            type: DataTypes.ENUM('like', 'comment', 'follow'),
+        content: {
+            type: DataTypes.STRING,
             allowNull: false,
         },
-        resourceId: {
-            type: DataTypes.INTEGER,
+        image: {
+            type: DataTypes.STRING,
             allowNull: true,
         },
-        isRead: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+        likes: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+        },
+        comments: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
+        },
+        reposts: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: 0,
         },
         createdAt: DataTypes.DATE,
         updatedAt: DataTypes.DATE,
@@ -64,6 +65,7 @@ Notification.init(
         sequelize,
         underscored: true,
         timestamps: true,
-        tableName: 'notifications',
+        modelName: 'post',
+        tableName: 'posts',
     }
 );
