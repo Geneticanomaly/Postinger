@@ -3,13 +3,16 @@ import cors from 'cors';
 import { PORT } from './util/config';
 import { connectToDatabase } from './util/db';
 import { app, server } from './socket/socket';
+import { router as authRouter } from './routes/auth';
+import { errorHandler, unknownEndpoint } from './util/middleware';
 
 app.use(cors());
 app.use(express.json());
 
-app.get('/test', (_req, res) => {
-    res.send('Working');
-});
+app.use(authRouter);
+
+app.use(unknownEndpoint);
+app.use(errorHandler);
 
 server.listen(PORT, async () => {
     await connectToDatabase();

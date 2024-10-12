@@ -7,4 +7,4 @@ const DATABASE_DEV_URL: string =
 
 export const DATABASE_URL: string = process.env.DATABASE_URL || DATABASE_DEV_URL;
 export const PORT: number = Number(process.env.PORT) || 3003;
-export const SECRET: string = process.env.SECRET || '';
+export const AUTH_SECRET: string = process.env.AUTH_SECRET || '';
