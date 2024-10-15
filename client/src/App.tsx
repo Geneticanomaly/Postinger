@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import Register from './pages/Register';
+import Register from './components/RegisterForm';
 import Login from './pages/Login';
 import Home from './pages/Home';
 
@@ -9,10 +9,10 @@ function App() {
         <>
             <Router>
                 <Routes>
-                    <Route path="/ksdjlk" element={<LandingPage />} />
+                    <Route path="/" element={<LandingPage />} />
                 </Routes>
                 <Routes>
-                    <Route path="/" element={<Register />} />
+                    <Route path="/register" element={<Register />} />
                 </Routes>
                 <Routes>
                     <Route path="/login" element={<Login />} />

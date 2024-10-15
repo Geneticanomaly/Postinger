@@ -53,7 +53,7 @@ const Register = () => {
                     value={formData.password}
                     onChange={(e) => handleChange(e)}
                 />
-                <button>Register</button>
+                <button className="p-6 bg-blue-400">Register</button>
             </form>
         </>
     );
