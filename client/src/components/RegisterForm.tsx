@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authServices from '../services/auth';
 import { TextField } from '@mui/material';
+import { useThemeContext } from '../context/themeContext';
+import '../index.css';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -10,6 +12,7 @@ const Register = () => {
         username: '',
         password: '',
     });
+    const { theme } = useThemeContext();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prevData) => ({
@@ -29,17 +32,61 @@ const Register = () => {
         navigate('/login');
     };
 
+    const style = {
+        width: '70%',
+        '& .MuiInputBase-input': {
+            color: theme === 'light' ? '#262626' : 'white',
+            '&:-webkit-autofill': {
+                // Autofill colors
+                '-webkit-box-shadow':
+                    theme === 'light'
+                        ? '0 0 0 30px #ffffff inset !important'
+                        : '0 0 0 30px #0a0a0a inset !important',
+                '-webkit-text-fill-color':
+                    theme === 'light' ? '#262626 !important' : '#ffffff !important',
+            },
+        },
+        '& .MuiInputLabel-root': {
+            color: 'gray',
+            // Label color when focused
+            '&.Mui-focused': {
+                color: '#60a5fa',
+            },
+        },
+        '& .MuiOutlinedInput-root': {
+            // Border color
+            '& fieldset': {
+                borderColor: '#404040',
+            },
+            // Border color on hover
+            '&:hover fieldset': {
+                borderColor: '#60a5fa',
+            },
+            // Border color when focused
+            '&.Mui-focused fieldset': {
+                borderColor: '#60a5fa',
+            },
+        },
+    };
+
     return (
-        <>
-            <form onSubmit={(e) => handleSubmit(e)} className="flex flex-col">
+        <div className="w-full flex flex-col gap-10">
+            <h1 className="text-3xl font-bold ml-[15%] dark:text-white">Create your account</h1>
+            <form
+                onSubmit={(e) => handleSubmit(e)}
+                className="w-full flex flex-col justify-center items-center gap-6"
+            >
                 <TextField
+                    sx={style}
                     type="text"
                     label="Email"
                     name="email"
                     value={formData.email}
                     onChange={(e) => handleChange(e)}
+                    autoComplete="off"
                 />
                 <TextField
+                    sx={style}
                     type="text"
                     label="Username"
                     name="username"
@@ -47,15 +94,23 @@ const Register = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <TextField
+                    sx={style}
                     type="password"
                     label="Password"
                     name="password"
                     value={formData.password}
                     onChange={(e) => handleChange(e)}
                 />
-                <button className="p-6 bg-blue-400">Register</button>
+                <section className="flex flex-row justify-center items-center gap-2 w-[70%]">
+                    <hr className="w-[38.5%]" />
+                    <p className="text-neutral-800 dark:text-white">Get Started</p>
+                    <hr className="w-[38.5%]" />
+                </section>
+                <button className="p-4 w-[70%] mt-2 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-400">
+                    Register
+                </button>
             </form>
-        </>
+        </div>
     );
 };
 

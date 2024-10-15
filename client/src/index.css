@@ -9,3 +9,9 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+.modal {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+}
