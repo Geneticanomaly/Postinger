@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import Register from './components/RegisterForm';
+import Register from './pages/Register.tsx';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import { useState } from 'react';
 import { Theme, ThemeContext } from './context/themeContext.ts';
+import './index.css';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');

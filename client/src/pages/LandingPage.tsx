@@ -1,13 +1,10 @@
-import { useState } from 'react';
 import googleLogo from '../assets/icons8-google-48.png';
 import discordLogo from '../assets/icons8-discord-48.png';
 import { useNavigate } from 'react-router-dom';
-import AuthModal from '../components/AuthModal';
 import { useThemeContext } from '../context/themeContext';
 
 const LandingPage = () => {
     const navigate = useNavigate();
-    const [isModal, setIsModal] = useState(false);
     const { theme, setTheme } = useThemeContext();
 
     return (
@@ -43,7 +40,7 @@ const LandingPage = () => {
                     </section>
                     <button
                         className="p-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-500"
-                        onClick={() => setIsModal(true)}
+                        onClick={() => navigate('/register')}
                     >
                         Create account
                     </button>
@@ -62,13 +59,6 @@ const LandingPage = () => {
                         </button>
                     </section>
                 </section>
-                {isModal && (
-                    <div
-                        className="fixed inset-0 bg-neutral-800 bg-opacity-50 w-full h-full"
-                        onClick={() => setIsModal(false)}
-                    />
-                )}
-                {isModal && <AuthModal />}
                 <button
                     className="absolute w-16 h-16 bottom-16 right-16 bg-neutral-900 dark:bg-white rounded-full
                     text-white dark:text-black"

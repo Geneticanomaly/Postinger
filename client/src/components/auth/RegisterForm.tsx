@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import authServices from '../services/auth';
+import authServices from '../../services/auth';
 import { TextField } from '@mui/material';
-import { useThemeContext } from '../context/themeContext';
-import '../index.css';
+import { useThemeContext } from '../../context/themeContext';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -38,11 +37,11 @@ const Register = () => {
             color: theme === 'light' ? '#262626' : 'white',
             '&:-webkit-autofill': {
                 // Autofill colors
-                '-webkit-box-shadow':
+                WebkitBoxShadow:
                     theme === 'light'
                         ? '0 0 0 30px #ffffff inset !important'
                         : '0 0 0 30px #0a0a0a inset !important',
-                '-webkit-text-fill-color':
+                WebkitTextFillColor:
                     theme === 'light' ? '#262626 !important' : '#ffffff !important',
             },
         },
@@ -102,11 +101,11 @@ const Register = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <section className="flex flex-row justify-center items-center gap-2 w-[70%]">
-                    <hr className="w-[38.5%]" />
+                    <hr className="sm:w-[38.5%] w-[30%]" />
                     <p className="text-neutral-800 dark:text-white">Get Started</p>
-                    <hr className="w-[38.5%]" />
+                    <hr className="sm:w-[38.5%] w-[30%]" />
                 </section>
-                <button className="p-4 w-[70%] mt-2 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-400">
+                <button className="p-4 w-[70%] mt-2 rounded-full bg-blue-600 text-white font-bold text-base sm:text-lg hover:bg-blue-400">
                     Register
                 </button>
             </form>
