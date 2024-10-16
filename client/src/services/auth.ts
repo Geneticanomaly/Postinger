@@ -1,5 +1,5 @@
 import axios from 'axios';
-const baseUrl = import.meta.env.BACKEND_URL;
+import { baseUrl } from '../constants';
 
 type RegisterCredentials = {
     email: string;
@@ -13,12 +13,12 @@ type LoginCredentials = {
 };
 
 const register = async (credentials: RegisterCredentials) => {
-    const res = await axios.post(`${baseUrl}/register`, credentials);
+    const res = await axios.post(`${baseUrl}/auth/register`, credentials);
     return res.data;
 };
 
 const login = async (credentials: LoginCredentials) => {
-    const res = await axios.post(`${baseUrl}/login`, credentials);
+    const res = await axios.post(`${baseUrl}/auth/login`, credentials);
     return res.data;
 };
 

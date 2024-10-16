@@ -5,6 +5,7 @@ import { TextField } from '@mui/material';
 import { useThemeContext } from '../../context/themeContext';
 import { getTextFieldStyle } from '../../theme';
 import { z } from 'zod';
+import { isAxiosError } from 'axios';
 
 const registerSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email address' }),
@@ -15,6 +16,7 @@ const registerSchema = z.object({
 const RegisterForm = () => {
     const navigate = useNavigate();
     const { theme } = useThemeContext();
+    const [errorMessage, setErrorMessage] = useState('');
     const [formData, setFormData] = useState({
         email: '',
         username: '',
@@ -56,13 +58,28 @@ const RegisterForm = () => {
             return;
         }
 
-        await authServices.register(formData);
-        setFormData({
-            email: '',
-            username: '',
-            password: '',
-        });
-        navigate('/login');
+        try {
+            await authServices.register(formData);
+            setFormData({
+                email: '',
+                username: '',
+                password: '',
+            });
+            navigate('/login');
+        } catch (error: unknown) {
+            if (isAxiosError(error)) {
+                if (error.response) {
+                    setErrorMessage(error.response.data.error);
+                } else {
+                    setErrorMessage('Something went wrong');
+                }
+            } else {
+                setErrorMessage('An unexpected error occured');
+            }
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
+        }
     };
 
     return (
@@ -104,6 +121,7 @@ const RegisterForm = () => {
                     error={!!formErrors.password}
                     helperText={formErrors.password}
                 />
+                {errorMessage && <p className="w-[70%] text-red-600">{errorMessage}</p>}
                 <section className="flex flex-row justify-center items-center gap-2 w-[70%]">
                     <hr className="sm:w-[38.5%] w-[30%]" />
                     <p className="text-neutral-800 dark:text-white">Get Started</p>

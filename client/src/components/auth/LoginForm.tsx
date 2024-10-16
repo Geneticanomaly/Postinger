@@ -5,6 +5,8 @@ import { getTextFieldStyle } from '../../theme';
 import { Link } from 'react-router-dom';
 import ThirdPartyAuth from './ThirdPartyAuth';
 import { z } from 'zod';
+import authServices from '../../services/auth';
+import { isAxiosError } from 'axios';
 
 const loginSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email' }),
@@ -21,6 +23,7 @@ const LoginForm = () => {
         email?: string;
         password?: string;
     }>({});
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prevData) => ({
@@ -37,7 +40,7 @@ const LoginForm = () => {
         }
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const result = loginSchema.safeParse(formData);
 
@@ -48,6 +51,27 @@ const LoginForm = () => {
                 password: zodErrors.password?._errors[0],
             });
             return;
+        }
+
+        try {
+            const user = await authServices.login(formData);
+            console.log('Logging in', user);
+        } catch (error: unknown) {
+            if (isAxiosError(error)) {
+                if (error.response) {
+                    setErrorMessage(
+                        error.response.data.error.charAt(0).toUpperCase() +
+                            error.response.data.error.slice(1)
+                    );
+                } else {
+                    setErrorMessage('Something went wrong');
+                }
+            } else {
+                setErrorMessage('An unexpected error occured');
+            }
+            setTimeout(() => {
+                setErrorMessage('');
+            }, 5000);
         }
     };
 
@@ -85,6 +109,7 @@ const LoginForm = () => {
                     error={!!formErrors.password}
                     helperText={formErrors.password}
                 />
+                {errorMessage && <p className="w-[70%] text-red-600">{errorMessage}</p>}
                 <button className="w-[70%] p-4 rounded-full text-white font-bold bg-blue-600 hover:bg-blue-500">
                     Sign in
                 </button>
