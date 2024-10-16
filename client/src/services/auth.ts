@@ -18,8 +18,17 @@ const register = async (credentials: RegisterCredentials) => {
 };
 
 const login = async (credentials: LoginCredentials) => {
-    const res = await axios.post(`${baseUrl}/auth/login`, credentials);
+    const res = await axios.post(`${baseUrl}/auth/login`, credentials, {
+        withCredentials: true,
+    });
     return res.data;
 };
 
-export default { register, login };
+const logout = async () => {
+    const res = await axios.get(`${baseUrl}/auth/logout`, {
+        withCredentials: true,
+    });
+    return res.data;
+};
+
+export default { register, login, logout };

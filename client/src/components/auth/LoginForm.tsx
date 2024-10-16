@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { useThemeContext } from '../../context/themeContext';
 import { getTextFieldStyle } from '../../theme';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ThirdPartyAuth from './ThirdPartyAuth';
 import { z } from 'zod';
 import authServices from '../../services/auth';
@@ -14,6 +14,7 @@ const loginSchema = z.object({
 });
 
 const LoginForm = () => {
+    const navigate = useNavigate();
     const { theme } = useThemeContext();
     const [formData, setFormData] = useState({
         email: '',
@@ -56,6 +57,7 @@ const LoginForm = () => {
         try {
             const user = await authServices.login(formData);
             console.log('Logging in', user);
+            navigate('/home');
         } catch (error: unknown) {
             if (isAxiosError(error)) {
                 if (error.response) {

@@ -1,9 +1,8 @@
 import { Request, Response } from 'express';
 import User from '../database/models/user';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import { AUTH_SECRET } from '../util/config';
 import 'express-async-errors';
+import { clearAuthCookies, sendAuthCookies } from '../util/createAuthTokens';
 
 type RegisterRequest = {
     email: string;
@@ -48,13 +47,12 @@ export const loginAuth = async (req: Request<{}, {}, LoginRequest>, res: Respons
         res.status(401).json({ error: 'invalid username or password' });
         return;
     }
+    sendAuthCookies(res, user);
 
-    const userForToken = {
-        id: user.id,
-        username: user.username,
-    };
-    // Create Authentication token
-    const token = jwt.sign(userForToken, AUTH_SECRET, { expiresIn: 60 * 60 });
+    res.status(200).json({ user: user });
+};
 
-    res.status(200).send({ token, username: user.username });
+export const logoutAuth = (_req: Request, res: Response) => {
+    clearAuthCookies(res);
+    res.status(200).end();
 };
