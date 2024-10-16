@@ -20,6 +20,11 @@ const ThirdPartyAuth = () => {
                 <img src={discordLogo} alt="Google" className="inline mr-2 w-8" />
                 Sign in with Discord
             </button>
+            <section className="flex flex-row items-center justify-center gap-2 dark:text-white w-full">
+                <hr className="w-full" />
+                <p className="font-semibold">or</p>
+                <hr className="w-full" />
+            </section>
         </>
     );
 };

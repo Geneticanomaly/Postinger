@@ -5,7 +5,7 @@ const DarkModeToggle = () => {
     return (
         <>
             <button
-                className=" w-12 h-12 bottom-12 right-12 bg-neutral-900 text-sm dark:bg-white rounded-full
+                className=" w-12 h-12 bottom-12 right-12 bg-neutral-800 text-sm dark:bg-white rounded-full
                     text-white dark:text-black"
                 onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >

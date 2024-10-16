@@ -18,11 +18,6 @@ const LandingPage = () => {
                         Join today.
                     </h3>
                     <ThirdPartyAuth />
-                    <section className="flex flex-row items-center justify-center gap-2 dark:text-white w-full">
-                        <hr className="w-full" />
-                        <p className="font-semibold">or</p>
-                        <hr className="w-full" />
-                    </section>
                     <button
                         className="p-4 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-500"
                         onClick={() => navigate('/register')}

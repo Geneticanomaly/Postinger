@@ -2,23 +2,53 @@ import { TextField } from '@mui/material';
 import { useState } from 'react';
 import { useThemeContext } from '../../context/themeContext';
 import { getTextFieldStyle } from '../../theme';
-// import googleLogo from '../../assets/icons8-google-48.png';
-// import discordLogo from '../../assets/icons8-discord-48.png';
 import { Link } from 'react-router-dom';
 import ThirdPartyAuth from './ThirdPartyAuth';
+import { z } from 'zod';
+
+const loginSchema = z.object({
+    email: z.string().email({ message: 'Please enter a valid email' }),
+    password: z.string().min(1, { message: 'Password is required' }),
+});
 
 const LoginForm = () => {
+    const { theme } = useThemeContext();
     const [formData, setFormData] = useState({
         email: '',
         password: '',
     });
-    const { theme } = useThemeContext();
+    const [formErrors, setFormErrors] = useState<{
+        email?: string;
+        password?: string;
+    }>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prevData) => ({
             ...prevData,
             [e.target.name]: e.target.value,
         }));
+
+        // Reset error if user starts typing again
+        if (formErrors[e.target.name as keyof typeof formErrors]) {
+            setFormErrors((prevErrors) => ({
+                ...prevErrors,
+                [e.target.name]: '',
+            }));
+        }
+    };
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const result = loginSchema.safeParse(formData);
+
+        if (!result.success) {
+            const zodErrors = result.error.format();
+            setFormErrors({
+                email: zodErrors.email?._errors[0],
+                password: zodErrors.password?._errors[0],
+            });
+            return;
+        }
     };
 
     return (
@@ -30,13 +60,11 @@ const LoginForm = () => {
                 <section className="flex flex-col justify-center items-center gap-4">
                     <ThirdPartyAuth />
                 </section>
-                <section className="flex flex-row items-center justify-center gap-2 dark:text-white">
-                    <hr className="w-full" />
-                    <p className="font-semibold">or</p>
-                    <hr className="w-full" />
-                </section>
             </section>
-            <form className="flex flex-col justify-center items-center gap-4">
+            <form
+                onSubmit={(e) => handleSubmit(e)}
+                className="flex flex-col justify-center items-center gap-4"
+            >
                 <TextField
                     sx={getTextFieldStyle(theme)}
                     type="text"
@@ -44,7 +72,8 @@ const LoginForm = () => {
                     name="email"
                     value={formData.email}
                     onChange={(e) => handleChange(e)}
-                    autoComplete="off"
+                    error={!!formErrors.email}
+                    helperText={formErrors.email}
                 />
                 <TextField
                     sx={getTextFieldStyle(theme)}
@@ -53,6 +82,8 @@ const LoginForm = () => {
                     name="password"
                     value={formData.password}
                     onChange={(e) => handleChange(e)}
+                    error={!!formErrors.password}
+                    helperText={formErrors.password}
                 />
                 <button className="w-[70%] p-4 rounded-full text-white font-bold bg-blue-600 hover:bg-blue-500">
                     Sign in
