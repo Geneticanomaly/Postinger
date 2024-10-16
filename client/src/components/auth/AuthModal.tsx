@@ -1,10 +1,18 @@
 import RegisterForm from './RegisterForm';
 import CloseIcon from '@mui/icons-material/Close';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import LoginForm from './LoginForm';
+import DarkModeToggle from '../DarkModeToggle';
 
 const AuthModal = () => {
     const navigate = useNavigate();
+    const location = useLocation();
 
+    const renderForm = () => {
+        if (location.pathname === '/register') return <RegisterForm />;
+        else if (location.pathname === '/login') return <LoginForm />;
+        return null;
+    };
     return (
         <div
             className="sm:w-[600px] sm:h-[600px] h-dvh w-dvw
@@ -17,7 +25,10 @@ const AuthModal = () => {
             >
                 <CloseIcon className=" !text-2xl dark:text-white" onClick={() => navigate('/')} />
             </section>
-            <RegisterForm />
+            <section className="absolute top-0 right-0 m-4">
+                <DarkModeToggle />
+            </section>
+            {renderForm()}
         </div>
     );
 };

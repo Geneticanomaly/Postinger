@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import authServices from '../../services/auth';
 import { TextField } from '@mui/material';
 import { useThemeContext } from '../../context/themeContext';
+import { getTextFieldStyle } from '../../theme';
 
-const Register = () => {
+const RegisterForm = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -31,52 +32,15 @@ const Register = () => {
         navigate('/login');
     };
 
-    const style = {
-        width: '70%',
-        '& .MuiInputBase-input': {
-            color: theme === 'light' ? '#262626' : 'white',
-            '&:-webkit-autofill': {
-                // Autofill colors
-                WebkitBoxShadow:
-                    theme === 'light'
-                        ? '0 0 0 30px #ffffff inset !important'
-                        : '0 0 0 30px #0a0a0a inset !important',
-                WebkitTextFillColor:
-                    theme === 'light' ? '#262626 !important' : '#ffffff !important',
-            },
-        },
-        '& .MuiInputLabel-root': {
-            color: 'gray',
-            // Label color when focused
-            '&.Mui-focused': {
-                color: '#60a5fa',
-            },
-        },
-        '& .MuiOutlinedInput-root': {
-            // Border color
-            '& fieldset': {
-                borderColor: '#404040',
-            },
-            // Border color on hover
-            '&:hover fieldset': {
-                borderColor: '#60a5fa',
-            },
-            // Border color when focused
-            '&.Mui-focused fieldset': {
-                borderColor: '#60a5fa',
-            },
-        },
-    };
-
     return (
-        <div className="w-full flex flex-col gap-10">
+        <main className="w-full flex flex-col gap-10">
             <h1 className="text-3xl font-bold ml-[15%] dark:text-white">Create your account</h1>
             <form
                 onSubmit={(e) => handleSubmit(e)}
-                className="w-full flex flex-col justify-center items-center gap-6"
+                className="w-full flex flex-col justify-center items-center gap-4"
             >
                 <TextField
-                    sx={style}
+                    sx={getTextFieldStyle(theme)}
                     type="text"
                     label="Email"
                     name="email"
@@ -85,7 +49,7 @@ const Register = () => {
                     autoComplete="off"
                 />
                 <TextField
-                    sx={style}
+                    sx={getTextFieldStyle(theme)}
                     type="text"
                     label="Username"
                     name="username"
@@ -93,7 +57,7 @@ const Register = () => {
                     onChange={(e) => handleChange(e)}
                 />
                 <TextField
-                    sx={style}
+                    sx={getTextFieldStyle(theme)}
                     type="password"
                     label="Password"
                     name="password"
@@ -105,12 +69,18 @@ const Register = () => {
                     <p className="text-neutral-800 dark:text-white">Get Started</p>
                     <hr className="sm:w-[38.5%] w-[30%]" />
                 </section>
-                <button className="p-4 w-[70%] mt-2 rounded-full bg-blue-600 text-white font-bold text-base sm:text-lg hover:bg-blue-400">
+                <button className="p-4 w-[70%] mt-2 rounded-full bg-blue-600 text-white font-bold text-base  hover:bg-blue-400">
                     Register
                 </button>
+                <section className="flex w-[70%] text-white gap-1 mt-2">
+                    <p className=" text-neutral-800 dark:text-white">Already have an account,</p>
+                    <Link to="/login" className="text-blue-600 dark:text-blue-400 hover:underline">
+                        Sign in
+                    </Link>
+                </section>
             </form>
-        </div>
+        </main>
     );
 };
 
-export default Register;
+export default RegisterForm;

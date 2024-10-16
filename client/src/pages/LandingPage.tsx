@@ -1,11 +1,11 @@
-import googleLogo from '../assets/icons8-google-48.png';
-import discordLogo from '../assets/icons8-discord-48.png';
 import { useNavigate } from 'react-router-dom';
 import { useThemeContext } from '../context/themeContext';
+import ThirdPartyAuth from '../components/auth/ThirdPartyAuth';
+import DarkModeToggle from '../components/DarkModeToggle';
 
 const LandingPage = () => {
     const navigate = useNavigate();
-    const { theme, setTheme } = useThemeContext();
+    const { theme } = useThemeContext();
 
     return (
         <div className={`${theme === 'dark' && 'dark'}`}>
@@ -17,22 +17,7 @@ const LandingPage = () => {
                     <h3 className="font-bold text-xl text-neutral-800 dark:text-neutral-100 mb-4">
                         Join today.
                     </h3>
-                    <button
-                        className="flex justify-center items-center gap-2 p-3 rounded-full bg-neutral-white border
-                        border-gray-300 cursor-pointertext-neutral-900 font-semibold hover:bg-gray-100
-                        dark:bg-white dark:hover:bg-gray-200"
-                    >
-                        <img src={googleLogo} alt="Google" className="inline mr-2 w-8" />
-                        Sign up with Google
-                    </button>
-                    <button
-                        className="flex justify-center items-center gap-2 p-3 rounded-full bg-neutral-white border
-                        border-gray-300 cursor-pointertext-neutral-900 font-semibold hover:bg-gray-100
-                        dark:bg-white dark:hover:bg-gray-200"
-                    >
-                        <img src={discordLogo} alt="Google" className="inline mr-2 w-8" />
-                        Sign up with Discord
-                    </button>
+                    <ThirdPartyAuth />
                     <section className="flex flex-row items-center justify-center gap-2 dark:text-white w-full">
                         <hr className="w-full" />
                         <p className="font-semibold">or</p>
@@ -59,13 +44,9 @@ const LandingPage = () => {
                         </button>
                     </section>
                 </section>
-                <button
-                    className="absolute w-16 h-16 bottom-16 right-16 bg-neutral-900 dark:bg-white rounded-full
-                    text-white dark:text-black"
-                    onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-                >
-                    {theme === 'dark' ? 'DRK' : 'LGT'}
-                </button>
+                <section className="absolute top-0 right-0 m-4">
+                    <DarkModeToggle />
+                </section>
             </main>
         </div>
     );

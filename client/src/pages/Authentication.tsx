@@ -1,5 +1,5 @@
 import { useThemeContext } from '../context/themeContext';
-import AuthModal from '../components/auth/AuthRegisterModal';
+import AuthModal from '../components/auth/AuthModal';
 
 const Register = () => {
     const { theme } = useThemeContext();

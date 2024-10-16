@@ -1,11 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
-import Register from './pages/Register.tsx';
-import Login from './pages/Login';
 import Home from './pages/Home';
 import { useState } from 'react';
 import { Theme, ThemeContext } from './context/themeContext.ts';
 import './index.css';
+import Authentication from './pages/Authentication.tsx';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');
@@ -17,10 +16,10 @@ function App() {
                         <Route path="/" element={<LandingPage />} />
                     </Routes>
                     <Routes>
-                        <Route path="/register" element={<Register />} />
+                        <Route path="/register" element={<Authentication />} />
                     </Routes>
                     <Routes>
-                        <Route path="/login" element={<Login />} />
+                        <Route path="/login" element={<Authentication />} />
                     </Routes>
                     <Routes>
                         <Route path="/home" element={<Home />} />
