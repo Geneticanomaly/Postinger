@@ -8,6 +8,7 @@ import Authentication from './pages/Authentication.tsx';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');
+
     return (
         <>
             <ThemeContext.Provider value={{ setTheme, theme }}>

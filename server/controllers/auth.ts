@@ -56,3 +56,10 @@ export const logoutAuth = (_req: Request, res: Response) => {
     clearAuthCookies(res);
     res.status(200).end();
 };
+
+export const isAuthenticated = (req: Request, res: Response) => {
+    const refreshToken = req.cookies.rid;
+
+    if (refreshToken) res.json({ redirect: '/home' });
+    else res.json({ redirect: null });
+};

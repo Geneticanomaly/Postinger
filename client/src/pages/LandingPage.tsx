@@ -2,10 +2,13 @@ import { useNavigate } from 'react-router-dom';
 import { useThemeContext } from '../context/themeContext';
 import ThirdPartyAuth from '../components/auth/ThirdPartyAuth';
 import DarkModeToggle from '../components/DarkModeToggle';
+import useIsAuthenticated from '../hooks/useIsAuthenticated';
 
 const LandingPage = () => {
     const navigate = useNavigate();
     const { theme } = useThemeContext();
+
+    useIsAuthenticated();
 
     return (
         <div className={`${theme === 'dark' && 'dark'}`}>
