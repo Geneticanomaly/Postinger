@@ -1,6 +1,8 @@
 # Postinger
 
-Starting dev environment
+Starting server dev environment
+Traverse to the correct directory with cd 
+- /Postinger/server
 
 -   docker compose -f docker-compose.dev.yml up --build
 
