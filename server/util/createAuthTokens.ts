@@ -9,7 +9,7 @@ export type Token = {
 
 const createAuthTokens = (user: User): { refreshToken: string; accessToken: string } => {
     const refreshToken = jwt.sign({ userId: user.id }, REFRESH_TOKEN_SECRET, { expiresIn: '30d' });
-    const accessToken = jwt.sign({ userId: user.id }, ACCESS_TOKEN_SECRET, { expiresIn: '15min' });
+    const accessToken = jwt.sign({ userId: user.id }, ACCESS_TOKEN_SECRET, { expiresIn: '15m' });
 
     return { refreshToken, accessToken };
 };

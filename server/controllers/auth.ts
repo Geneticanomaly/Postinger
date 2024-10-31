@@ -3,6 +3,7 @@ import User from '../database/models/user';
 import bcrypt from 'bcrypt';
 import 'express-async-errors';
 import { clearAuthCookies, sendAuthCookies } from '../util/createAuthTokens';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 
 type RegisterRequest = {
     email: string;
@@ -59,7 +60,25 @@ export const logoutAuth = (_req: Request, res: Response) => {
 
 export const isAuthenticated = (req: Request, res: Response) => {
     const refreshToken = req.cookies.rid;
+    const currentTime = Math.floor(Date.now() / 1000);
 
-    if (refreshToken) res.json({ redirect: '/home' });
-    else res.json({ redirect: null });
+    // Check refresh token expiration
+    let isRefreshTokenValid = false;
+    if (refreshToken) {
+        const decodedRefreshToken = jwt.decode(refreshToken);
+        if (decodedRefreshToken && typeof decodedRefreshToken !== 'string') {
+            const payload = decodedRefreshToken as JwtPayload;
+            if (payload.exp && payload.exp > currentTime) {
+                isRefreshTokenValid = true;
+            }
+        }
+    }
+
+    if (isRefreshTokenValid) {
+        res.json({ redirect: '/home' });
+    } else {
+        // CLear cookies if refreshToken has expired
+        clearAuthCookies(res);
+        res.json({ redirect: null });
+    }
 };
