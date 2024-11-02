@@ -1,6 +1,7 @@
 import { useThemeContext } from '../context/themeContext';
 
 import Sidebar from '../components/Sidebar/Sidebar';
+import MainFeed from '../components/MainFeed';
 
 const Home = () => {
     const { theme } = useThemeContext();
@@ -11,6 +12,10 @@ const Home = () => {
                 <div className="flex justify-center h-full">
                     <section className="w-[275px] flex flex-col items-center">
                         <Sidebar />
+                    </section>
+
+                    <section className="w-[990px]">
+                        <MainFeed />
                     </section>
                 </div>
             </main>
