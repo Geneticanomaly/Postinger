@@ -1,7 +1,7 @@
 const MainFeed = () => {
     return (
-        <div className="w-[990px] ">
-            <div className="flex justify-center gap-10">
+        <div className="w-[600px] lg:w-[990px] ">
+            <div className="flex justify-center gap-4 xl:gap-10">
                 <section
                     className="flex items-center text-center border-b border-l border-r w-full 
     border-gray-500 opacity-70"
@@ -14,7 +14,7 @@ const MainFeed = () => {
                     </h2>
                 </section>
 
-                <section className="flex flex-col items-center">
+                <section className="hidden lg:flex flex-col items-center">
                     <form className="">
                         <input
                             className="p-3 pl-12 rounded-full bg-neutral-800 text-neutral-100 mt-1 w-[300px]"
