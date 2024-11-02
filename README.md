@@ -1,5 +1,12 @@
 # Postinger
 
+Starting client dev environment
+Traverse to the correct directory with cd
+- /Postinger/client
+
+npm run dev
+
+
 Starting server dev environment
 Traverse to the correct directory with cd 
 - /Postinger/server
