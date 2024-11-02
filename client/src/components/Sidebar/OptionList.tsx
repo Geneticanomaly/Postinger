@@ -9,7 +9,7 @@ const OptionList = ({ options }: OptionListType) => {
     return (
         <>
             {options.map((option) => (
-                <Option key={option.name} option={option} />
+                <Option key={option.id} option={option} />
             ))}
         </>
     );

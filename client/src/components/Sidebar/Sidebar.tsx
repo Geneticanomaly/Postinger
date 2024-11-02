@@ -26,14 +26,13 @@ const Sidebar = () => {
             <span className="rounded-full p-3 cursor-pointer bg-blue-500 max-w-max hover:bg-blue-600 xl:hidden">
                 <MdOutlinePostAdd className="text-3xl" />
             </span>
-            <h1 onClick={logout}>Logout</h1>
             <section
                 className="flex items-center gap-4 p-3 mt-4 max-w-max rounded-full font-bold text-base 
             cursor-pointer hover:bg-neutral-800"
             >
                 <img src={placeholderAvatar} className="rounded-full w-10" />
                 <span className="hidden xl:inline">Hikaru Nakamura</span>
-                <IoIosMore className="hidden xl:inline" />
+                <IoIosMore className="hidden xl:inline" onClick={logout} />
             </section>
         </div>
     );
