@@ -13,9 +13,9 @@ const Sidebar = () => {
         navigate('/');
     };
     return (
-        <div className="w-[100%] flex flex-col gap-4 mt-1 text-2xl h-full">
+        <div className="w-[275px] flex flex-col items-left gap-4 mt-1 text-2xl">
             <OptionList options={options} />
-            <button className="w-[80%] mt-4 bg-blue-500 text-xl font-bold text-white p-3 rounded-full hover:bg-blue-600">
+            <button className="w-[90%] mt-4 bg-blue-500 text-xl font-bold text-white p-3 rounded-full hover:bg-blue-600">
                 Post
             </button>
             <h1 onClick={logout}>Logout</h1>
