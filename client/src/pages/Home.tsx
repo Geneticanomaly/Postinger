@@ -1,19 +1,20 @@
-import authServices from '../services/auth';
-import { useNavigate } from 'react-router-dom';
+import { useThemeContext } from '../context/themeContext';
+
+import Sidebar from '../components/Sidebar/Sidebar';
 
 const Home = () => {
-    const navigate = useNavigate();
-
-    const logout = async () => {
-        await authServices.logout();
-        navigate('/');
-    };
+    const { theme } = useThemeContext();
 
     return (
-        <>
-            <h1>Hello there</h1>
-            <button onClick={logout}>Logout</button>
-        </>
+        <div className={`${theme === 'dark' && 'dark'}`}>
+            <main className="h-svh bg-neutral-950 text-neutral-100 ">
+                <div className="flex justify-center h-full">
+                    <section className="w-[275px] flex flex-col items-center">
+                        <Sidebar />
+                    </section>
+                </div>
+            </main>
+        </div>
     );
 };
 
