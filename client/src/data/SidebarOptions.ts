@@ -1,5 +1,3 @@
-import { GoHomeFill } from 'react-icons/go';
-
 import {
     IoNotificationsOutline,
     IoBookmarkOutline,
@@ -8,6 +6,7 @@ import {
 } from 'react-icons/io5';
 import { AiOutlineMail } from 'react-icons/ai';
 import { SiPopos } from 'react-icons/si';
+import { GoHome } from 'react-icons/go';
 
 export const options = [
     {
@@ -19,7 +18,7 @@ export const options = [
         id: 2,
         name: 'Home',
         route: '/home',
-        logo: GoHomeFill,
+        logo: GoHome,
     },
     {
         id: 3,

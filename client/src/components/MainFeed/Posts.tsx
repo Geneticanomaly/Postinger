@@ -9,7 +9,7 @@ const Posts = () => {
 
     return (
         <div className="flex flex-col w-full">
-            {width > 500 ? <MainHeader /> : <MobileHeader />}
+            {width > 499 ? <MainHeader /> : <MobileHeader />}
 
             {posts.map((post, i) => (
                 <Post key={i} post={post} />
