@@ -23,12 +23,14 @@ const Post = ({ post }: PostType) => {
                     <p>{post.title}</p>
                 </section>
             </section>
-            <section className=" ml-[10%] mt-3 rounded-xl">
-                {post.img && <img src={post.img} className=" max-w-full h-auto rounded-xl" />}
+            <section className=" ml-[9.5%] mt-3 rounded-xl">
+                {post.img && (
+                    <img src={post.img} className=" max-w-full h-auto rounded-xl cursor-pointer" />
+                )}
             </section>
             {/* Footer */}
             <footer className="flex gap-16 ml-[10%] mt-3">
-                <section className="flex items-center cursor-pointer group">
+                <section className="flex items-center cursor-pointer group ">
                     <span
                         className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
             group-hover:bg-blue-500 group-hover:bg-opacity-10 group-hover:text-blue-500"
@@ -44,7 +46,7 @@ const Post = ({ post }: PostType) => {
                         className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
             group-hover:bg-green-500 group-hover:bg-opacity-10 group-hover:text-green-500"
                     >
-                        <LiaRetweetSolid />
+                        <LiaRetweetSolid className="" />
                     </span>
                     <p className="text-sm text-neutral-500 group-hover:text-green-500 transition duration-200">
                         {getCondensedNumber(post.reposts)}

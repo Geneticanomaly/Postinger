@@ -8,7 +8,7 @@ const Home = () => {
 
     return (
         <div className={`${theme === 'dark' && 'dark'}`}>
-            <main className="h-full bg-neutral-950 text-neutral-100 flex justify-center  ">
+            <main className="h-full bg-neutral-950 text-neutral-100 flex justify-center ">
                 <Sidebar />
                 <MainFeed />
             </main>
