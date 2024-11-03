@@ -1,8 +1,14 @@
+import useWindowWidth from '../../hooks/useWindowWidth';
 import Posts from './Posts';
 
 const MainFeed = () => {
+    const width = useWindowWidth();
     return (
-        <div className="w-[600px] lg:w-[990px] ">
+        <div
+            className={`${
+                width <= 500 && 'w-full'
+            }w-[400px] sm:w-[500px] md:w-[600px] lg:w-[990px]`}
+        >
             <div className="flex justify-center gap-4 xl:gap-10">
                 <Posts />
 
