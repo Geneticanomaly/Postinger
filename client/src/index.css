@@ -5,3 +5,18 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
+
+/* Scrollwheel styles */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    background: #0c0c0c;
+}
+::-webkit-scrollbar-thumb {
+    background: #262626;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #404040;
+}
