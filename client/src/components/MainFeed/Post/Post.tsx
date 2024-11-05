@@ -7,7 +7,7 @@ type PostType = {
 
 const Post = ({ post }: PostType) => {
     return (
-        <div className="flex flex-col w-full border-l border-r border-b border-neutral-700 p-3 ">
+        <div className="flex flex-col w-full border-l border-r border-b border-neutral-700 p-3">
             <PostContent post={post} />
         </div>
     );

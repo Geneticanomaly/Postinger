@@ -25,10 +25,7 @@ const PostContent = ({ post }: PostContentType) => {
 
                 <section className=" mt-3 rounded-xl">
                     {post.img && (
-                        <img
-                            src={post.img}
-                            className="max-w-full h-auto rounded-xl cursor-pointer"
-                        />
+                        <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                     )}
                 </section>
                 <PostFooter post={post} />
