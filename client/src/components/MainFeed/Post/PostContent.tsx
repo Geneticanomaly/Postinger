@@ -7,7 +7,7 @@ type PostContentType = {
 
 const PostContent = ({ post }: PostContentType) => {
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 p-3">
             <img
                 src={post.avatarUrl}
                 className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
@@ -26,6 +26,14 @@ const PostContent = ({ post }: PostContentType) => {
                 <section className=" mt-3 rounded-xl">
                     {post.img && (
                         <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
+                    )}
+                    {post.video && (
+                        <video
+                            className="w-full rounded-xl cursor-pointer border border-neutral-700"
+                            controls
+                        >
+                            <source src={post.video} type="video/mp4" />
+                        </video>
                     )}
                 </section>
                 <PostFooter post={post} />

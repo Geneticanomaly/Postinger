@@ -11,6 +11,7 @@ export type PostData = {
     username: string;
     title: string;
     img?: string;
+    video?: string;
     date: string;
     avatarUrl: string;
     replies: number;
