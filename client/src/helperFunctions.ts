@@ -16,6 +16,10 @@ export const getCondensedNumber = (amount: number): string => {
         const roundedValue = Math.round(amount / 100000) / 10;
         return `${roundedValue}M`;
     } else {
-        return amount.toString();
+        if (amount === 0) {
+            return '';
+        } else {
+            return amount.toString();
+        }
     }
 };

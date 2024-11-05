@@ -1,7 +1,7 @@
-import { posts } from '../../data/PostData';
-import useWindowWidth from '../../hooks/useWindowWidth';
-import MainHeader from './MainHeader';
-import MobileHeader from './MobileHeader';
+import { posts } from '../../../data/PostData';
+import useWindowWidth from '../../../hooks/useWindowWidth';
+import MainHeader from '../MainHeader';
+import MobileHeader from '../MobileHeader';
 import Post from './Post';
 
 const Posts = () => {
