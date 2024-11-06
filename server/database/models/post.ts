@@ -12,10 +12,9 @@ export default class Post extends Model<InferAttributes<Post>, InferCreationAttr
     declare id: CreationOptional<number>;
     declare userId: string;
     declare content: string;
-    declare image: CreationOptional<string>;
-    declare likes: number;
-    declare comments: number;
-    declare reposts: number;
+    declare likes: CreationOptional<number>;
+    declare comments: CreationOptional<number>;
+    declare reposts: CreationOptional<number>;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
@@ -38,10 +37,6 @@ Post.init(
         content: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: true,
         },
         likes: {
             type: DataTypes.INTEGER,

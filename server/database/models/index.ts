@@ -8,6 +8,7 @@ import Follow from './follower';
 import Notification from './notification';
 import Chat from './chat';
 import Message from './message';
+import File from './file';
 
 /* Post Relationships */
 User.hasMany(Post, { foreignKey: 'userId', onDelete: 'CASCADE' });
@@ -92,4 +93,20 @@ Notification.belongsTo(Follow, {
     },
 });
 
-export default { User, Post, Comment, Like, Bookmark, Repost, Follow, Notification };
+/* User and File Relationships */
+User.hasMany(File, { foreignKey: 'userId', onDelete: 'CASCADE' });
+File.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+
+/* Post and File Relationships */
+Post.hasMany(File, { foreignKey: 'postId', onDelete: 'CASCADE' });
+File.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
+
+/* Comment and File Relationships */
+Comment.hasMany(File, { foreignKey: 'commentId', onDelete: 'CASCADE' });
+File.belongsTo(Comment, { foreignKey: 'commentId', onDelete: 'CASCADE' });
+
+/* Message and File Relationships */
+Message.hasMany(File, { foreignKey: 'messageId', onDelete: 'CASCADE' });
+File.belongsTo(Message, { foreignKey: 'messageId', onDelete: 'CASCADE' });
+
+export default { User, Post, Comment, Like, Bookmark, Repost, Follow, Notification, File };

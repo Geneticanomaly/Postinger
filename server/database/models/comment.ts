@@ -8,12 +8,14 @@ import {
 
 import { sequelize } from '../../util/db';
 
-export default class Comment extends Model<InferAttributes<Comment>, InferCreationAttributes<Comment>> {
+export default class Comment extends Model<
+    InferAttributes<Comment>,
+    InferCreationAttributes<Comment>
+> {
     declare id: CreationOptional<number>;
     declare postId: number;
     declare userId: string;
-    declare content: CreationOptional<string | null>;
-    declare image: CreationOptional<string | null>;
+    declare content: CreationOptional<string>;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
@@ -42,10 +44,6 @@ Comment.init(
             },
         },
         content: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        image: {
             type: DataTypes.STRING,
             allowNull: true,
         },

@@ -33,14 +33,6 @@ module.exports = {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
-            avatar_url: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            background_url: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
             disabled: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
@@ -77,10 +69,6 @@ module.exports = {
             content: {
                 type: DataTypes.STRING,
                 allowNull: false,
-            },
-            image: {
-                type: DataTypes.STRING,
-                allowNull: true,
             },
             likes: {
                 type: DataTypes.INTEGER,
@@ -131,10 +119,6 @@ module.exports = {
                 },
             },
             content: {
-                type: DataTypes.STRING,
-                allowNull: true,
-            },
-            image: {
                 type: DataTypes.STRING,
                 allowNull: true,
             },
@@ -361,6 +345,75 @@ module.exports = {
                 defaultValue: DataTypes.NOW,
             },
         });
+        await queryInterface.createTable('files', {
+            id: {
+                type: DataTypes.INTEGER,
+                primaryKey: true,
+                autoIncrement: true,
+            },
+            user_id: {
+                type: DataTypes.UUID,
+                allowNull: true,
+                references: {
+                    model: 'users',
+                    key: 'id',
+                },
+            },
+            post_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: 'posts',
+                    key: 'id',
+                },
+            },
+            comment_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: 'comments',
+                    key: 'id',
+                },
+            },
+            message_id: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                references: {
+                    model: 'messages',
+                    key: 'id',
+                },
+            },
+            name: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            encoding: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            mimetype: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            },
+            buffer: {
+                type: DataTypes.BLOB('long'),
+                allowNull: false,
+            },
+            file_type: {
+                type: DataTypes.ENUM('profile-img, background-img, other-img'),
+                allowNull: false,
+            },
+            created_at: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW,
+            },
+            updated_at: {
+                type: DataTypes.DATE,
+                allowNull: false,
+                defaultValue: DataTypes.NOW,
+            },
+        });
     },
     down: async ({ context: queryInterface }) => {
         await queryInterface.dropTable('users');
@@ -373,5 +426,6 @@ module.exports = {
         await queryInterface.dropTable('notifications');
         await queryInterface.dropTable('chats');
         await queryInterface.dropTable('messages');
+        await queryInterface.dropTable('files');
     },
 };

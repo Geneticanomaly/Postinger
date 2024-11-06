@@ -8,7 +8,10 @@ import {
 
 import { sequelize } from '../../util/db';
 
-export default class Message extends Model<InferAttributes<Message>, InferCreationAttributes<Message>> {
+export default class Message extends Model<
+    InferAttributes<Message>,
+    InferCreationAttributes<Message>
+> {
     declare id: CreationOptional<number>;
     declare chatId: number;
     declare senderId: string;

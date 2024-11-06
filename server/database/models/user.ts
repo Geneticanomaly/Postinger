@@ -16,8 +16,6 @@ export default class User extends Model<InferAttributes<User>, InferCreationAttr
     declare username: string;
     declare description: CreationOptional<string>;
     declare residence: CreationOptional<string>;
-    declare avatarUrl: CreationOptional<string>;
-    declare backgroundUrl: CreationOptional<string>;
     declare disabled: boolean;
     declare admin: boolean;
     declare createdAt: CreationOptional<Date>;
@@ -53,14 +51,6 @@ User.init(
             allowNull: true,
         },
         residence: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        avatarUrl: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
-        backgroundUrl: {
             type: DataTypes.STRING,
             allowNull: true,
         },
