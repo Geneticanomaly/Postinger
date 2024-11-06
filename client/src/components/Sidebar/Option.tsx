@@ -1,3 +1,4 @@
+import { IconType } from 'react-icons';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { SidebarOption } from '../../types';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +13,16 @@ const Option = ({ option }: OptionType) => {
 
     const shouldDisplayName = option.name && width > 1280;
 
+    const getIcon = (option: SidebarOption): IconType => {
+        if (option.filledLogo) {
+            return window.location.href.includes(option.route) ? option.filledLogo : option.logo;
+        } else {
+            return option.logo;
+        }
+    };
+
+    const IconComponent = getIcon(option);
+
     return (
         <section
             onClick={() => navigate(option.route)}
@@ -20,8 +31,16 @@ const Option = ({ option }: OptionType) => {
             max-w-max cursor-pointer rounded-full hover:bg-neutral-800 transition duration-200
         `}
         >
-            <option.logo className="text-3xl" />
-            {shouldDisplayName && <span className="text-[22px]">{option.name}</span>}
+            <IconComponent className="text-3xl" />
+            {shouldDisplayName && (
+                <span
+                    className={`text-[21px] ${
+                        IconComponent === option.filledLogo && 'font-semibold'
+                    }`}
+                >
+                    {option.name}
+                </span>
+            )}
         </section>
     );
 };

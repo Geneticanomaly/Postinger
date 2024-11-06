@@ -5,6 +5,7 @@ export type SidebarOption = {
     name?: string;
     route: string;
     logo: IconType;
+    filledLogo?: IconType;
 };
 
 export type PostData = {

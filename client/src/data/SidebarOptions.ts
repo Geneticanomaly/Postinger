@@ -1,12 +1,17 @@
 import {
     IoNotificationsOutline,
+    IoNotificationsSharp,
     IoBookmarkOutline,
+    IoBookmark,
     IoPersonOutline,
+    IoPersonSharp,
     IoSearchOutline,
+    IoSearchSharp,
+    IoMailOutline,
+    IoMailSharp,
 } from 'react-icons/io5';
-import { AiOutlineMail } from 'react-icons/ai';
 import { SiPopos } from 'react-icons/si';
-import { GoHome } from 'react-icons/go';
+import { GoHome, GoHomeFill } from 'react-icons/go';
 
 export const options = [
     {
@@ -19,35 +24,41 @@ export const options = [
         name: 'Home',
         route: '/home',
         logo: GoHome,
+        filledLogo: GoHomeFill,
     },
     {
         id: 3,
         name: 'Explore',
         route: '/explore',
         logo: IoSearchOutline,
+        filledLogo: IoSearchSharp,
     },
     {
         id: 4,
         name: 'Notifications',
         route: '/notifications',
         logo: IoNotificationsOutline,
+        filledLogo: IoNotificationsSharp,
     },
     {
         id: 5,
         name: 'Messages',
         route: '/messages',
-        logo: AiOutlineMail,
+        logo: IoMailOutline,
+        filledLogo: IoMailSharp,
     },
     {
         id: 6,
         name: 'Booksmarks',
         route: '/bookmarks',
         logo: IoBookmarkOutline,
+        filledLogo: IoBookmark,
     },
     {
         id: 7,
         name: 'Profile',
         route: '/profile',
         logo: IoPersonOutline,
+        filledLogo: IoPersonSharp,
     },
 ];
