@@ -11,7 +11,7 @@ export default class File extends Model {
     declare encoding: string;
     declare mimetype: string;
     declare buffer: Buffer;
-    declare fileType: 'profile-img' | 'background-img' | 'other-img';
+    declare fileType: string;
     declare createdAt: CreationOptional<Date>;
     declare updatedAt: CreationOptional<Date>;
 }
@@ -72,7 +72,7 @@ File.init(
             allowNull: false,
         },
         fileType: {
-            type: DataTypes.ENUM('profile-img, background-img, other-img'),
+            type: DataTypes.STRING,
             allowNull: false,
         },
         createdAt: DataTypes.DATE,

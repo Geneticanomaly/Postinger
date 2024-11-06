@@ -400,7 +400,7 @@ module.exports = {
                 allowNull: false,
             },
             file_type: {
-                type: DataTypes.ENUM('profile-img, background-img, other-img'),
+                type: DataTypes.STRING,
                 allowNull: false,
             },
             created_at: {

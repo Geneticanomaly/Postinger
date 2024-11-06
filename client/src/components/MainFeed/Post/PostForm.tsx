@@ -4,7 +4,7 @@ import { IoImageOutline } from 'react-icons/io5';
 import { MdOutlineGif } from 'react-icons/md';
 import { VscSmiley } from 'react-icons/vsc';
 import { IoCloseOutline } from 'react-icons/io5';
-import { posts } from '../../../data/PostData';
+import postServices from '../../../services/post';
 
 const PostForm = () => {
     const [text, setText] = useState<string>('');
@@ -16,29 +16,6 @@ const PostForm = () => {
         e.target.style.height = `${e.target.scrollHeight}px`; // Adjust textare height based on its content
 
         setText(e.target.value);
-    };
-
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        const postObject = {
-            username: 'TEST_USER',
-            title: text,
-            img: fileUrl,
-            date: 'Nov 1',
-            avatarUrl: placeholderAvatar,
-            replies: 12,
-            reposts: 1,
-            likes: 100,
-            views: 1000000,
-        };
-
-        posts.push(postObject);
-
-        console.log('POSTS', posts);
-        setText('');
-        setFile(null);
-        setFileUrl('');
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,6 +34,21 @@ const PostForm = () => {
     };
 
     const handleFileClose = () => {
+        setFile(null);
+        setFileUrl('');
+    };
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        formData.append('userId', '25931610-b714-44c9-9fbf-fac5a48ce914');
+        if (text) formData.append('content', text);
+        if (file) formData.append('file', file);
+
+        const res = await postServices.create(formData);
+        console.log(res);
+        setText('');
         setFile(null);
         setFileUrl('');
     };
@@ -82,7 +74,11 @@ const PostForm = () => {
                             onChange={(e) => handleChange(e)}
                         ></textarea>
                         <section className="relative mb-3 w-full">
-                            <img src={fileUrl} className="rounded-2xl w-full" />
+                            {file && file.type.startsWith('video/') ? (
+                                <video src={fileUrl} className="rounded-2xl w-full" controls />
+                            ) : (
+                                <img src={fileUrl} className="rounded-2xl w-full" />
+                            )}
                             {fileUrl && (
                                 <span
                                     className="absolute top-1.5 right-1.5 p-2 text-2xl cursor-pointer rounded-full bg-neutral-900 bg-opacity-90"
