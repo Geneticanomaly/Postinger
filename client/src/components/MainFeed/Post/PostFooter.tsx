@@ -12,7 +12,7 @@ type PostFooterType = {
 
 const PostFooter = ({ post }: PostFooterType) => {
     return (
-        <footer className="flex items-center mt-3 justify-between ">
+        <footer className="flex items-center justify-between ">
             <section className="flex items-center cursor-pointer group ">
                 <span
                     className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200

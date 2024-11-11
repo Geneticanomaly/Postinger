@@ -9,6 +9,7 @@ export type SidebarOption = {
 };
 
 export type PostData = {
+    id: number;
     username: string;
     title: string;
     img?: string;

@@ -5,6 +5,7 @@ import testVideo from '../assets/TestVideo.mp4';
 
 export const posts = [
     {
+        id: 1,
         username: 'Test_User',
         title: 'This is my video',
         video: testVideo,
@@ -16,6 +17,7 @@ export const posts = [
         views: 652000,
     },
     {
+        id: 2,
         username: 'HYPEX',
         title: 'The greatest chapter 2 season 1 poi returns tomorrow',
         img: coffeePhoto,
@@ -27,6 +29,7 @@ export const posts = [
         views: 1000000,
     },
     {
+        id: 3,
         username: 'IFireMonkey',
         title: 'Google is ameizing',
         img: testPhoto,

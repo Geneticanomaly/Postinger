@@ -120,7 +120,9 @@ const PostForm = () => {
                             </section>
                             <button
                                 className={`py-[7px] w-[70px] bg-blue-500 rounded-full font-bold transition duration-200 
-                                ${!isButtonDisabled ? 'hover:bg-blue-400' : 'disabled:opacity-50'}`}
+                                ${
+                                    !isButtonDisabled ? 'hover:bg-[#3a77da]' : 'disabled:opacity-50'
+                                }`}
                                 disabled={isButtonDisabled}
                             >
                                 Post

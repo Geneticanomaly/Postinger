@@ -23,7 +23,7 @@ const PostContent = ({ post }: PostContentType) => {
                     <p>{post.title}</p>
                 </section>
 
-                <section className=" mt-3 rounded-xl">
+                <section className="mb-3 mt-3 rounded-xl">
                     {post.img && (
                         <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                     )}
