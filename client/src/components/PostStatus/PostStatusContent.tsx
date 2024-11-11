@@ -21,19 +21,14 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                 />
                 <h1 className="font-bold text-xl">Post</h1>
             </section>
-            <div className="flex gap-2 mt-2 items-center">
+            <div className="flex gap-3 mt-2 items-center">
                 <img
                     src={placeholderAvatar}
                     className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
                 />
                 <section className="flex flex-col w-full">
-                    <section className="flex gap-1 sm:text-base text-sm items-center justify-between">
-                        <div className="flex gap-2">
-                            <h2 className="font-bold cursor-pointer hover:underline">
-                                Bubbie_golf
-                            </h2>
-                            <p className="text-neutral-500">· 1 Nov</p>
-                        </div>
+                    <section className="flex sm:text-base text-sm items-center justify-between">
+                        <h2 className="font-bold cursor-pointer">{post.username}</h2>
                         <button
                             className="bg-blue-50 rounded-full text-neutral-800 py-1 px-4 font-semibold
                         hover:bg-neutral-100 transition duration-200"
@@ -44,7 +39,7 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                 </section>
             </div>
             <p className="text-lg">This is a thread on how to hit a draw...</p>
-            <section className="mb-3 mt-3 rounded-xl">
+            <section className="mt-3 rounded-xl">
                 {post.img && (
                     <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                 )}
@@ -57,6 +52,7 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                     </video>
                 )}
             </section>
+            <p className="text-neutral-500 hover:underline cursor-pointer">{post.date}</p>
             <div className="p-2 border-b border-t border-neutral-700">
                 <PostFooter post={post} />
             </div>

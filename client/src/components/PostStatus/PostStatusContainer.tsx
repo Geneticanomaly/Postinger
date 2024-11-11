@@ -1,4 +1,4 @@
-import SideContent from '../MainFeed/SideContent';
+import SideContent from '../SideContent';
 import PostStatusContent from './PostStatusContent';
 import { posts } from '../../data/PostData';
 

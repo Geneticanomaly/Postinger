@@ -1,5 +1,5 @@
 import Posts from './Post/Posts';
-import SideContent from './SideContent';
+import SideContent from '../SideContent';
 
 const MainFeed = () => {
     return (
