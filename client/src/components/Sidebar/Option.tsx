@@ -34,7 +34,7 @@ const Option = ({ option }: OptionType) => {
             <IconComponent className="text-3xl" />
             {shouldDisplayName && (
                 <span
-                    className={`text-[21px] ${
+                    className={`text-[18px] ${
                         IconComponent === option.filledLogo && 'font-semibold'
                     }`}
                 >

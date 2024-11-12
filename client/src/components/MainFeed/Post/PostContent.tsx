@@ -15,7 +15,7 @@ const PostContent = ({ post }: PostContentType) => {
             <div>
                 <section className="flex flex-col">
                     <section className="flex gap-1 sm:text-base text-sm">
-                        <h2 className="font-bold cursor-pointer hover:underline">
+                        <h2 className="font-bold cursor-pointer hover:underline z-10">
                             {post.username}
                         </h2>
                         <p className="text-neutral-500">· {post.date}</p>
