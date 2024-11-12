@@ -5,7 +5,6 @@ export default class File extends Model {
     declare id: CreationOptional<number>;
     declare userId: CreationOptional<string>;
     declare postId: CreationOptional<number>;
-    declare commentId: CreationOptional<number>;
     declare messageId: CreationOptional<number>;
     declare name: string;
     declare encoding: string;
@@ -36,14 +35,6 @@ File.init(
             allowNull: true,
             references: {
                 model: 'posts',
-                key: 'id',
-            },
-        },
-        commentId: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-            references: {
-                model: 'comments',
                 key: 'id',
             },
         },

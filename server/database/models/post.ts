@@ -11,6 +11,7 @@ import { sequelize } from '../../util/db';
 export default class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
     declare id: CreationOptional<number>;
     declare userId: string;
+    declare parentPostId: CreationOptional<number | null>;
     declare content: string;
     declare likes: CreationOptional<number>;
     declare comments: CreationOptional<number>;
@@ -31,6 +32,14 @@ Post.init(
             allowNull: false,
             references: {
                 model: 'users',
+                key: 'id',
+            },
+        },
+        parentPostId: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            references: {
+                model: 'posts',
                 key: 'id',
             },
         },
