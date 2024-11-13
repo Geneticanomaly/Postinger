@@ -1,26 +1,14 @@
-import { IoMdArrowBack } from 'react-icons/io';
 import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import PostFooter from '../MainFeed/Post/PostFooter';
 import { PostData } from '../../types';
-import { useNavigate } from 'react-router-dom';
 
 type PostStatusContentType = {
     post: PostData;
 };
 
 const PostStatusContent = ({ post }: PostStatusContentType) => {
-    const navigate = useNavigate();
-
     return (
         <div className="flex flex-col w-full p-3 border-l border-r border-b border-neutral-700 gap-3">
-            <section className="flex items-center gap-10">
-                <IoMdArrowBack
-                    className=" cursor-pointer"
-                    size={20}
-                    onClick={() => navigate('/home')}
-                />
-                <h1 className="font-bold text-xl">Post</h1>
-            </section>
             <div className="flex gap-3 mt-4 items-center">
                 <img
                     src={placeholderAvatar}

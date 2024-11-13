@@ -6,6 +6,7 @@ import { Theme, ThemeContext } from './context/themeContext.ts';
 import './index.css';
 import Authentication from './pages/Authentication.tsx';
 import PostStatus from './pages/PostStatus.tsx';
+import Profile from './pages/Profile.tsx';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');
@@ -25,6 +26,9 @@ function App() {
                     </Routes>
                     <Routes>
                         <Route path="/home" element={<Home />} />
+                    </Routes>
+                    <Routes>
+                        <Route path="/:username" element={<Profile />} />
                     </Routes>
                     <Routes>
                         <Route path="/:username/status/:postId" element={<PostStatus />} />

@@ -7,9 +7,11 @@ import PostForm from './PostForm';
 import { useQuery } from '@tanstack/react-query';
 import postServices from '../../../services/post';
 import { PostData } from '../../../types';
+import { useLocation } from 'react-router-dom';
 
 const Posts = () => {
     const width = useWindowWidth();
+    const location = useLocation();
 
     const { data, isLoading, error } = useQuery<PostData[]>({
         queryKey: ['posts'],
@@ -23,8 +25,12 @@ const Posts = () => {
 
     return (
         <div className="flex flex-col w-full">
-            {width > 499 ? <MainHeader /> : <MobileHeader />}
-            <PostForm />
+            {location.pathname === '/home' && (
+                <>
+                    {width > 499 ? <MainHeader /> : <MobileHeader />}
+                    <PostForm />
+                </>
+            )}
             {posts!.map((post, i) => (
                 <Post key={i} post={post} />
             ))}

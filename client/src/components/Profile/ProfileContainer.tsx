@@ -1,16 +1,16 @@
 import SideContent from '../SideContent';
-import PostStatusContent from './PostStatusContent';
-import { posts } from '../../data/PostData';
-import Header from '../Header';
 import Posts from '../MainFeed/Post/Posts';
+import ProfileBanner from './ProfileBanner';
+import Header from '../Header';
 
-const PostStatusContainer = () => {
+const ProfileContainer = () => {
     return (
         <div className="w-full sm:w-[500px] md:w-[600px] lg:w-[900px]">
             <div className="flex justify-center gap-4 xl:gap-10">
                 <div className="w-full">
                     <Header />
-                    <PostStatusContent post={posts[0]} />
+                    <ProfileBanner />
+                    {/* Posts / Replies / Likes */}
                     <Posts />
                 </div>
                 <SideContent />
@@ -19,4 +19,4 @@ const PostStatusContainer = () => {
     );
 };
 
-export default PostStatusContainer;
+export default ProfileContainer;
