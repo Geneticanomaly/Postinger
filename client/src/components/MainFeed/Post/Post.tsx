@@ -19,10 +19,7 @@ const Post = ({ post }: PostType) => {
             onClick={handleClick}
             className="relative flex flex-col w-full border-l border-r border-b border-neutral-700 cursor-pointer group"
         >
-            {/* Independent background hover effect */}
             <div className="absolute inset-0 bg-[#79737311] opacity-0 transition duration-300 group-hover:opacity-100 pointer-events-none" />
-
-            {/* Post content remains fully interactable */}
             <PostContent post={post} />
         </div>
     );

@@ -21,7 +21,7 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                 />
                 <h1 className="font-bold text-xl">Post</h1>
             </section>
-            <div className="flex gap-3 mt-2 items-center">
+            <div className="flex gap-3 mt-4 items-center">
                 <img
                     src={placeholderAvatar}
                     className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
@@ -30,7 +30,7 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                     <section className="flex sm:text-base text-sm items-center justify-between">
                         <h2 className="font-bold cursor-pointer">{post.username}</h2>
                         <button
-                            className="bg-blue-50 rounded-full text-neutral-800 py-1 px-4 font-semibold
+                            className="bg-blue-50 rounded-full text-sm text-neutral-800 py-1 px-4 font-semibold
                         hover:bg-neutral-100 transition duration-200"
                         >
                             Follow

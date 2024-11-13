@@ -42,7 +42,7 @@ const PostForm = () => {
         e.preventDefault();
 
         const formData = new FormData();
-        formData.append('userId', '25931610-b714-44c9-9fbf-fac5a48ce914');
+        formData.append('userId', '8517635c-75a8-4ea6-bfe7-581067a86b19');
         if (text) formData.append('content', text);
         if (file) formData.append('file', file);
 
