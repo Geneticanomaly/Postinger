@@ -1,15 +1,33 @@
+import { useState } from 'react';
+
 const MainHeader = () => {
+    const [selectedElement, setSelectedElement] = useState('For you');
+
     return (
         <header
             className="sticky top-0 z-20 flex items-center text-center border-b border-l border-r w-full 
-        border-neutral-700 opacity-90"
+        border-neutral-700 opacity-90 bg-neutral-950 text-sm"
         >
-            <h2 className="p-4 bg-neutral-950 w-[50%] cursor-pointer hover:bg-neutral-500 transition duration-200">
+            <span
+                className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
+                        cursor-pointer ${selectedElement === 'For you' && 'font-bold'}`}
+                onClick={() => setSelectedElement('For you')}
+            >
                 For you
-            </h2>
-            <h2 className="p-4 bg-neutral-950 w-[50%] cursor-pointer hover:bg-neutral-500 transition duration-200">
+                {selectedElement === 'For you' && (
+                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-blue-500 rounded-full" />
+                )}
+            </span>
+            <span
+                className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
+                        cursor-pointer ${selectedElement === 'Following' && 'font-bold'}`}
+                onClick={() => setSelectedElement('Following')}
+            >
                 Following
-            </h2>
+                {selectedElement === 'Following' && (
+                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-blue-500 rounded-full" />
+                )}
+            </span>
         </header>
     );
 };

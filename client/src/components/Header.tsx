@@ -22,8 +22,8 @@ const Header = () => {
 
     return (
         <header
-            className="sticky top-0 z-20 flex items-center gap-10 px-3 py-1 bg-neutral-950
-                            border-l border-r border-neutral-700 opacity-90"
+            className="sticky top-0 z-20 h-[55px] flex items-center gap-10 px-3 py-1 bg-neutral-950
+                    border-l border-r border-neutral-700 opacity-90"
         >
             <span className="cursor-pointer p-2 rounded-full hover:bg-neutral-800 transition duration-200">
                 <IoMdArrowBack size={20} onClick={() => navigate(-1)} />
