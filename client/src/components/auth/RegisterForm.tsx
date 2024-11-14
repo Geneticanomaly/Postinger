@@ -122,7 +122,7 @@ const RegisterForm = () => {
                     helperText={formErrors.password}
                 />
                 {errorMessage && <p className="w-[70%] text-red-600">{errorMessage}</p>}
-                <section className="flex flex-row justify-center items-center gap-2 w-[70%]">
+                <section className="flex flex-row justify-center items-center gap-2 w-[70%] text-sm">
                     <hr className="sm:w-[38.5%] w-[30%]" />
                     <p className="text-neutral-800 dark:text-white">Get Started</p>
                     <hr className="sm:w-[38.5%] w-[30%]" />

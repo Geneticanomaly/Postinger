@@ -16,7 +16,7 @@ const AuthModal = () => {
     return (
         <div
             className="sm:w-[600px] sm:h-[600px] h-dvh w-dvw
-             absolute sm:top-44 bg-neutral-100 rounded-xl flex flex-col 
+             absolute  bg-neutral-100 rounded-xl flex flex-col 
                 items-center justify-center dark:bg-neutral-950"
         >
             <section

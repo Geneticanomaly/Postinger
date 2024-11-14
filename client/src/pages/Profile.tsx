@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom';
 import ProfileContainer from '../components/Profile/ProfileContainer';
 import Sidebar from '../components/Sidebar/Sidebar';
 import { useThemeContext } from '../context/themeContext';
@@ -13,6 +14,7 @@ const Profile = () => {
                 {width > 499 && <Sidebar />}
                 <ProfileContainer />
             </main>
+            <Outlet />
         </div>
     );
 };
