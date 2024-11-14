@@ -49,7 +49,7 @@ export const options = [
     },
     {
         id: 6,
-        name: 'Booksmarks',
+        name: 'Bookmarks',
         route: '/bookmarks',
         logo: IoBookmarkOutline,
         filledLogo: IoBookmark,

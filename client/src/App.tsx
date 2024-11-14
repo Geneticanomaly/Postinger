@@ -7,6 +7,7 @@ import './index.css';
 import Authentication from './pages/Authentication.tsx';
 import PostStatus from './pages/PostStatus.tsx';
 import Profile from './pages/Profile.tsx';
+import ScrollToTop from './hooks/ScrollToTop.ts';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');
@@ -15,6 +16,7 @@ function App() {
         <>
             <ThemeContext.Provider value={{ setTheme, theme }}>
                 <Router>
+                    <ScrollToTop />
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                     </Routes>

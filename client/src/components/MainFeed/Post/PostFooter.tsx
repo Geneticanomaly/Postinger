@@ -13,55 +13,78 @@ type PostFooterType = {
 const PostFooter = ({ post }: PostFooterType) => {
     return (
         <footer className="flex items-center justify-between z-10">
-            <section className="flex items-center cursor-pointer group/replies">
+            <section
+                className="flex items-center cursor-pointer group/replies"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+            >
                 <span
                     className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/replies:bg-blue-500 group-hover/replies:bg-opacity-10 group-hover/replies:text-blue-500"
                 >
                     <TbMessageCircle />
                 </span>
-                <p className="text-sm text-neutral-500 group-hover/replies:text-blue-500 transition duration-200 -ml-1">
+                <p className="text-[13px] text-neutral-500 group-hover/replies:text-blue-500 transition duration-200 -ml-1">
                     {getCondensedNumber(post.replies)}
                 </p>
             </section>
-            <section className="flex items-center cursor-pointer group/reposts">
+            <section
+                className="flex items-center cursor-pointer group/reposts"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+            >
                 <span
                     className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/reposts:bg-green-500 group-hover/reposts:bg-opacity-10 group-hover/reposts:text-green-500"
                 >
                     <LiaRetweetSolid />
                 </span>
-                <p className="text-sm text-neutral-500 group-hover/reposts:text-green-500 transition duration-200 -ml-1">
+                <p className="text-[13px] text-neutral-500 group-hover/reposts:text-green-500 transition duration-200 -ml-1">
                     {getCondensedNumber(post.reposts)}
                 </p>
             </section>
-            <section className="flex items-center cursor-pointer group/likes">
+            <section
+                className="flex items-center cursor-pointer group/likes"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+            >
                 <span
                     className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/likes:bg-pink-500 group-hover/likes:bg-opacity-10 group-hover/likes:text-pink-500"
                 >
                     <IoMdHeartEmpty />
                 </span>
-                <p className="text-sm text-neutral-500 group-hover/likes:text-pink-500 transition duration-200 -ml-1">
+                <p className="text-[13px] text-neutral-500 group-hover/likes:text-pink-500 transition duration-200 -ml-1">
                     {getCondensedNumber(post.likes)}
                 </p>
             </section>
-            <section className="flex items-center cursor-pointer group/views">
+            <section
+                className="flex items-center cursor-pointer group/views"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
+            >
                 <span
                     className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/views:bg-blue-500 group-hover/views:bg-opacity-10 group-hover/views:text-blue-500"
                 >
                     <BiBarChart />
                 </span>
-                <p className="text-sm text-neutral-500 group-hover/views:text-blue-500 transition duration-200 -ml-1">
+                <p className="text-[13px] text-neutral-500 group-hover/views:text-blue-500 transition duration-200 -ml-1">
                     {getCondensedNumber(post.views)}
                 </p>
             </section>
             <span
                 className="p-[6px] rounded-full text-neutral-500 transition duration-200 
                         hover:bg-blue-500 hover:text-blue-500 hover:bg-opacity-10 cursor-pointer"
+                onClick={(e) => {
+                    e.stopPropagation();
+                }}
             >
-                <IoBookmarkOutline />
+                <IoBookmarkOutline size={18} />
             </span>
         </footer>
     );

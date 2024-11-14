@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { PostData } from '../../../types';
 import PostFooter from './PostFooter';
 
@@ -6,16 +7,28 @@ type PostContentType = {
 };
 
 const PostContent = ({ post }: PostContentType) => {
+    const navigate = useNavigate();
+
     return (
         <div className="flex gap-2 p-3">
             <img
                 src={post.avatarUrl}
                 className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
+                onClick={(e) => {
+                    e.stopPropagation();
+                    navigate(`/profile/${post.username}`);
+                }}
             />
             <div>
                 <section className="flex flex-col">
                     <section className="flex gap-1 sm:text-base text-sm">
-                        <h2 className="font-bold cursor-pointer hover:underline z-10">
+                        <h2
+                            className="font-bold cursor-pointer hover:underline"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                navigate(`/profile/${post.username}`);
+                            }}
+                        >
                             {post.username}
                         </h2>
                         <p className="text-neutral-500">· {post.date}</p>
