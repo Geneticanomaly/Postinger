@@ -1,5 +1,6 @@
 import { IoMdArrowBack } from 'react-icons/io';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getCondensedNumber } from '../helperFunctions';
 
 const Header = () => {
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Header = () => {
             return (
                 <>
                     <h1 className="font-bold text-xl">Username</h1>
-                    <p className="text-sm text-neutral-500">40 posts</p>
+                    <p className="text-sm text-neutral-500">{getCondensedNumber(113250)} posts</p>
                 </>
             );
         }

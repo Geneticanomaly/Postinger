@@ -49,16 +49,18 @@ const EditProfileTextarea = ({
             >
                 {label}
             </label>
-            <label
-                className={`absolute text-[12px] top-1.5 right-2 transition duration-200 pointer-events-none
+            {focused && (
+                <label
+                    className={`absolute text-[12px] top-1.5 right-2 transition duration-200 pointer-events-none
                            peer-placeholder-shown:top-4 peer-placeholder-shown:text-[16px]
                            peer-placeholder-shown:text-neutral-600 peer-focus:top-1.5 peer-focus:text-[12px]
                            peer-focus:text-[#5b9aff] ${
                                focused ? 'text-blue-500' : 'text-neutral-500'
                            }`}
-            >
-                {value.length} / {maxCount}
-            </label>
+                >
+                    {value.length} / {maxCount}
+                </label>
+            )}
         </div>
     );
 };

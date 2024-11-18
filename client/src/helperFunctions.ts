@@ -5,11 +5,11 @@ export const getCondensedNumber = (amount: number): string => {
         return `${roundedValue}K`;
         // 10K - 99K range
     } else if (amount >= 10000 && amount < 100000) {
-        const roundedValue = Math.floor(amount / 1000);
+        const roundedValue = Math.floor(amount / 100) / 10;
         return `${roundedValue}K`;
         // 100K - 999K range
     } else if (amount >= 100000 && amount < 1000000) {
-        const roundedValue = Math.floor(amount / 1000);
+        const roundedValue = Math.floor(amount / 100) / 10;
         return `${roundedValue}K`;
         // 1M and above
     } else if (amount >= 1000000) {
