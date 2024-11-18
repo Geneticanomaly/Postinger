@@ -8,7 +8,7 @@ import Authentication from './pages/Authentication.tsx';
 import PostStatus from './pages/PostStatus.tsx';
 import Profile from './pages/Profile.tsx';
 import ScrollToTop from './hooks/ScrollToTop.ts';
-import EditProfileModal from './components/Profile/EditProfileModal.tsx';
+import EditProfileModal from './components/Profile/EditProfile/EditProfileModal.tsx';
 
 function App() {
     const [theme, setTheme] = useState<Theme>('dark');
