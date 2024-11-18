@@ -9,7 +9,7 @@ const EditModalHeader = ({ navigate }: EditModalHeaderProps) => {
     return (
         <header
             className="sticky w-full p-3 top-0 z-10 bg-neutral-950 flex items-center justify-between
-                        bg-opacity-90 backdrop-blur-sm"
+                       bg-opacity-90 backdrop-blur-sm"
         >
             <section className="flex items-center gap-8">
                 <span
@@ -22,7 +22,7 @@ const EditModalHeader = ({ navigate }: EditModalHeaderProps) => {
             </section>
             <button
                 className="py-1.5 px-4 rounded-full bg-white text-sm text-neutral-950 font-medium
-                                hover:bg-neutral-200 transition duration-200"
+                         hover:bg-neutral-200 transition duration-200"
             >
                 Save
             </button>

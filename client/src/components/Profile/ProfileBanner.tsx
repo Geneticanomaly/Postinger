@@ -14,15 +14,14 @@ const ProfileBanner = () => {
                 <img src={background} className="w-full h-[200px]" />
                 <img
                     src={avatarUrl}
-                    className="absolute w-32 rounded-full left-5 top-[135px] border-[3px] border-neutral-950
-                        cursor-pointer"
+                    className="absolute w-32 rounded-full left-5 top-[135px] border-[3px] border-neutral-950 cursor-pointer"
                 />
                 <button
                     className="absolute top-[210px] right-2 py-2 px-4 border border-neutral-700 rounded-full
-                        font-bold text-sm hover:bg-neutral-800 transition duration-300"
-                    onClick={() => navigate(`/profile/thomaaa/setup_profile`)}
+                               font-bold text-sm hover:bg-neutral-800 transition duration-300"
+                    onClick={() => navigate(`/profile/thomaaa/edit_profile`)}
                 >
-                    Set up profile
+                    Edit profile
                 </button>
                 <section className="w-full h-[175px] py-20 px-5 flex flex-col gap-2">
                     <h1 className="font-bold">Username</h1>
@@ -45,7 +44,7 @@ const ProfileBanner = () => {
                 <footer className="flex">
                     <span
                         className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
-                        cursor-pointer ${selectedElement === 'posts' && 'font-bold'}`}
+                                    cursor-pointer ${selectedElement === 'posts' && 'font-bold'}`}
                         onClick={() => setSelectedElement('posts')}
                     >
                         Posts
@@ -55,7 +54,7 @@ const ProfileBanner = () => {
                     </span>
                     <span
                         className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
-                        cursor-pointer ${selectedElement === 'replies' && 'font-bold'}`}
+                                    cursor-pointer ${selectedElement === 'replies' && 'font-bold'}`}
                         onClick={() => setSelectedElement('replies')}
                     >
                         Replies
@@ -65,7 +64,7 @@ const ProfileBanner = () => {
                     </span>
                     <span
                         className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
-                        cursor-pointer ${selectedElement === 'likes' && 'font-bold'}`}
+                                    cursor-pointer ${selectedElement === 'likes' && 'font-bold'}`}
                         onClick={() => setSelectedElement('likes')}
                     >
                         Likes

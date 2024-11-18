@@ -35,7 +35,6 @@ const BackgroundPicture = ({ setBackgroundPicture }: BackgroundPictureProps) => 
                 src={backgroundUrl ? backgroundUrl : ''}
                 className={`${backgroundUrl ? 'w-full h-full' : 'hidden'}`}
             />
-            ull h-
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-4 ">
                 <input
                     id="backgroundInput"
@@ -45,7 +44,7 @@ const BackgroundPicture = ({ setBackgroundPicture }: BackgroundPictureProps) => 
                 />
                 <span
                     className="p-3 bg-neutral-800 text-[20px] rounded-full cursor-pointer text-white
-                                transition duration-200 hover:bg-neutral-700 bg-opacity-60"
+                               transition duration-200 hover:bg-neutral-700 bg-opacity-60"
                     onClick={handleClick}
                 >
                     <TbCameraPlus />
@@ -53,7 +52,7 @@ const BackgroundPicture = ({ setBackgroundPicture }: BackgroundPictureProps) => 
                 {backgroundUrl && (
                     <span
                         className="p-3 bg-neutral-800 text-[20px] rounded-full cursor-pointer text-white
-                         transition duration-200 hover:bg-neutral-700 bg-opacity-60"
+                                   transition duration-200 hover:bg-neutral-700 bg-opacity-60"
                         onClick={resetProfilePicture}
                     >
                         <IoMdClose />

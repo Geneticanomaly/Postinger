@@ -47,14 +47,14 @@ const ProfilePicture = ({ setProfilePicture }: ProfilePictureProps) => {
                     <span
                         onClick={handleClick}
                         className="p-2 bg-neutral-800 text-[20px] rounded-full cursor-pointer text-white
-                                transition duration-200 hover:bg-neutral-700 bg-opacity-60"
+                                   transition duration-200 hover:bg-neutral-700 bg-opacity-60"
                     >
                         <TbCameraPlus />
                     </span>
                     {profilePictureUrl && (
                         <span
                             className="p-2 bg-neutral-800 text-[20px] rounded-full cursor-pointer text-white
-                         transition duration-200 hover:bg-neutral-700 bg-opacity-60"
+                                       transition duration-200 hover:bg-neutral-700 bg-opacity-60"
                             onClick={resetProfilePicture}
                         >
                             <IoMdClose />

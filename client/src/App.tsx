@@ -32,7 +32,7 @@ function App() {
                     </Routes>
                     <Routes>
                         <Route path="/profile/:username/*" element={<Profile />}>
-                            <Route path="setup_profile" element={<EditProfileModal />} />
+                            <Route path="edit_profile" element={<EditProfileModal />} />
                         </Route>
                     </Routes>
                     <Routes>

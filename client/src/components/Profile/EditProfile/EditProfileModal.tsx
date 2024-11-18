@@ -30,7 +30,7 @@ const EditProfileModal = () => {
             ></div>
             <div
                 className="absolute z-30 md:w-[650px] md:h-[650px] w-full h-full bg-neutral-100 dark:bg-neutral-950
-                        rounded-xl flex flex-col items-center overflow-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                           rounded-xl flex flex-col items-center overflow-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
                 <EditModalHeader navigate={navigate} />
                 <div className="relative w-full h-[200px]">
@@ -40,21 +40,24 @@ const EditProfileModal = () => {
                 <div className="absolute w-full flex flex-col items-center justify-center gap-4 mt-[345px]">
                     <EditProfileTextarea
                         label="Name"
+                        maxCount={50}
                         rows={1}
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={setName}
                     />
                     <EditProfileTextarea
                         label="Bio"
+                        maxCount={160}
                         rows={3}
                         value={bio}
-                        onChange={(e) => setBio(e.target.value)}
+                        onChange={setBio}
                     />
                     <EditProfileTextarea
                         label="Location"
+                        maxCount={30}
                         rows={1}
                         value={location}
-                        onChange={(e) => setLocation(e.target.value)}
+                        onChange={setLocation}
                     />
                 </div>
             </div>
