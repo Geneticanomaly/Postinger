@@ -21,3 +21,9 @@ export type PostData = {
     likes: number;
     views: number;
 };
+
+export type UpdateUserPayload = {
+    name: string;
+    bio: string;
+    residence: string;
+};
