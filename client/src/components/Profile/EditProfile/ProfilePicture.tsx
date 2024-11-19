@@ -5,9 +5,10 @@ import { IoMdClose } from 'react-icons/io';
 
 type ProfilePictureProps = {
     setProfilePicture: React.Dispatch<React.SetStateAction<File | null>>;
+    setShowCropImageModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ProfilePicture = ({ setProfilePicture }: ProfilePictureProps) => {
+const ProfilePicture = ({ setProfilePicture, setShowCropImageModal }: ProfilePictureProps) => {
     const [profilePictureUrl, setProfilePictureUrl] = useState('');
 
     const handleClick = () => {

@@ -21,8 +21,6 @@ const Posts = () => {
 
     if (isLoading || error) return <>Loading...</>;
 
-    console.log(data);
-
     return (
         <div className="flex flex-col w-full">
             {location.pathname === '/home' && (

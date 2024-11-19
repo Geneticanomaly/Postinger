@@ -6,7 +6,7 @@ const MainHeader = () => {
     return (
         <header
             className="sticky top-0 z-20 flex items-center text-center border-b border-l border-r w-full 
-        border-neutral-700 opacity-90 bg-neutral-950 text-sm"
+        border-neutral-700 bg-opacity-90 bg-neutral-950 text-sm backdrop-blur-sm"
         >
             <span
                 className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 

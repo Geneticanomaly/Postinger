@@ -26,3 +26,32 @@
 textarea::-webkit-scrollbar {
     width: 0px;
 }
+
+.scrollbar-hidden {
+    scrollbar-width: none; /* For Firefox */
+    -ms-overflow-style: none; /* For IE and Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Opera */
+}
+
+/* Slider */
+.custom-slider .MuiSlider-thumb {
+    width: 14px;
+    height: 14px;
+    background-color: #00aeff;
+}
+
+.custom-slider .MuiSlider-thumb:hover,
+.custom-slider .MuiSlider-thumb.Mui-focusVisible {
+    box-shadow: 0px 0px 0px 8px rgba(12, 126, 233, 0.16);
+}
+
+.custom-slider .MuiSlider-track {
+    background-color: #00aeff;
+}
+
+.custom-slider .MuiSlider-rail {
+    background-color: rgb(0, 195, 255);
+}

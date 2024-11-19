@@ -4,9 +4,13 @@ import { TbCameraPlus } from 'react-icons/tb';
 
 type BackgroundPictureProps = {
     setBackgroundPicture: React.Dispatch<React.SetStateAction<File | null>>;
+    setShowCropImageModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const BackgroundPicture = ({ setBackgroundPicture }: BackgroundPictureProps) => {
+const BackgroundPicture = ({
+    setBackgroundPicture,
+    setShowCropImageModal,
+}: BackgroundPictureProps) => {
     const [backgroundUrl, setBackgroundUrl] = useState('');
 
     const handleClick = () => {
@@ -19,14 +23,16 @@ const BackgroundPicture = ({ setBackgroundPicture }: BackgroundPictureProps) => 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
             const selectedFile = e.target.files[0];
-            // setProfilePicture(selectedFile);
-            setBackgroundUrl(URL.createObjectURL(selectedFile));
+            setBackgroundPicture(selectedFile);
+            // setBackgroundUrl(URL.createObjectURL(selectedFile));
+            setShowCropImageModal(true);
         }
     };
 
     const resetProfilePicture = () => {
         setBackgroundPicture(null);
         setBackgroundUrl('');
+        setShowCropImageModal(false);
     };
 
     return (
