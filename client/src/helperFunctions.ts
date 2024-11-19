@@ -1,3 +1,5 @@
+import { Area } from 'react-easy-crop';
+
 export const getCondensedNumber = (amount: number): string => {
     // 1K - 9.9K range
     if (amount >= 1000 && amount < 10000) {
@@ -22,4 +24,51 @@ export const getCondensedNumber = (amount: number): string => {
             return amount.toString();
         }
     }
+};
+
+export const getCroppedImage = (imageSrc: string, croppedAreaPixels: Area): Promise<File> => {
+    return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.src = imageSrc;
+
+        image.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            if (!ctx) {
+                reject('Failed to get canvas context');
+                return;
+            }
+
+            // Set canvas size to the cropped area size
+            canvas.width = croppedAreaPixels.width;
+            canvas.height = croppedAreaPixels.height;
+
+            // Draw the image on the canvas based on the cropped pixels
+            ctx.drawImage(
+                image,
+                croppedAreaPixels.x,
+                croppedAreaPixels.y,
+                croppedAreaPixels.width,
+                croppedAreaPixels.height,
+                0,
+                0,
+                croppedAreaPixels.width,
+                croppedAreaPixels.height
+            );
+
+            // Convert the canvas to a blob and resolve it as a file
+            canvas.toBlob((blob) => {
+                if (!blob) {
+                    reject('Failed to create cropped image blob');
+                    return;
+                }
+                const file = new File([blob], 'cropped-image.png', { type: 'image/png' });
+                resolve(file);
+            });
+        };
+
+        image.onerror = () => {
+            reject('Failed to load image');
+        };
+    });
 };

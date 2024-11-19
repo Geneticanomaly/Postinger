@@ -1,18 +1,19 @@
-import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { TbCameraPlus } from 'react-icons/tb';
 
 type BackgroundPictureProps = {
+    backgroundUrl: string;
+    setBackgroundUrl: React.Dispatch<React.SetStateAction<string>>;
     setBackgroundPicture: React.Dispatch<React.SetStateAction<File | null>>;
     setShowCropImageModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const BackgroundPicture = ({
+    backgroundUrl,
+    setBackgroundUrl,
     setBackgroundPicture,
     setShowCropImageModal,
 }: BackgroundPictureProps) => {
-    const [backgroundUrl, setBackgroundUrl] = useState('');
-
     const handleClick = () => {
         const fileInput = document.getElementById('backgroundInput');
         if (fileInput) {
@@ -24,7 +25,6 @@ const BackgroundPicture = ({
         if (e.target.files && e.target.files.length > 0) {
             const selectedFile = e.target.files[0];
             setBackgroundPicture(selectedFile);
-            // setBackgroundUrl(URL.createObjectURL(selectedFile));
             setShowCropImageModal(true);
         }
     };
