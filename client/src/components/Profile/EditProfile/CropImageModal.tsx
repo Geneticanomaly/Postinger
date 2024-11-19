@@ -30,8 +30,7 @@ const CropImageModal = ({
         y: 0,
     });
 
-    const onCropComplete = (croppedArea: Area, croppedAreaPixels: Area) => {
-        console.log(croppedArea, croppedAreaPixels);
+    const onCropComplete = (_croppedArea: Area, croppedAreaPixels: Area) => {
         setCroppedImagePixels(croppedAreaPixels);
     };
 
@@ -42,13 +41,21 @@ const CropImageModal = ({
     }, [backgroundPicture]);
 
     const handleClick = async () => {
-        const croppedFile = await getCroppedImage(imageUrl, croppedImagePixels);
-        console.log('file', croppedFile);
-        setBackgroundPicture(croppedFile);
-        if (backgroundPicture) {
-            setBackgroundUrl(URL.createObjectURL(croppedFile));
-        }
-        setShowCropImageModal(false);
+        getCroppedImage(imageUrl, croppedImagePixels)
+            .then((croppedImage) => {
+                if (croppedImage instanceof File) {
+                    setBackgroundPicture(croppedImage);
+                    if (backgroundPicture) {
+                        setBackgroundUrl(URL.createObjectURL(croppedImage));
+                    }
+                    setShowCropImageModal(false);
+                } else {
+                    console.error('The returned value is not a valid File');
+                }
+            })
+            .catch((error) => {
+                console.error('Error cropping image:', error);
+            });
     };
 
     return (

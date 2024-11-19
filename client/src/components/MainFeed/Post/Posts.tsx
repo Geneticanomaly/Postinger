@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import postServices from '../../../services/post';
 import { PostData } from '../../../types';
 import { useLocation } from 'react-router-dom';
+import Loading from '../../Loading';
 
 const Posts = () => {
     const width = useWindowWidth();
@@ -19,8 +20,6 @@ const Posts = () => {
         staleTime: 1000 * 60 * 5, // 5 minutes
     });
 
-    if (isLoading || error) return <>Loading...</>;
-
     return (
         <div className="flex flex-col w-full">
             {location.pathname === '/home' && (
@@ -29,9 +28,13 @@ const Posts = () => {
                     <PostForm />
                 </>
             )}
-            {posts!.map((post, i) => (
-                <Post key={i} post={post} />
-            ))}
+            {isLoading || error ? (
+                <Loading />
+            ) : !data ? (
+                <h3>No posts here...</h3>
+            ) : (
+                posts!.map((post, i) => <Post key={i} post={post} />)
+            )}
         </div>
     );
 };
