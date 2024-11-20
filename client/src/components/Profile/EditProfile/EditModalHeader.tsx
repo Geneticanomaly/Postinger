@@ -5,14 +5,27 @@ import { IoMdArrowBack } from 'react-icons/io';
 type EditModalHeaderProps = {
     setShowCropImageModal: React.Dispatch<React.SetStateAction<boolean>>;
     cropImage: boolean;
+    setProfilePicture: React.Dispatch<React.SetStateAction<File | null>>;
+    setBackgroundPicture: React.Dispatch<React.SetStateAction<File | null>>;
+    setCurrentPicture: React.Dispatch<React.SetStateAction<'' | 'profile' | 'background'>>;
 };
 
-const EditModalHeader = ({ setShowCropImageModal, cropImage }: EditModalHeaderProps) => {
+const EditModalHeader = ({
+    setShowCropImageModal,
+    cropImage,
+    setProfilePicture,
+    setBackgroundPicture,
+    setCurrentPicture,
+}: EditModalHeaderProps) => {
     const navigate = useNavigate();
     const handleNavigation = () => {
         if (cropImage) {
+            setProfilePicture(null);
+            setBackgroundPicture(null);
+            setCurrentPicture('');
             setShowCropImageModal(false);
         } else {
+            setCurrentPicture('');
             navigate(-1);
         }
     };

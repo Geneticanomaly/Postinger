@@ -29,7 +29,7 @@ const Posts = () => {
                 </>
             )}
             {isLoading || error ? (
-                <Loading />
+                <Loading isButton={false} />
             ) : !data ? (
                 <h3>No posts here...</h3>
             ) : (

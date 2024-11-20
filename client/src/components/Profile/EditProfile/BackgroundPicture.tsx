@@ -2,6 +2,7 @@ import { IoMdClose } from 'react-icons/io';
 import { TbCameraPlus } from 'react-icons/tb';
 
 type BackgroundPictureProps = {
+    setCurrentPicture: React.Dispatch<React.SetStateAction<'' | 'profile' | 'background'>>;
     backgroundUrl: string;
     setBackgroundUrl: React.Dispatch<React.SetStateAction<string>>;
     setBackgroundPicture: React.Dispatch<React.SetStateAction<File | null>>;
@@ -9,6 +10,7 @@ type BackgroundPictureProps = {
 };
 
 const BackgroundPicture = ({
+    setCurrentPicture,
     backgroundUrl,
     setBackgroundUrl,
     setBackgroundPicture,
@@ -25,7 +27,11 @@ const BackgroundPicture = ({
         if (e.target.files && e.target.files.length > 0) {
             const selectedFile = e.target.files[0];
             setBackgroundPicture(selectedFile);
+            setCurrentPicture('background');
             setShowCropImageModal(true);
+
+            // Reset the input so that the same file can trigger the onChange
+            e.target.value = '';
         }
     };
 

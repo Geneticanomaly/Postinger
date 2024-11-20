@@ -8,6 +8,9 @@ import CropImageModal from './CropImageModal';
 
 const EditProfileModal = () => {
     const navigate = useNavigate();
+
+    const [currentPicture, setCurrentPicture] = useState<'' | 'profile' | 'background'>('');
+
     const [profilePicture, setProfilePicture] = useState<File | null>(null);
     const [profileUrl, setprofileUrl] = useState('');
 
@@ -20,7 +23,7 @@ const EditProfileModal = () => {
     const [bio, setBio] = useState('');
     const [location, setLocation] = useState('');
 
-    // Disable scrolling when the modal is open
+    // Disable main page scrolling when the modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden';
         return () => {
@@ -36,9 +39,15 @@ const EditProfileModal = () => {
             ></div>
             <div
                 className="absolute z-30 md:w-[650px] md:h-[650px] w-full h-full bg-neutral-100 dark:bg-neutral-950
-                           rounded-xl flex flex-col items-center overflow-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                           md:rounded-xl flex flex-col items-center overflow-auto top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
             >
-                <EditModalHeader setShowCropImageModal={setShowCropImageModal} cropImage={false} />
+                <EditModalHeader
+                    setShowCropImageModal={setShowCropImageModal}
+                    cropImage={false}
+                    setProfilePicture={setProfilePicture}
+                    setBackgroundPicture={setBackgroundPicture}
+                    setCurrentPicture={setCurrentPicture}
+                />
                 <button
                     className="absolute top-3.5 right-4 z-30 py-1.5 px-4 rounded-full bg-white text-sm text-neutral-950 font-medium
                          hover:bg-neutral-200 transition duration-200"
@@ -47,10 +56,14 @@ const EditProfileModal = () => {
                 </button>
                 <div className="relative w-full h-[200px]">
                     <ProfilePicture
+                        setCurrentPicture={setCurrentPicture}
+                        profileUrl={profileUrl}
+                        setProfileUrl={setprofileUrl}
                         setProfilePicture={setProfilePicture}
                         setShowCropImageModal={setShowCropImageModal}
                     />
                     <BackgroundPicture
+                        setCurrentPicture={setCurrentPicture}
                         backgroundUrl={backgroundUrl}
                         setBackgroundUrl={setBackgroundUrl}
                         setBackgroundPicture={setBackgroundPicture}
@@ -83,12 +96,15 @@ const EditProfileModal = () => {
 
                 {showCropImageModal && (
                     <CropImageModal
-                        // profilePicture={profilePicture}
-                        // setProfilePicture={setProfilePicture}
+                        profilePicture={profilePicture}
+                        setProfilePicture={setProfilePicture}
+                        setProfileUrl={setprofileUrl}
                         backgroundPicture={backgroundPicture}
                         setBackgroundPicture={setBackgroundPicture}
                         setBackgroundUrl={setBackgroundUrl}
                         setShowCropImageModal={setShowCropImageModal}
+                        currentPicture={currentPicture}
+                        setCurrentPicture={setCurrentPicture}
                     />
                 )}
             </div>

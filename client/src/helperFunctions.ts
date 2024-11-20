@@ -46,14 +46,14 @@ export const getCroppedImage = (imageSrc: string, croppedAreaPixels: Area): Prom
             // Draw the image on the canvas based on the cropped pixels
             ctx.drawImage(
                 image,
-                croppedAreaPixels.x,
-                croppedAreaPixels.y,
-                croppedAreaPixels.width,
-                croppedAreaPixels.height,
-                0,
-                0,
-                croppedAreaPixels.width,
-                croppedAreaPixels.height
+                croppedAreaPixels.x, // X position of the crop in pixels
+                croppedAreaPixels.y, // Y position of the crop in pixels
+                croppedAreaPixels.width, // Width of the cropped area
+                croppedAreaPixels.height, // Height of the cropped area
+                0, // X position on the canvas (start from top-left corner)
+                0, // Y position on the canvas (start from top-left corner)
+                croppedAreaPixels.width, // Width on the canvas
+                croppedAreaPixels.height // Height on the canvas
             );
 
             // Convert the canvas to a blob and resolve it as a file

@@ -6,20 +6,32 @@ import { HiMagnifyingGlassPlus, HiMagnifyingGlassMinus } from 'react-icons/hi2';
 import Cropper from 'react-easy-crop';
 import { Point, Area } from 'react-easy-crop';
 import { getCroppedImage } from '../../../helperFunctions';
+import Loading from '../../Loading';
 
 type CropImageModalProps = {
+    profilePicture: File | null;
+    setProfilePicture: React.Dispatch<React.SetStateAction<File | null>>;
+    setProfileUrl: React.Dispatch<React.SetStateAction<string>>;
     backgroundPicture: File | null;
     setBackgroundPicture: React.Dispatch<React.SetStateAction<File | null>>;
     setBackgroundUrl: React.Dispatch<React.SetStateAction<string>>;
     setShowCropImageModal: React.Dispatch<React.SetStateAction<boolean>>;
+    currentPicture: '' | 'profile' | 'background';
+    setCurrentPicture: React.Dispatch<React.SetStateAction<'' | 'profile' | 'background'>>;
 };
 
 const CropImageModal = ({
+    profilePicture,
+    setProfilePicture,
+    setProfileUrl,
     backgroundPicture,
     setBackgroundPicture,
     setBackgroundUrl,
     setShowCropImageModal,
+    currentPicture,
+    setCurrentPicture,
 }: CropImageModalProps) => {
+    const [loading, setLoading] = useState(false);
     const [crop, setCrop] = useState<Point>({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [imageUrl, setImageUrl] = useState('');
@@ -35,26 +47,36 @@ const CropImageModal = ({
     };
 
     useEffect(() => {
-        if (backgroundPicture) {
-            setImageUrl(URL.createObjectURL(backgroundPicture));
+        const selectedPicture = currentPicture === 'profile' ? profilePicture : backgroundPicture;
+        if (selectedPicture) {
+            setImageUrl(URL.createObjectURL(selectedPicture));
         }
-    }, [backgroundPicture]);
+    }, [currentPicture, profilePicture, backgroundPicture]);
 
     const handleClick = async () => {
+        setLoading(true);
         getCroppedImage(imageUrl, croppedImagePixels)
             .then((croppedImage) => {
                 if (croppedImage instanceof File) {
                     setBackgroundPicture(croppedImage);
-                    if (backgroundPicture) {
+                    if (currentPicture === 'profile') {
+                        setProfilePicture(croppedImage);
+                        setProfileUrl(URL.createObjectURL(croppedImage));
+                    } else if (currentPicture === 'background') {
+                        setBackgroundPicture(croppedImage);
                         setBackgroundUrl(URL.createObjectURL(croppedImage));
                     }
+                    setLoading(false);
+                    setCurrentPicture('');
                     setShowCropImageModal(false);
                 } else {
                     console.error('The returned value is not a valid File');
+                    setLoading(false);
                 }
             })
             .catch((error) => {
                 console.error('Error cropping image:', error);
+                setLoading(false);
             });
     };
 
@@ -63,20 +85,26 @@ const CropImageModal = ({
             className="absolute z-50 w-full h-full bg-neutral-100 dark:bg-black rounded-xl 
                        overflow-auto scrollbar-hidden"
         >
-            <EditModalHeader setShowCropImageModal={setShowCropImageModal} cropImage={true} />
+            <EditModalHeader
+                setShowCropImageModal={setShowCropImageModal}
+                cropImage={true}
+                setProfilePicture={setProfilePicture}
+                setBackgroundPicture={setBackgroundPicture}
+                setCurrentPicture={setCurrentPicture}
+            />
             <button
-                className="absolute top-3.5 right-4 z-50 py-1.5 px-4 rounded-full bg-white text-sm text-neutral-950 font-medium
-                         hover:bg-neutral-200 transition duration-200"
+                className="absolute top-3.5 right-4 z-50 w-[74px] h-8 rounded-full bg-white text-sm text-neutral-950 font-medium
+                         flex justify-center items-center hover:bg-neutral-200 transition duration-200"
                 onClick={handleClick}
             >
-                Apply
+                {loading ? <Loading isButton={true} /> : 'Apply'}
             </button>
             <div className="h-full bg-[#111111]">
                 <Cropper
                     image={imageUrl}
                     crop={crop}
                     zoom={zoom}
-                    aspect={3.5 / 1.5}
+                    aspect={currentPicture === 'profile' ? 1 / 1 : 3.5 / 1.5}
                     onCropChange={setCrop}
                     onCropComplete={onCropComplete}
                     showGrid={false}
