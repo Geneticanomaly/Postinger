@@ -78,6 +78,10 @@ module.exports = {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
+            embedded_link: {
+                type: DataTypes.STRING,
+                allowNull: true,
+            },
             likes: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

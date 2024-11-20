@@ -23,6 +23,14 @@ const EditProfileModal = () => {
     const [bio, setBio] = useState('');
     const [location, setLocation] = useState('');
 
+    const handleSave = () => {
+        // TODO:
+        // Need to check which api endpoints needs to be triggered
+        // Based on what has changed
+
+        console.log('SAVING DATA');
+    };
+
     // Disable main page scrolling when the modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden';
@@ -51,6 +59,7 @@ const EditProfileModal = () => {
                 <button
                     className="absolute top-3.5 right-4 z-30 py-1.5 px-4 rounded-full bg-white text-sm text-neutral-950 font-medium
                          hover:bg-neutral-200 transition duration-200"
+                    onClick={handleSave}
                 >
                     Save
                 </button>

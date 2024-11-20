@@ -12,7 +12,7 @@ type PostFooterType = {
 
 const PostFooter = ({ post }: PostFooterType) => {
     return (
-        <footer className="flex items-center justify-between z-10">
+        <footer className="flex items-center justify-between z-10 -ml-2">
             <section
                 className="flex items-center cursor-pointer group/replies"
                 onClick={(e) => {
@@ -20,7 +20,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                 }}
             >
                 <span
-                    className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
+                    className="p-[8px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/replies:bg-blue-500 group-hover/replies:bg-opacity-10 group-hover/replies:text-blue-500"
                 >
                     <TbMessageCircle />
@@ -36,7 +36,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                 }}
             >
                 <span
-                    className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
+                    className="p-[7px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/reposts:bg-green-500 group-hover/reposts:bg-opacity-10 group-hover/reposts:text-green-500"
                 >
                     <LiaRetweetSolid />
@@ -52,7 +52,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                 }}
             >
                 <span
-                    className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
+                    className="p-[7px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/likes:bg-pink-500 group-hover/likes:bg-opacity-10 group-hover/likes:text-pink-500"
                 >
                     <IoMdHeartEmpty />
@@ -68,7 +68,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                 }}
             >
                 <span
-                    className="p-[6px] rounded-full text-xl text-neutral-500 transition duration-200
+                    className="p-[7px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/views:bg-blue-500 group-hover/views:bg-opacity-10 group-hover/views:text-blue-500"
                 >
                     <BiBarChart />
@@ -78,7 +78,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                 </p>
             </section>
             <span
-                className="p-[6px] rounded-full text-neutral-500 transition duration-200 
+                className="p-[7px] rounded-full text-neutral-500 transition duration-200 
                         hover:bg-blue-500 hover:text-blue-500 hover:bg-opacity-10 cursor-pointer"
                 onClick={(e) => {
                     e.stopPropagation();

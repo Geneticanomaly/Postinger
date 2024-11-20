@@ -13,6 +13,7 @@ export default class Post extends Model<InferAttributes<Post>, InferCreationAttr
     declare userId: string;
     declare parentPostId: CreationOptional<number | null>;
     declare content: string;
+    declare embeddedLink: CreationOptional<string>;
     declare likes: CreationOptional<number>;
     declare comments: CreationOptional<number>;
     declare reposts: CreationOptional<number>;
@@ -46,6 +47,10 @@ Post.init(
         content: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        embeddedLink: {
+            type: DataTypes.STRING,
+            allowNull: true,
         },
         likes: {
             type: DataTypes.INTEGER,

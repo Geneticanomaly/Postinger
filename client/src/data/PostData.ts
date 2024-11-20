@@ -40,4 +40,15 @@ export const posts = [
         likes: 17000,
         views: 652000,
     },
+    {
+        id: 4,
+        username: 'IdkWhyImHere',
+        title: 'Test paragraph',
+        date: 'Nov 3',
+        avatarUrl: placeholderAvatar,
+        replies: 461,
+        reposts: 948,
+        likes: 17000,
+        views: 652000,
+    },
 ];

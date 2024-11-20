@@ -19,7 +19,7 @@ const PostContent = ({ post }: PostContentType) => {
                     navigate(`/profile/${post.username}`);
                 }}
             />
-            <div>
+            <div className="w-full">
                 <section className="flex flex-col">
                     <section className="flex gap-1 sm:text-base text-sm">
                         <h2
@@ -36,7 +36,7 @@ const PostContent = ({ post }: PostContentType) => {
                     <p>{post.title}</p>
                 </section>
 
-                <section className="mb-3 mt-3 rounded-xl">
+                <section className="mb-3 mt-3 rounded-xl ">
                     {post.img && (
                         <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                     )}
@@ -47,6 +47,17 @@ const PostContent = ({ post }: PostContentType) => {
                         >
                             <source src={post.video} type="video/mp4" />
                         </video>
+
+                        // <iframe
+                        //     className="w-full rounded-xl sm:h-[236px] md:h-[292px] lg:h-[283px] xl:h-[270px] h-[268px]
+                        //                cursor-pointer border border-neutral-700"
+                        //     src="https://www.youtube.com/embed/bxfKJHE3hpE?si=qZKrRFQa9rb3cdse"
+                        //     title="YouTube video player"
+                        //     frameBorder="0"
+                        //     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        //     referrerPolicy="strict-origin-when-cross-origin"
+                        //     allowFullScreen
+                        // ></iframe>
                     )}
                 </section>
                 <PostFooter post={post} />
