@@ -50,7 +50,18 @@ export const loginAuth = async (req: Request<{}, {}, LoginRequest>, res: Respons
     }
     sendAuthCookies(res, user);
 
-    res.status(200).json({ user: user });
+    res.status(200).json({
+        user: {
+            id: user.id,
+            username: user.username,
+            description: user.description,
+            residence: user.residence,
+            disabled: user.disabled,
+            admin: user.admin,
+            createdAt: user.createdAt,
+            updatedAt: user.updatedAt,
+        },
+    });
 };
 
 export const logoutAuth = (_req: Request, res: Response) => {

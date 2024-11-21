@@ -7,6 +7,7 @@ import ThirdPartyAuth from './ThirdPartyAuth';
 import { z } from 'zod';
 import authServices from '../../services/auth';
 import { isAxiosError } from 'axios';
+import { useUserDispatch } from '../../context/userContext/useUserContext';
 
 const loginSchema = z.object({
     email: z.string().email({ message: 'Please enter a valid email' }),
@@ -25,6 +26,8 @@ const LoginForm = () => {
         password?: string;
     }>({});
     const [errorMessage, setErrorMessage] = useState('');
+
+    const userDispatch = useUserDispatch();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData((prevData) => ({
@@ -56,7 +59,8 @@ const LoginForm = () => {
 
         try {
             const user = await authServices.login(formData);
-            console.log('Logging in', user);
+            window.localStorage.setItem('user', JSON.stringify(user));
+            userDispatch({ type: 'SET', payload: user });
             navigate('/home');
         } catch (error: unknown) {
             if (isAxiosError(error)) {

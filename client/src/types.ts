@@ -1,5 +1,22 @@
 import { IconType } from 'react-icons';
 
+export type User = {
+    id: string;
+    username: string;
+    description: string | null;
+    residence: string | null;
+    disabled: boolean;
+    admin: boolean;
+    createdAt: string;
+    updatedAt: string;
+    profileImage?: File | null;
+    backgroundImage?: File | null;
+};
+
+export type UserContextValueType = {
+    user: User;
+};
+
 export type SidebarOption = {
     id: number;
     name?: string;

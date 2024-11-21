@@ -1,11 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import authServices from '../../services/auth';
+import { useUserValue } from '../../context/userContext/useUserContext';
 
 const LogoutModal = () => {
     const navigate = useNavigate();
+    const user = useUserValue();
 
     const handleLogout = async () => {
         await authServices.logout();
+        window.localStorage.removeItem('user');
         navigate('/');
     };
 
@@ -21,7 +24,7 @@ const LogoutModal = () => {
                 className="w-full py-3 transition duration-200 hover:bg-[#24293065] opacity-90"
                 onClick={handleLogout}
             >
-                <h2 className="text-white pl-5">Log out @TKaatranen</h2>
+                <h2 className="text-white pl-5">Log out @{user?.user.username}</h2>
             </span>
             <span
                 className="absolute sm:left-[46px] left-[19px] bottom-0"
