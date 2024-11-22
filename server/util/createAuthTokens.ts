@@ -24,11 +24,11 @@ const cookieOpts = {
 
 export const sendAuthCookies = (res: Response, user: User) => {
     const { refreshToken, accessToken } = createAuthTokens(user);
-    res.cookie('id', accessToken, cookieOpts);
+    res.cookie('tid', accessToken, cookieOpts);
     res.cookie('rid', refreshToken, cookieOpts);
 };
 
 export const clearAuthCookies = (res: Response) => {
-    res.clearCookie('id', { ...cookieOpts, maxAge: 0 });
+    res.clearCookie('tid', { ...cookieOpts, maxAge: 0 });
     res.clearCookie('rid', { ...cookieOpts, maxAge: 0 });
 };

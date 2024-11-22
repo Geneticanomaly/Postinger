@@ -2,9 +2,11 @@ import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import { IoIosMore } from 'react-icons/io';
 import { useState } from 'react';
 import LogoutModal from './LogoutModal';
+import { useUserValue } from '../../context/userContext/useUserContext';
 
-const Profile = () => {
+const ProfileButton = () => {
     const [showModal, setShowModal] = useState(false);
+    const user = useUserValue();
 
     return (
         <section
@@ -15,9 +17,9 @@ const Profile = () => {
         >
             <div className="flex items-center gap-4">
                 <img src={placeholderAvatar} className="rounded-full xl:w-10 w-12" />
-                <span className="hidden xl:inline">Hikaru Nakamura</span>
+                <span className="hidden xl:inline">{user?.user.username}</span>
             </div>
-            <IoIosMore className="hidden xl:inline" />
+            <IoIosMore className="hidden xl:inline text-xl" />
             {showModal && <LogoutModal />}
             {showModal && (
                 <div
@@ -33,4 +35,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default ProfileButton;

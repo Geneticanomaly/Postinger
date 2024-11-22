@@ -12,8 +12,8 @@ const useIsAuthenticated = () => {
                     withCredentials: true,
                 });
 
-                if (res.data.redirect) {
-                    navigate(res.data.redirect);
+                if (res.data) {
+                    navigate('/home');
                 }
             } catch (error) {
                 console.error('Not authenticated', error);

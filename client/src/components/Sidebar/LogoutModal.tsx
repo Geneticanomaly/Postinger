@@ -8,7 +8,6 @@ const LogoutModal = () => {
 
     const handleLogout = async () => {
         await authServices.logout();
-        window.localStorage.removeItem('user');
         navigate('/');
     };
 

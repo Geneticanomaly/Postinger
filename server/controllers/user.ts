@@ -2,11 +2,21 @@ import { Request, Response } from 'express';
 import User from '../database/models/user';
 import File from '../database/models/file';
 import multer from 'multer';
+import { isAuthenticated } from '../util/middleware';
 require('express-async-errors');
 
 export const getUsers = async (_req: Request, res: Response) => {
     const users = await User.findAll();
     res.json(users);
+};
+
+export const getCurrentUser = async (req: Request, res: Response) => {
+    const userId = isAuthenticated(req, res);
+
+    if (!userId) res.status(401).json({ error: 'Unauthorized: Token expired' });
+
+    const user = await User.findByPk(userId);
+    res.json({ user: user });
 };
 
 const storage = multer.memoryStorage();

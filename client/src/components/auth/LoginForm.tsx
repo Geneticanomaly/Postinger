@@ -59,7 +59,6 @@ const LoginForm = () => {
 
         try {
             const user = await authServices.login(formData);
-            window.localStorage.setItem('user', JSON.stringify(user));
             userDispatch({ type: 'SET', payload: user });
             navigate('/home');
         } catch (error: unknown) {

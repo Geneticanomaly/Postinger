@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useUserDispatch, useUserValue } from '../context/userContext/useUserContext';
+import userServices from '../services/user';
 
 export const useGetCurrentUser = () => {
     const user = useUserValue();
@@ -7,10 +8,10 @@ export const useGetCurrentUser = () => {
 
     useEffect(() => {
         const getCurrentUser = async () => {
-            const loggedUserJSON = window.localStorage.getItem('user');
-            if (loggedUserJSON) {
-                const user = JSON.parse(loggedUserJSON);
-                userDispatch({ type: 'SET', payload: user });
+            const current_user = await userServices.getCurrentUser();
+
+            if (current_user) {
+                userDispatch({ type: 'SET', payload: current_user });
             }
         };
         if (!user) getCurrentUser();
