@@ -1,9 +1,9 @@
 import React, { createContext, useReducer, ReactNode } from 'react';
-import { UserContextValueType } from '../../types';
+import { User } from '../../types';
 
-type UserState = UserContextValueType | null;
+type UserState = User | undefined;
 
-type UserAction = { type: 'SET'; payload: UserContextValueType } | { type: 'CLEAR' };
+type UserAction = { type: 'SET'; payload: User } | { type: 'CLEAR' };
 
 type UserContextType = [UserState, React.Dispatch<UserAction>];
 
@@ -12,7 +12,7 @@ const userReducer = (state: UserState, action: UserAction): UserState => {
         case 'SET':
             return action.payload;
         case 'CLEAR':
-            return null;
+            return undefined;
         default:
             return state;
     }
@@ -25,7 +25,7 @@ interface UserContextProviderProps {
 }
 
 export const UserContextProvider: React.FC<UserContextProviderProps> = (props) => {
-    const [user, userDispatch] = useReducer(userReducer, null); // Initialize state as null
+    const [user, userDispatch] = useReducer(userReducer, undefined); // Initialize state as null
 
     return (
         <UserContext.Provider value={[user, userDispatch]}>{props.children}</UserContext.Provider>

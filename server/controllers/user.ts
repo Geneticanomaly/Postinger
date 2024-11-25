@@ -28,7 +28,7 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     }
 
     const user = await User.findByPk(userId);
-    res.json({ user: user });
+    res.json(user);
 };
 
 const storage = multer.memoryStorage();

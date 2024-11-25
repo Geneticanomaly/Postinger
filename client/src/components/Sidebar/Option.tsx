@@ -12,7 +12,6 @@ const Option = ({ option }: OptionType) => {
     const navigate = useNavigate();
     const width = useWindowWidth();
     const user = useUserValue();
-    // console.log('USER', user);
 
     const shouldDisplayName = option.name && width > 1280;
 
@@ -21,7 +20,7 @@ const Option = ({ option }: OptionType) => {
             // Only highlight profile icon when current user viewing their own page.
             if (option.route === '/profile') {
                 if (user)
-                    return window.location.href.includes(user.user.username)
+                    return window.location.href.includes(user.username)
                         ? option.filledLogo
                         : option.logo;
             }
@@ -35,7 +34,7 @@ const Option = ({ option }: OptionType) => {
 
     const navigateToRoute = () => {
         if (option.route === '/profile') {
-            navigate(`${option.route}/${user?.user.username}`);
+            navigate(`${option.route}/${user?.username}`);
         } else {
             navigate(option.route);
         }

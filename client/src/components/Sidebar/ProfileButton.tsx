@@ -17,7 +17,7 @@ const ProfileButton = () => {
         >
             <div className="flex items-center gap-4">
                 <img src={placeholderAvatar} className="rounded-full xl:w-10 w-12" />
-                <span className="hidden xl:inline">{user?.user.username}</span>
+                <span className="hidden xl:inline">{user?.username}</span>
             </div>
             <IoIosMore className="hidden xl:inline text-xl" />
             {showModal && <LogoutModal />}

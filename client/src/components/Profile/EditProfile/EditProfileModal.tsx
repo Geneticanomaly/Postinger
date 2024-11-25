@@ -6,6 +6,7 @@ import EditProfileTextarea from './EditProfileTextarea';
 import EditModalHeader from './EditModalHeader';
 import CropImageModal from './CropImageModal';
 import { useUserValue } from '../../../context/userContext/useUserContext';
+// import userServices from '../../../services/user';
 
 const EditProfileModal = () => {
     const navigate = useNavigate();
@@ -22,14 +23,16 @@ const EditProfileModal = () => {
     const [showCropImageModal, setShowCropImageModal] = useState(false);
 
     // Initialize state directly with user data
-    const [name, setName] = useState(user?.user.username || '');
-    const [bio, setBio] = useState(user?.user.description || '');
-    const [location, setLocation] = useState(user?.user.residence || '');
+    const [username, setUsername] = useState(user?.username || '');
+    const [description, setDescription] = useState(user?.description || '');
+    const [residence, setResidence] = useState(user?.residence || '');
 
     const handleSave = () => {
         // TODO:
         // Need to check which api endpoints needs to be triggered
         // Based on what has changed
+
+        // if (username)
 
         console.log('SAVING DATA');
     };
@@ -87,22 +90,22 @@ const EditProfileModal = () => {
                         label="Name"
                         maxCount={50}
                         rows={1}
-                        value={name}
-                        onChange={setName}
+                        value={username}
+                        onChange={setUsername}
                     />
                     <EditProfileTextarea
                         label="Bio"
                         maxCount={160}
                         rows={3}
-                        value={bio}
-                        onChange={setBio}
+                        value={description}
+                        onChange={setDescription}
                     />
                     <EditProfileTextarea
                         label="Location"
                         maxCount={30}
                         rows={1}
-                        value={location}
-                        onChange={setLocation}
+                        value={residence}
+                        onChange={setResidence}
                     />
                 </div>
 

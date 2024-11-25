@@ -20,10 +20,10 @@ const ProfileContainer = () => {
     } = useQuery<User>({
         queryKey: ['otherUser'],
         queryFn: () => userServices.getUser(username),
-        enabled: user?.user.username !== username,
+        enabled: user?.username !== username,
     });
 
-    const displayUser = user?.user.username === username ? user?.user : userData;
+    const displayUser = user?.username === username ? user : userData;
 
     if (isLoading || error) return <Loading isButton={false} />;
 

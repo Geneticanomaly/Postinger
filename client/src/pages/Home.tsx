@@ -7,7 +7,6 @@ import { useGetCurrentUser } from '../hooks/useGetCurrentUser';
 const Home = () => {
     const { theme } = useThemeContext();
     const width = useWindowWidth();
-
     // Re-acquire user on page refresh if missing
     useGetCurrentUser();
 

@@ -27,7 +27,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
                 <button
                     className="absolute top-[210px] right-2 py-2 px-4 border border-neutral-700 rounded-full
                                font-bold text-sm hover:bg-neutral-800 transition duration-300"
-                    onClick={() => navigate(`/profile/${currentUser?.user.username}/edit_profile`)}
+                    onClick={() => navigate(`/profile/${currentUser?.username}/edit_profile`)}
                 >
                     Edit profile
                 </button>

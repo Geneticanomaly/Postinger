@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { UserContext } from './UserContext';
-import { UserContextValueType } from '../../types';
+import { User } from '../../types';
 
-type UserState = UserContextValueType | null;
+type UserState = User | undefined;
 
-type UserAction = { type: 'SET'; payload: UserContextValueType } | { type: 'CLEAR' };
+type UserAction = { type: 'SET'; payload: User } | { type: 'CLEAR' };
 
 export const useUserValue = (): UserState => {
     const context = useContext(UserContext);
