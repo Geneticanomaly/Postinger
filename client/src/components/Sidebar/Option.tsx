@@ -2,6 +2,7 @@ import { IconType } from 'react-icons';
 import useWindowWidth from '../../hooks/useWindowWidth';
 import { SidebarOption } from '../../types';
 import { useNavigate } from 'react-router-dom';
+import { useUserValue } from '../../context/userContext/useUserContext';
 
 type OptionType = {
     option: SidebarOption;
@@ -10,11 +11,19 @@ type OptionType = {
 const Option = ({ option }: OptionType) => {
     const navigate = useNavigate();
     const width = useWindowWidth();
+    const user = useUserValue();
 
     const shouldDisplayName = option.name && width > 1280;
 
     const getIcon = (option: SidebarOption): IconType => {
         if (option.filledLogo) {
+            // Only highlight profile icon when current user viewing their own page.
+            if (option.route === '/profile') {
+                if (user)
+                    return window.location.href.includes(user.user.username)
+                        ? option.filledLogo
+                        : option.logo;
+            }
             return window.location.href.includes(option.route) ? option.filledLogo : option.logo;
         } else {
             return option.logo;

@@ -4,7 +4,6 @@ import bcrypt from 'bcrypt';
 import 'express-async-errors';
 import { clearAuthCookies, sendAuthCookies } from '../util/createAuthTokens';
 import { isAuthenticated } from '../util/middleware';
-// import jwt, { JwtPayload } from 'jsonwebtoken';
 
 type RegisterRequest = {
     email: string;

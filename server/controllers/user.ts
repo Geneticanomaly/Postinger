@@ -13,7 +13,10 @@ export const getUsers = async (_req: Request, res: Response) => {
 export const getCurrentUser = async (req: Request, res: Response) => {
     const userId = isAuthenticated(req, res);
 
-    if (!userId) res.status(401).json({ error: 'Unauthorized: Token expired' });
+    if (!userId) {
+        res.status(401).json({ error: 'Unauthorized: Token expired' });
+        return;
+    }
 
     const user = await User.findByPk(userId);
     res.json({ user: user });
@@ -28,6 +31,7 @@ export const updateUserImage = async (req: Request<{ id: string }, {}, {}>, res:
     uploadMiddleware(req, res, async (err: any) => {
         if (err) {
             res.status(500).json({ error: 'File upload failed' });
+            return;
         }
         const user = await User.findByPk(req.params.id);
 

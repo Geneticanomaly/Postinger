@@ -2,7 +2,6 @@ import { Request, Response } from 'express';
 import Post from '../database/models/post';
 import File from '../database/models/file';
 import multer from 'multer';
-// import { AppFile } from '../types';
 require('express-async-errors');
 
 export const getPosts = async (_req: Request, res: Response) => {
@@ -24,7 +23,9 @@ export const createPost = async (req: Request<{}, {}, CreatePostRequest>, res: R
     uploadMiddleware(req, res, async (err: any) => {
         if (err) {
             res.status(500).json({ error: 'File upload failed' });
+            return;
         }
+
         const { userId, content } = req.body;
 
         const post = await Post.create({
