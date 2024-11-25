@@ -4,7 +4,7 @@ type EditProfileTextareaProps = {
     label: string;
     maxCount: number;
     rows: number;
-    value: string;
+    value: string | undefined;
     onChange: React.Dispatch<React.SetStateAction<string>>;
 };
 
@@ -58,7 +58,7 @@ const EditProfileTextarea = ({
                                focused ? 'text-blue-500' : 'text-neutral-500'
                            }`}
                 >
-                    {value.length} / {maxCount}
+                    {value?.length} / {maxCount}
                 </label>
             )}
         </div>

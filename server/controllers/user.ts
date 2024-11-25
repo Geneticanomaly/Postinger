@@ -10,6 +10,15 @@ export const getUsers = async (_req: Request, res: Response) => {
     res.json(users);
 };
 
+export const getUser = async (req: Request, res: Response) => {
+    const user = await User.findOne({
+        where: {
+            username: req.params.username,
+        },
+    });
+    res.json(user);
+};
+
 export const getCurrentUser = async (req: Request, res: Response) => {
     const userId = isAuthenticated(req, res);
 

@@ -12,6 +12,7 @@ const Option = ({ option }: OptionType) => {
     const navigate = useNavigate();
     const width = useWindowWidth();
     const user = useUserValue();
+    // console.log('USER', user);
 
     const shouldDisplayName = option.name && width > 1280;
 
@@ -32,9 +33,17 @@ const Option = ({ option }: OptionType) => {
 
     const IconComponent = getIcon(option);
 
+    const navigateToRoute = () => {
+        if (option.route === '/profile') {
+            navigate(`${option.route}/${user?.user.username}`);
+        } else {
+            navigate(option.route);
+        }
+    };
+
     return (
         <section
-            onClick={() => navigate(option.route)}
+            onClick={navigateToRoute}
             className={`flex items-center gap-4 text-left
             ${shouldDisplayName ? 'pl-3 pr-6 py-3' : 'p-3'} 
             max-w-max cursor-pointer rounded-full hover:bg-neutral-800 transition duration-200

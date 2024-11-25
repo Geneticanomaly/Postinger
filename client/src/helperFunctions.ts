@@ -72,3 +72,13 @@ export const getCroppedImage = (imageSrc: string, croppedAreaPixels: Area): Prom
         };
     });
 };
+
+export const getJoinDate = (createdAt: string | undefined): string => {
+    if (createdAt) {
+        const date = new Date(createdAt);
+        const year = date.getFullYear();
+        const month = date.toLocaleString('default', { month: 'long' });
+        return `${month} ${year}`;
+    }
+    return '';
+};

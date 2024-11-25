@@ -5,9 +5,11 @@ import BackgroundPicture from './BackgroundPicture';
 import EditProfileTextarea from './EditProfileTextarea';
 import EditModalHeader from './EditModalHeader';
 import CropImageModal from './CropImageModal';
+import { useUserValue } from '../../../context/userContext/useUserContext';
 
 const EditProfileModal = () => {
     const navigate = useNavigate();
+    const user = useUserValue();
 
     const [currentPicture, setCurrentPicture] = useState<'' | 'profile' | 'background'>('');
 
@@ -19,9 +21,10 @@ const EditProfileModal = () => {
 
     const [showCropImageModal, setShowCropImageModal] = useState(false);
 
-    const [name, setName] = useState('');
-    const [bio, setBio] = useState('');
-    const [location, setLocation] = useState('');
+    // Initialize state directly with user data
+    const [name, setName] = useState(user?.user.username || '');
+    const [bio, setBio] = useState(user?.user.description || '');
+    const [location, setLocation] = useState(user?.user.residence || '');
 
     const handleSave = () => {
         // TODO:

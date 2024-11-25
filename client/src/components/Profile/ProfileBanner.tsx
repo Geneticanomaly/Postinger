@@ -3,10 +3,18 @@ import avatarUrl from '../../assets/avatar-1577909_1280.png';
 import { IoCalendarOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { User } from '../../types';
+import { getJoinDate } from '../../helperFunctions';
+import { useUserValue } from '../../context/userContext/useUserContext';
 
-const ProfileBanner = () => {
+type ProfileBannerProps = {
+    user: User | undefined;
+};
+
+const ProfileBanner = ({ user }: ProfileBannerProps) => {
     const [selectedElement, setSelectedElement] = useState('posts');
     const navigate = useNavigate();
+    const currentUser = useUserValue();
 
     return (
         <div>
@@ -19,14 +27,15 @@ const ProfileBanner = () => {
                 <button
                     className="absolute top-[210px] right-2 py-2 px-4 border border-neutral-700 rounded-full
                                font-bold text-sm hover:bg-neutral-800 transition duration-300"
-                    onClick={() => navigate(`/profile/thomaaa/edit_profile`)}
+                    onClick={() => navigate(`/profile/${currentUser?.user.username}/edit_profile`)}
                 >
                     Edit profile
                 </button>
                 <section className="w-full h-[175px] py-20 px-5 flex flex-col gap-2">
-                    <h1 className="font-bold">Username</h1>
+                    <h1 className="font-bold">{user?.username}</h1>
                     <span className="text-sm text-neutral-500 flex items-center gap-2">
-                        <IoCalendarOutline className="text-base" /> Joined December 2014
+                        <IoCalendarOutline className="text-base" /> Joined{' '}
+                        {getJoinDate(user?.createdAt)}
                     </span>
                     <div className="flex gap-4 text-sm ">
                         <div className="hover:underline cursor-pointer">
