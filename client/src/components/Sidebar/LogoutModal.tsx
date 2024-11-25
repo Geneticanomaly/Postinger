@@ -23,7 +23,7 @@ const LogoutModal = () => {
                 className="w-full py-3 transition duration-200 hover:bg-[#24293065] opacity-90"
                 onClick={handleLogout}
             >
-                <h2 className="text-white pl-5">Log out @{user?.user.username}</h2>
+                <h2 className="text-white pl-5">Log out @{user?.username}</h2>
             </span>
             <span
                 className="absolute sm:left-[46px] left-[19px] bottom-0"

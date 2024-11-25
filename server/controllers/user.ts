@@ -31,6 +31,30 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     res.json(user);
 };
 
+type UserDataRequest = {
+    username: string;
+    description: string;
+    residence: string;
+};
+
+export const updateUserData = async (req: Request<{}, {}, UserDataRequest>, res: Response) => {
+    const { username, description, residence } = req.body;
+    const user = await User.findOne({ where: { username: username } });
+
+    if (!user) {
+        res.status(400).json({ error: 'User not found' });
+        return;
+    }
+
+    user.username = username;
+    user.description = description;
+    user.residence = residence;
+
+    await user.save();
+
+    res.status(200).json(user);
+};
+
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 

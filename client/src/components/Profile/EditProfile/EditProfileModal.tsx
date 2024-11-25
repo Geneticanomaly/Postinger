@@ -5,12 +5,17 @@ import BackgroundPicture from './BackgroundPicture';
 import EditProfileTextarea from './EditProfileTextarea';
 import EditModalHeader from './EditModalHeader';
 import CropImageModal from './CropImageModal';
-import { useUserValue } from '../../../context/userContext/useUserContext';
-// import userServices from '../../../services/user';
+import { useUserDispatch, useUserValue } from '../../../context/userContext/useUserContext';
+import { useMutation } from '@tanstack/react-query';
+import userServices from '../../../services/user';
+import { User } from '../../../types';
+import Loading from '../../Loading';
 
 const EditProfileModal = () => {
     const navigate = useNavigate();
     const user = useUserValue();
+    const userDispatch = useUserDispatch();
+    const [isLoading, setIsLoading] = useState(false);
 
     const [currentPicture, setCurrentPicture] = useState<'' | 'profile' | 'background'>('');
 
@@ -22,17 +27,79 @@ const EditProfileModal = () => {
 
     const [showCropImageModal, setShowCropImageModal] = useState(false);
 
-    // Initialize state directly with user data
-    const [username, setUsername] = useState(user?.username || '');
-    const [description, setDescription] = useState(user?.description || '');
-    const [residence, setResidence] = useState(user?.residence || '');
+    const [username, setUsername] = useState('');
+    const [description, setDescription] = useState('');
+    const [residence, setResidence] = useState('');
 
-    const handleSave = () => {
+    // Store initial values
+    const [initialUsername] = useState(user?.username || '');
+    const [initialDescription] = useState(user?.description || '');
+    const [initialResidence] = useState(user?.residence || '');
+
+    // Check if any values have changed
+    const isDisabled =
+        username.length < 3 ||
+        (username === initialUsername &&
+            description === initialDescription &&
+            residence === initialResidence);
+
+    // Initialize values with the current user's data
+    useEffect(() => {
+        if (user) {
+            setUsername(user.username || '');
+            setDescription(user.description || '');
+            setResidence(user.residence || '');
+        }
+    }, [user]);
+
+    const userMutation = useMutation({
+        mutationFn: userServices.update,
+        onSuccess: (newUser: User) => {
+            console.log('User updated successfully', newUser);
+            if (user) {
+                userDispatch({
+                    type: 'SET',
+                    payload: {
+                        ...user,
+                        username: newUser.username,
+                        description: newUser.description,
+                        residence: newUser.residence,
+                    },
+                });
+            }
+        },
+        onError: (err: unknown) => {
+            console.error('Error updating user:', err);
+        },
+    });
+
+    const handleSave = async () => {
         // TODO:
         // Need to check which api endpoints needs to be triggered
         // Based on what has changed
 
-        // if (username)
+        // Initialize null values to empty strings
+        const userDescription = user?.description || '';
+        const userResidence = user?.residence || '';
+
+        // If user's data (username, description or residence) has changed only then go in here
+        if (
+            username !== user?.username ||
+            description !== userDescription ||
+            residence !== userResidence
+        ) {
+            const payload = {
+                username,
+                description,
+                residence,
+            };
+
+            userMutation.mutate(payload);
+            setIsLoading(true);
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            setIsLoading(false);
+            navigate(-1);
+        }
 
         console.log('SAVING DATA');
     };
@@ -63,11 +130,14 @@ const EditProfileModal = () => {
                     setCurrentPicture={setCurrentPicture}
                 />
                 <button
-                    className="absolute top-3.5 right-4 z-30 py-1.5 px-4 rounded-full bg-white text-sm text-neutral-950 font-medium
-                         hover:bg-neutral-200 transition duration-200"
+                    className={`absolute top-3.5 right-4 z-30 w-[74px] h-8 rounded-full bg-white text-sm text-neutral-950 font-medium
+                         hover:bg-neutral-200 transition duration-200 ${
+                             isDisabled && 'disabled:opacity-50'
+                         }`}
+                    disabled={isDisabled || isLoading}
                     onClick={handleSave}
                 >
-                    Save
+                    {isLoading ? <Loading isButton={true} /> : 'Save'}
                 </button>
                 <div className="relative w-full h-[200px]">
                     <ProfilePicture

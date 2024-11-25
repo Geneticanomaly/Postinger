@@ -40,7 +40,7 @@ export type PostData = {
 };
 
 export type UpdateUserPayload = {
-    name: string;
-    bio: string;
+    username: string;
+    description: string;
     residence: string;
 };

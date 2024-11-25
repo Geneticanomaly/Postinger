@@ -14,8 +14,9 @@ const getUser = async (username: string | undefined) => {
     return res.data;
 };
 
-const update = async (payload: UpdateUserPayload, userId: string) => {
-    const res = await axios.post(`${baseUrl}/users/${userId}`, payload);
+const update = async (payload: UpdateUserPayload) => {
+    console.log('HERE', payload);
+    const res = await axios.put(`${baseUrl}/users/edit_profile`, payload);
     return res.data;
 };
 
