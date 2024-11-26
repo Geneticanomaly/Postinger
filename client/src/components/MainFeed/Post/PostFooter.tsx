@@ -21,11 +21,11 @@ const PostFooter = ({ post }: PostFooterType) => {
             >
                 <span
                     className="p-[8px] rounded-full text-xl text-neutral-500 transition duration-200
-                    group-hover/replies:bg-blue-500 group-hover/replies:bg-opacity-10 group-hover/replies:text-blue-500"
+                    group-hover/replies:bg-[#00aeff] group-hover/replies:bg-opacity-10 group-hover/replies:text-[#00aeff]"
                 >
                     <TbMessageCircle />
                 </span>
-                <p className="text-[13px] text-neutral-500 group-hover/replies:text-blue-500 transition duration-200 -ml-1">
+                <p className="text-[13px] text-neutral-500 group-hover/replies:text-[#00aeff] transition duration-200 -ml-1">
                     {getCondensedNumber(post.replies)}
                 </p>
             </section>
@@ -78,8 +78,8 @@ const PostFooter = ({ post }: PostFooterType) => {
                 </p>
             </section>
             <span
-                className="p-[7px] rounded-full text-neutral-500 transition duration-200 
-                        hover:bg-blue-500 hover:text-blue-500 hover:bg-opacity-10 cursor-pointer"
+                className="p-2 rounded-full text-neutral-500 transition duration-200 
+                        hover:bg-[#00aeff] hover:text-[#00aeff] hover:bg-opacity-10 cursor-pointer"
                 onClick={(e) => {
                     e.stopPropagation();
                 }}

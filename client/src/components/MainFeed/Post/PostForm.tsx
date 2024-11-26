@@ -5,8 +5,13 @@ import { MdOutlineGif } from 'react-icons/md';
 import { VscSmiley } from 'react-icons/vsc';
 import { IoCloseOutline } from 'react-icons/io5';
 import postServices from '../../../services/post';
+import { useNavigate } from 'react-router-dom';
+import { useUserValue } from '../../../context/userContext/useUserContext';
 
 const PostForm = () => {
+    const navigate = useNavigate();
+    const user = useUserValue();
+
     const [text, setText] = useState<string>('');
     const [file, setFile] = useState<File | null>();
     const [fileUrl, setFileUrl] = useState<string>('');
@@ -59,10 +64,19 @@ const PostForm = () => {
         <div className="border-l border-r border-b border-neutral-700 min-h-32">
             <form className="p-3 md:mr-4 lg:mr-0" onSubmit={(e) => handleSubmit(e)}>
                 <section className="flex gap-2">
-                    <img
-                        src={placeholderAvatar}
-                        className="max-w-10 max-h-10 rounded-full cursor-pointer"
-                    />
+                    <div
+                        className="relative w-11 h-10 cursor-pointer"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            navigate(`/profile/${user?.username}`);
+                        }}
+                    >
+                        <img
+                            src={placeholderAvatar}
+                            className="rounded-full w-full h-full transition duration-200"
+                        />
+                        <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300"></div>
+                    </div>
                     <div className="w-full">
                         <textarea
                             className="w-full h-12 p-2.5 -mt-1 text-lg bg-neutral-950  text-white rounded-lg 
@@ -90,8 +104,8 @@ const PostForm = () => {
                         </section>
                         <div className=" h-[1px] w-full bg-gray-500 opacity-40" />
                         <div className="flex items-center justify-between mt-3">
-                            <section className="flex items-center gap-1 text-blue-400">
-                                <div className="flex rounded-full transition duration-200 hover:bg-blue-400 hover:bg-opacity-10">
+                            <section className="flex items-center gap-1 text-[#00aeff]">
+                                <div className="flex rounded-full transition duration-200 hover:bg-[#00aeff] hover:bg-opacity-10">
                                     <input
                                         type="file"
                                         id="fileInput"
@@ -107,9 +121,9 @@ const PostForm = () => {
                                 </div>
                                 <span
                                     className="p-[10px] rounded-full cursor-pointer transition duration-200
-                                hover:bg-blue-400 hover:bg-opacity-10"
+                                hover:bg-[#00aeff] hover:bg-opacity-10"
                                 >
-                                    <MdOutlineGif className="border rounded-sm border-blue-400 cursor-pointer" />
+                                    <MdOutlineGif className="border rounded-sm border-[#00aeff] cursor-pointer" />
                                 </span>
                                 <span
                                     className="p-[8px] text-[20px] rounded-full cursor-pointer transition duration-200
@@ -119,9 +133,11 @@ const PostForm = () => {
                                 </span>
                             </section>
                             <button
-                                className={`py-[7px] w-[70px] bg-blue-500 rounded-full font-bold transition duration-200 
+                                className={`py-[8px] w-[66px] text-sm bg-[#00aeffe7] rounded-full font-bold transition duration-200 
                                 ${
-                                    !isButtonDisabled ? 'hover:bg-[#3a77da]' : 'disabled:opacity-50'
+                                    !isButtonDisabled
+                                        ? 'hover:bg-[#00aeffd8]'
+                                        : 'disabled:opacity-40'
                                 }`}
                                 disabled={isButtonDisabled}
                             >

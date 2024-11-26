@@ -4,12 +4,12 @@ const PostButton = () => {
     return (
         <>
             <button
-                className="w-[90%] mt-4 bg-blue-500 text-lg font-bold text-white py-[12px] px-4 rounded-full 
-            hover:bg-[#3a77da] hidden xl:block transition duration-200"
+                className="w-[90%] mt-4 bg-[#00aeff] text-lg font-bold text-white py-[12px] px-4 rounded-full 
+            hover:bg-[#00aeffe7] hidden xl:block transition duration-200"
             >
                 Post
             </button>
-            <span className="rounded-full p-2 mt-4 cursor-pointer bg-blue-500 max-w-max hover:bg-[#3a77da] xl:hidden transition duration-200">
+            <span className="rounded-full p-2 mt-4 cursor-pointer bg-[#00aeff] max-w-max hover:bg-[#00aeffe7] xl:hidden transition duration-200">
                 <MdOutlinePostAdd className="text-3xl" />
             </span>
         </>

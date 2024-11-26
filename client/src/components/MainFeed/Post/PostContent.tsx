@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { PostData } from '../../../types';
 import PostFooter from './PostFooter';
-
 type PostContentType = {
     post: PostData;
 };
@@ -11,14 +10,19 @@ const PostContent = ({ post }: PostContentType) => {
 
     return (
         <div className="flex gap-2 p-3">
-            <img
-                src={post.avatarUrl}
-                className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
+            <div
+                className="relative w-11 h-10 cursor-pointer"
                 onClick={(e) => {
                     e.stopPropagation();
                     navigate(`/profile/${post.username}`);
                 }}
-            />
+            >
+                <img
+                    src={post.avatarUrl}
+                    className="rounded-full w-full h-full transition duration-200"
+                />
+                <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300"></div>
+            </div>
             <div className="w-full">
                 <section className="flex flex-col">
                     <section className="flex gap-1 sm:text-base text-sm">
