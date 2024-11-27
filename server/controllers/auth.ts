@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
-import User from '../database/models/user';
 import bcrypt from 'bcrypt';
 import 'express-async-errors';
 import { clearAuthCookies, sendAuthCookies } from '../util/createAuthTokens';
 import { isAuthenticated } from '../util/middleware';
+import models from '../database/models';
+
+const { User, File } = models;
 
 type RegisterRequest = {
     email: string;
@@ -40,26 +42,26 @@ export const loginAuth = async (req: Request<{}, {}, LoginRequest>, res: Respons
         where: {
             email,
         },
+        include: [
+            { model: File, as: 'profileImage' },
+            { model: File, as: 'backgroundImage' },
+        ],
     });
+
+    if (!user) {
+        res.status(401).json({ error: 'invalid username' });
+        return;
+    }
 
     // Compare user's password and given password
     const passwordCorrect = user === null ? false : await bcrypt.compare(password, user.password);
-    if (!(user && passwordCorrect)) {
-        res.status(401).json({ error: 'invalid username or password' });
+    if (!passwordCorrect) {
+        res.status(401).json({ error: 'invalid password' });
         return;
     }
     sendAuthCookies(res, user);
 
-    res.status(200).json({
-        id: user.id,
-        username: user.username,
-        description: user.description,
-        residence: user.residence,
-        disabled: user.disabled,
-        admin: user.admin,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-    });
+    res.status(200).json({ user });
 };
 
 export const logoutAuth = (_req: Request, res: Response) => {

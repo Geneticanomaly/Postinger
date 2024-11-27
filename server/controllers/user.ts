@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
-import User from '../database/models/user';
-import File from '../database/models/file';
 import multer from 'multer';
 import { isAuthenticated } from '../util/middleware';
 require('express-async-errors');
+import models from '../database/models';
+
+const { User, File } = models;
 
 export const getUsers = async (_req: Request, res: Response) => {
     const users = await User.findAll();
@@ -15,8 +16,12 @@ export const getUser = async (req: Request, res: Response) => {
         where: {
             username: req.params.username,
         },
+        include: [
+            { model: File, as: 'profileImage' },
+            { model: File, as: 'backgroundImage' },
+        ],
     });
-    res.json(user);
+    res.status(200).json(user);
 };
 
 export const getCurrentUser = async (req: Request, res: Response) => {
@@ -27,8 +32,14 @@ export const getCurrentUser = async (req: Request, res: Response) => {
         return;
     }
 
-    const user = await User.findByPk(userId);
-    res.json(user);
+    const user = await User.findByPk(userId, {
+        include: [
+            { model: File, as: 'profileImage' },
+            { model: File, as: 'backgroundImage' },
+        ],
+    });
+
+    res.status(200).json(user);
 };
 
 type UserDataRequest = {

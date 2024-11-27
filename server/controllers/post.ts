@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import Post from '../database/models/post';
-import File from '../database/models/file';
 import multer from 'multer';
 require('express-async-errors');
+import models from '../database/models';
+
+const { Post, File } = models;
 
 export const getPosts = async (_req: Request, res: Response) => {
     const posts = await Post.findAll();

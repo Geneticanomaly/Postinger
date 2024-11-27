@@ -1,6 +1,5 @@
 import User from './user';
 import Post from './post';
-import Comment from './comment';
 import Like from './like';
 import Bookmark from './bookmark';
 import Repost from './repost';
@@ -13,12 +12,6 @@ import File from './file';
 /* Post Relationships */
 User.hasMany(Post, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Post.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-
-/* Comment Relationships */
-User.hasMany(Comment, { foreignKey: 'userId', onDelete: 'CASCADE' });
-Comment.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
-Post.hasMany(Comment, { foreignKey: 'postId', onDelete: 'CASCADE' });
-Comment.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
 
 /* Chat Relationships */
 User.hasMany(Chat, { as: 'InitiatedChats', foreignKey: 'userId1', onDelete: 'CASCADE' });
@@ -75,15 +68,6 @@ Notification.belongsTo(Like, {
     },
 });
 
-// Scope association association to comments
-Notification.belongsTo(Comment, {
-    foreignKey: 'resourceId',
-    constraints: false,
-    scope: {
-        type: 'comment',
-    },
-});
-
 // Scope association association to follows
 Notification.belongsTo(Follow, {
     foreignKey: 'resourceId',
@@ -94,19 +78,21 @@ Notification.belongsTo(Follow, {
 });
 
 /* User and File Relationships */
-User.hasMany(File, { foreignKey: 'userId', onDelete: 'CASCADE' });
-File.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+User.hasOne(File, { as: 'profileImage', foreignKey: 'userId', scope: { fileType: 'profile' } });
+File.belongsTo(User, { foreignKey: 'userId' });
+User.hasOne(File, {
+    as: 'backgroundImage',
+    foreignKey: 'userId',
+    scope: { fileType: 'background' },
+});
+File.belongsTo(User, { foreignKey: 'userId' });
 
 /* Post and File Relationships */
 Post.hasMany(File, { foreignKey: 'postId', onDelete: 'CASCADE' });
 File.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
 
-/* Comment and File Relationships */
-Comment.hasMany(File, { foreignKey: 'commentId', onDelete: 'CASCADE' });
-File.belongsTo(Comment, { foreignKey: 'commentId', onDelete: 'CASCADE' });
-
 /* Message and File Relationships */
 Message.hasMany(File, { foreignKey: 'messageId', onDelete: 'CASCADE' });
 File.belongsTo(Message, { foreignKey: 'messageId', onDelete: 'CASCADE' });
 
-export default { User, Post, Comment, Like, Bookmark, Repost, Follow, Notification, File };
+export default { User, Post, Like, Bookmark, Repost, Follow, Notification, File };
