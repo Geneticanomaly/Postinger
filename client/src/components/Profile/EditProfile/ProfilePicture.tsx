@@ -1,6 +1,7 @@
 import placeholderAvatar from '../../../assets/avatar-1577909_1280.png';
 import { TbCameraPlus } from 'react-icons/tb';
 import { IoMdClose } from 'react-icons/io';
+import { useUserValue } from '../../../context/userContext/useUserContext';
 
 type ProfilePictureProps = {
     setCurrentPicture: React.Dispatch<React.SetStateAction<'' | 'profile' | 'background'>>;
@@ -17,6 +18,10 @@ const ProfilePicture = ({
     setProfilePicture,
     setShowCropImageModal,
 }: ProfilePictureProps) => {
+    const user = useUserValue();
+
+    console.log(user);
+
     const handleClick = () => {
         const fileInput = document.getElementById('fileInput');
         if (fileInput) {

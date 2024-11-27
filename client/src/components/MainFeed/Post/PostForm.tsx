@@ -104,8 +104,8 @@ const PostForm = () => {
                         </section>
                         <div className=" h-[1px] w-full bg-gray-500 opacity-40" />
                         <div className="flex items-center justify-between mt-3">
-                            <section className="flex items-center gap-1 text-[#00aeff]">
-                                <div className="flex rounded-full transition duration-200 hover:bg-[#00aeff] hover:bg-opacity-10">
+                            <section className="flex items-center gap-1 text-[#1D9BF0]">
+                                <div className="flex rounded-full transition duration-200 hover:bg-[#1D9BF0] hover:bg-opacity-10">
                                     <input
                                         type="file"
                                         id="fileInput"
@@ -121,9 +121,9 @@ const PostForm = () => {
                                 </div>
                                 <span
                                     className="p-[10px] rounded-full cursor-pointer transition duration-200
-                                hover:bg-[#00aeff] hover:bg-opacity-10"
+                                hover:bg-[#1D9BF0] hover:bg-opacity-10"
                                 >
-                                    <MdOutlineGif className="border rounded-sm border-[#00aeff] cursor-pointer" />
+                                    <MdOutlineGif className="border rounded-sm border-[#1D9BF0] cursor-pointer" />
                                 </span>
                                 <span
                                     className="p-[8px] text-[20px] rounded-full cursor-pointer transition duration-200
@@ -133,7 +133,7 @@ const PostForm = () => {
                                 </span>
                             </section>
                             <button
-                                className={`py-[8px] w-[66px] text-sm bg-[#00aeffe7] rounded-full font-bold transition duration-200 
+                                className={`py-[8px] w-[66px] text-sm bg-[#1D9BF0] rounded-full font-bold transition duration-200 
                                 ${
                                     !isButtonDisabled
                                         ? 'hover:bg-[#00aeffd8]'

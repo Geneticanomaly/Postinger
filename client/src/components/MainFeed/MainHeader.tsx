@@ -15,7 +15,7 @@ const MainHeader = () => {
             >
                 For you
                 {selectedElement === 'For you' && (
-                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-[#00aeff] rounded-full" />
+                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-[#1D9BF0] rounded-full" />
                 )}
             </span>
             <span
@@ -25,7 +25,7 @@ const MainHeader = () => {
             >
                 Following
                 {selectedElement === 'Following' && (
-                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-[#00aeff] rounded-full" />
+                    <div className="absolute bottom-0 h-[4px] w-[30%] bg-[#1D9BF0] rounded-full" />
                 )}
             </span>
         </header>

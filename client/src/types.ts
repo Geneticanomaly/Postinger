@@ -2,6 +2,7 @@ import { IconType } from 'react-icons';
 
 export type User = {
     id: string;
+    email: string;
     username: string;
     description: string | null;
     residence: string | null;

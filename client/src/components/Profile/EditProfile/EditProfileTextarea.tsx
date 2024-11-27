@@ -31,7 +31,7 @@ const EditProfileTextarea = ({
             <textarea
                 className="w-full p-2 pt-7 text-[16px] bg-neutral-950 text-white rounded-md 
                            placeholder-gray-400 outline-none resize-none border border-neutral-600
-                           focus:border-[#00aeff]"
+                           focus:border-[#1D9BF0]"
                 rows={rows}
                 value={value}
                 onChange={(e) => handleChange(e)}
@@ -41,14 +41,14 @@ const EditProfileTextarea = ({
             ></textarea>
             <label
                 className={`absolute text-[12px] top-1.5 left-2 transition duration-200 pointer-events-none
-                           ${focused ? 'text-[#00aeff]' : 'text-neutral-500'}`}
+                           ${focused ? 'text-[#1D9BF0]' : 'text-neutral-500'}`}
             >
                 {label}
             </label>
             {focused && (
                 <label
                     className={`absolute text-[12px] top-1.5 right-2 transition duration-200 pointer-events-none
-                            ${focused ? 'text-[#00aeff]' : 'text-neutral-500'}`}
+                            ${focused ? 'text-[#1D9BF0]' : 'text-neutral-500'}`}
                 >
                     {value?.length} / {maxCount}
                 </label>

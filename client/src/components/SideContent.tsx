@@ -10,7 +10,6 @@ const SideContent = () => {
     const handleBlur = () => setFocused(false);
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchInput(e.target.value);
-        console.log(searchInput);
     };
 
     return (
@@ -19,13 +18,13 @@ const SideContent = () => {
                 <div className="flex items-center">
                     <span className="absolute ml-4 mt-1">
                         <IoSearchOutline
-                            className={`text-xl ${focused ? 'text-blue-500' : 'text-neutral-400'}`}
+                            className={`text-xl ${focused ? 'text-[#1D9BF0]' : 'text-neutral-400'}`}
                         />
                     </span>
-                    {searchInput && (
+                    {focused && (
                         <span
-                            className="absolute right-3 mt-1 p-1 text-lg text-neutral-900 bg-blue-500 
-                                rounded-full cursor-pointer hover:bg-[#3a77da] transition duration-200"
+                            className="absolute right-3 mt-1 p-0.5 text-lg text-neutral-900 bg-[#1D9BF0] 
+                                rounded-full cursor-pointer hover:bg-[#00aeffd8] transition duration-200"
                             onClick={() => setSearchInput('')}
                         >
                             <IoMdClose />
@@ -33,7 +32,7 @@ const SideContent = () => {
                     )}
                     <input
                         className="py-2.5 px-3 pl-12 pr-12 rounded-full bg-neutral-800 text-neutral-100 mt-1 w-[300px]
-                            focus:bg-neutral-950 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            focus:bg-neutral-950 focus:outline-none focus:ring-1 focus:ring-[#1D9BF0]"
                         placeholder="Search"
                         value={searchInput}
                         onChange={(e) => handleChange(e)}
