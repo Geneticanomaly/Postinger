@@ -12,8 +12,19 @@ export const useGetCurrentUser = () => {
         const getCurrentUser = async () => {
             try {
                 const res = await userServices.getCurrentUser();
-                userDispatch({ type: 'SET', payload: res });
-            } catch {
+                userDispatch({
+                    type: 'SET',
+                    payload: {
+                        ...res,
+                        backgroundImage: {
+                            mimetype: res.backgroundImage.mimetype,
+                            buffer: res.backgroundImage.buffer,
+                        },
+                    },
+                });
+                // console.log('user', );
+            } catch (e: unknown) {
+                console.log(e);
                 navigate('/login');
             }
         };

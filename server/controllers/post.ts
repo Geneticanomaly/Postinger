@@ -52,6 +52,6 @@ export const createPost = async (req: Request<{}, {}, CreatePostRequest>, res: R
 };
 
 export const getFiles = async (_req: Request, res: Response) => {
-    const files = await File.findAll();
+    const files = await File.findAll({ attributes: { exclude: ['buffer'] } });
     res.json(files);
 };

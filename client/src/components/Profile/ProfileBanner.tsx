@@ -4,7 +4,7 @@ import { IoCalendarOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { User } from '../../types';
-import { getJoinDate } from '../../helperFunctions';
+import { getJoinDate, getUserImage } from '../../helperFunctions';
 import { useUserValue } from '../../context/userContext/useUserContext';
 
 type ProfileBannerProps = {
@@ -22,7 +22,10 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
     return (
         <div>
             <div className="relative w-full border-l border-r border-b border-neutral-700">
-                <img src={background} className="w-full h-[200px]" />
+                <img
+                    src={user?.backgroundImage ? getUserImage(user) : background}
+                    className="w-full h-[200px]"
+                />
                 <img
                     src={avatarUrl}
                     className="absolute w-32 rounded-full left-5 top-[135px] border-[3px] border-neutral-950 cursor-pointer"

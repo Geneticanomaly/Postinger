@@ -78,12 +78,16 @@ Notification.belongsTo(Follow, {
 });
 
 /* User and File Relationships */
-User.hasOne(File, { as: 'profileImage', foreignKey: 'userId', scope: { fileType: 'profile' } });
+User.hasOne(File, {
+    as: 'profileImage',
+    foreignKey: 'userId',
+    scope: { fileType: 'profileImage' },
+});
 File.belongsTo(User, { foreignKey: 'userId' });
 User.hasOne(File, {
     as: 'backgroundImage',
     foreignKey: 'userId',
-    scope: { fileType: 'background' },
+    scope: { fileType: 'backgroundImage' },
 });
 File.belongsTo(User, { foreignKey: 'userId' });
 

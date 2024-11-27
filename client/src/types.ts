@@ -10,12 +10,8 @@ export type User = {
     admin: boolean;
     createdAt: string;
     updatedAt: string;
-    profileImage?: File | null;
-    backgroundImage?: File | null;
-};
-
-export type UserContextValueType = {
-    user: User;
+    profileImage?: UserImage | null;
+    backgroundImage?: UserImage | null;
 };
 
 export type SidebarOption = {
@@ -44,4 +40,12 @@ export type UpdateUserPayload = {
     username: string;
     description: string;
     residence: string;
+};
+
+export type UserImage = {
+    name?: string;
+    encoding?: string;
+    mimetype: string;
+    buffer: string;
+    fileType?: string;
 };

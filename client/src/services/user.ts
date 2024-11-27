@@ -20,4 +20,13 @@ const update = async (payload: UpdateUserPayload) => {
     return res.data;
 };
 
-export default { updateFile, getCurrentUser, getUser, update };
+const updateUserImage = async (formData: FormData) => {
+    const res = await axios.post(`${baseUrl}/users/edit_profile/image`, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data',
+        },
+    });
+    return res.data;
+};
+
+export default { updateFile, getCurrentUser, getUser, update, updateUserImage };

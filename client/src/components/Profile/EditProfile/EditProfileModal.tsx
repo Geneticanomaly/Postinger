@@ -41,7 +41,8 @@ const EditProfileModal = () => {
         username.length < 3 ||
         (username === initialUsername &&
             description === initialDescription &&
-            residence === initialResidence);
+            residence === initialResidence &&
+            !backgroundPicture);
 
     // Initialize values with the current user's data
     useEffect(() => {
@@ -78,6 +79,8 @@ const EditProfileModal = () => {
         // Need to check which api endpoints needs to be triggered
         // Based on what has changed
 
+        setIsLoading(true);
+
         // Initialize null values to empty strings
         const userDescription = user?.description || '';
         const userResidence = user?.residence || '';
@@ -101,9 +104,26 @@ const EditProfileModal = () => {
             navigate(-1);
         }
 
+        if (backgroundPicture && user) {
+            const formData = new FormData();
+            formData.append('userId', user.id);
+            formData.append('file', backgroundPicture);
+            formData.append('fileType', 'backgroundImage');
+            const response = await userServices.updateUserImage(formData);
+            console.log('RESPONSE', response);
+            userDispatch({
+                type: 'SET',
+                payload: {
+                    ...user,
+                    backgroundImage: { ...response, buffer: response.buffer.toString('base64') },
+                },
+            });
+        }
+
+        setIsLoading(false);
         console.log('SAVING DATA');
     };
-
+    // console.log('USER', user);
     // Disable main page scrolling when the modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden';

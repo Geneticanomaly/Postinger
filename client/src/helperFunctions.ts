@@ -1,4 +1,5 @@
 import { Area } from 'react-easy-crop';
+import { User } from './types';
 
 export const getCondensedNumber = (amount: number): string => {
     // 1K - 9.9K range
@@ -79,6 +80,13 @@ export const getJoinDate = (createdAt: string | undefined): string => {
         const year = date.getFullYear();
         const month = date.toLocaleString('default', { month: 'long' });
         return `${month} ${year}`;
+    }
+    return '';
+};
+
+export const getUserImage = (user: User | undefined): string => {
+    if (user) {
+        return `data:${user?.backgroundImage?.mimetype};base64,${user?.backgroundImage?.buffer}`;
     }
     return '';
 };
