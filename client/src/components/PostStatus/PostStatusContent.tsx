@@ -1,6 +1,7 @@
 import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import PostFooter from '../MainFeed/Post/PostFooter';
 import { PostData } from '../../types';
+import PostForm from '../MainFeed/Post/PostForm/PostForm';
 
 type PostStatusContentType = {
     post: PostData;
@@ -44,6 +45,7 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
             <div className="p-2 border-b border-t border-neutral-700">
                 <PostFooter post={post} />
             </div>
+            <PostForm />
         </div>
     );
 };

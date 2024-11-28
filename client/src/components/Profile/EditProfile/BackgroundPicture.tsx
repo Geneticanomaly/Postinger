@@ -62,6 +62,7 @@ const BackgroundPicture = ({
                 <input
                     id="backgroundInput"
                     type="file"
+                    accept="image/*"
                     onChange={(e) => handleFileChange(e)}
                     className="hidden"
                 />

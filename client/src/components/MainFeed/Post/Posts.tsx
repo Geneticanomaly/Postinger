@@ -3,7 +3,7 @@ import useWindowWidth from '../../../hooks/useWindowWidth';
 import MainHeader from '../MainHeader';
 import MobileHeader from '../MobileHeader';
 import Post from './Post';
-import PostForm from './PostForm';
+import PostForm from './PostForm/PostForm';
 import { useQuery } from '@tanstack/react-query';
 import postServices from '../../../services/post';
 import { PostData } from '../../../types';
@@ -25,7 +25,9 @@ const Posts = () => {
             {location.pathname === '/home' && (
                 <>
                     {width > 499 ? <MainHeader /> : <MobileHeader />}
-                    <PostForm />
+                    <div className="border-l border-r border-b border-neutral-700 p-3 w-full">
+                        <PostForm />
+                    </div>
                 </>
             )}
             {isLoading || error ? (

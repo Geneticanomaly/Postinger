@@ -63,6 +63,7 @@ const ProfilePicture = ({
                     <input
                         id="fileInput"
                         type="file"
+                        accept="image/*"
                         onChange={(e) => handleFileChange(e)}
                         className="hidden"
                     />

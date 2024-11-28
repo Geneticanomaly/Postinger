@@ -13,6 +13,7 @@ export const getPosts = async (_req: Request, res: Response) => {
 type CreatePostRequest = {
     userId: string;
     content: string;
+    fileType: string;
 };
 
 const storage = multer.memoryStorage();
@@ -27,7 +28,7 @@ export const createPost = async (req: Request<{}, {}, CreatePostRequest>, res: R
             return;
         }
 
-        const { userId, content } = req.body;
+        const { userId, content, fileType } = req.body;
 
         const post = await Post.create({
             userId: userId,
@@ -41,7 +42,7 @@ export const createPost = async (req: Request<{}, {}, CreatePostRequest>, res: R
                 encoding: req.file.encoding,
                 mimetype: req.file.mimetype,
                 buffer: req.file.buffer,
-                fileType: 'other-img',
+                fileType: fileType,
             };
 
             await File.create(newFile);
