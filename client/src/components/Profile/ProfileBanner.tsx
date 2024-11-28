@@ -23,11 +23,11 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
         <div>
             <div className="relative w-full border-l border-r border-b border-neutral-700">
                 <img
-                    src={user?.backgroundImage ? getUserImage(user) : background}
+                    src={user?.backgroundImage ? getUserImage(user, false) : background}
                     className="w-full h-[200px]"
                 />
                 <img
-                    src={avatarUrl}
+                    src={user?.profileImage ? getUserImage(user, true) : avatarUrl}
                     className="absolute w-32 rounded-full left-5 top-[135px] border-[3px] border-neutral-950 cursor-pointer"
                 />
                 {isCurrentUser && (

@@ -126,7 +126,10 @@ export const updateUserImage = async (
         });
 
         if (existingFile) {
-            console.log('******************** UPDATING AN EXISTING FILE ********************');
+            console.log(
+                '******************** UPDATING AN EXISTING FILE ********************',
+                fileType
+            );
             existingFile.name = req.file.originalname;
             existingFile.encoding = req.file.encoding;
             existingFile.mimetype = req.file.mimetype;
@@ -142,7 +145,7 @@ export const updateUserImage = async (
                 fileType: fileType,
             });
         } else {
-            console.log('******************** CREATING A NEW FILE ********************');
+            console.log('******************** CREATING A NEW FILE ********************', fileType);
             const newFile = {
                 userId: user.id,
                 name: req.file.originalname,

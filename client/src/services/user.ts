@@ -21,7 +21,7 @@ const update = async (payload: UpdateUserPayload) => {
 };
 
 const updateUserImage = async (formData: FormData) => {
-    const res = await axios.post(`${baseUrl}/users/edit_profile/image`, formData, {
+    const res = await axios.put(`${baseUrl}/users/edit_profile/image`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data',
         },

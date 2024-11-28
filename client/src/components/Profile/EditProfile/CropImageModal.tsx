@@ -58,7 +58,6 @@ const CropImageModal = ({
         getCroppedImage(imageUrl, croppedImagePixels)
             .then((croppedImage) => {
                 if (croppedImage instanceof File) {
-                    setBackgroundPicture(croppedImage);
                     if (currentPicture === 'profile') {
                         setProfilePicture(croppedImage);
                         setProfileUrl(URL.createObjectURL(croppedImage));

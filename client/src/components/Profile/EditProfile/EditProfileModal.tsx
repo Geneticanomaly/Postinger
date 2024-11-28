@@ -8,7 +8,7 @@ import CropImageModal from './CropImageModal';
 import { useUserDispatch, useUserValue } from '../../../context/userContext/useUserContext';
 import { useMutation } from '@tanstack/react-query';
 import userServices from '../../../services/user';
-import { User } from '../../../types';
+import { User, UserImage } from '../../../types';
 import Loading from '../../Loading';
 
 const EditProfileModal = () => {
@@ -42,7 +42,8 @@ const EditProfileModal = () => {
         (username === initialUsername &&
             description === initialDescription &&
             residence === initialResidence &&
-            !backgroundPicture);
+            !backgroundPicture &&
+            !profilePicture);
 
     // Initialize values with the current user's data
     useEffect(() => {
@@ -74,11 +75,26 @@ const EditProfileModal = () => {
         },
     });
 
-    const handleSave = async () => {
-        // TODO:
-        // Need to check which api endpoints needs to be triggered
-        // Based on what has changed
+    const updateUserImageMutation = useMutation({
+        mutationFn: userServices.updateUserImage,
+        onSuccess: (file: UserImage) => {
+            const fileType = file.fileType;
+            if (user && fileType) {
+                userDispatch({
+                    type: 'SET',
+                    payload: {
+                        ...user,
+                        [fileType]: { ...file },
+                    },
+                });
+            }
+        },
+        onError: (err: unknown) => {
+            console.error('Error updating user image:', err);
+        },
+    });
 
+    const handleSave = async () => {
         setIsLoading(true);
 
         // Initialize null values to empty strings
@@ -98,32 +114,31 @@ const EditProfileModal = () => {
             };
 
             userMutation.mutate(payload);
-            setIsLoading(true);
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setIsLoading(false);
-            navigate(-1);
         }
 
+        // If a new backgroundPicture is selected go in here
         if (backgroundPicture && user) {
             const formData = new FormData();
             formData.append('userId', user.id);
             formData.append('file', backgroundPicture);
             formData.append('fileType', 'backgroundImage');
-            const response = await userServices.updateUserImage(formData);
-            console.log('RESPONSE', response);
-            userDispatch({
-                type: 'SET',
-                payload: {
-                    ...user,
-                    backgroundImage: { ...response, buffer: response.buffer.toString('base64') },
-                },
-            });
+            updateUserImageMutation.mutate(formData);
         }
 
+        // If a new profilePicture is selected go in here
+        if (profilePicture && user) {
+            const formData = new FormData();
+            formData.append('userId', user.id);
+            formData.append('file', profilePicture);
+            formData.append('fileType', 'profileImage');
+            updateUserImageMutation.mutate(formData);
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
         setIsLoading(false);
-        console.log('SAVING DATA');
+        navigate(-1);
     };
-    // console.log('USER', user);
+
     // Disable main page scrolling when the modal is open
     useEffect(() => {
         document.body.style.overflow = 'hidden';
