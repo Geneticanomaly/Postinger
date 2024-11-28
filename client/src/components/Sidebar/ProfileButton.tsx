@@ -3,6 +3,7 @@ import { IoIosMore } from 'react-icons/io';
 import { useState } from 'react';
 import LogoutModal from './LogoutModal';
 import { useUserValue } from '../../context/userContext/useUserContext';
+import { getUserImage } from '../../helperFunctions';
 
 const ProfileButton = () => {
     const [showModal, setShowModal] = useState(false);
@@ -16,7 +17,10 @@ const ProfileButton = () => {
                     }`}
         >
             <div className="flex items-center gap-4">
-                <img src={placeholderAvatar} className="rounded-full xl:w-10 w-12" />
+                <img
+                    src={user?.profileImage ? getUserImage(user, true) : placeholderAvatar}
+                    className="rounded-full xl:w-10 w-12"
+                />
                 <span className="hidden xl:inline">{user?.username}</span>
             </div>
             <IoIosMore className="hidden xl:inline text-xl" />

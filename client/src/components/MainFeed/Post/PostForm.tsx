@@ -7,6 +7,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 import postServices from '../../../services/post';
 import { useNavigate } from 'react-router-dom';
 import { useUserValue } from '../../../context/userContext/useUserContext';
+import { getUserImage } from '../../../helperFunctions';
 
 const PostForm = () => {
     const navigate = useNavigate();
@@ -72,7 +73,7 @@ const PostForm = () => {
                         }}
                     >
                         <img
-                            src={placeholderAvatar}
+                            src={user?.profileImage ? getUserImage(user, true) : placeholderAvatar}
                             className="rounded-full w-full h-full transition duration-200"
                         />
                         <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300"></div>

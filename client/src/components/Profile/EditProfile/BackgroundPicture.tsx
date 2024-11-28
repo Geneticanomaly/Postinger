@@ -1,5 +1,8 @@
 import { IoMdClose } from 'react-icons/io';
 import { TbCameraPlus } from 'react-icons/tb';
+import { getUserImage } from '../../../helperFunctions';
+import { useUserValue } from '../../../context/userContext/useUserContext';
+import placeholder from '../../../assets/profile-background.jpg';
 
 type BackgroundPictureProps = {
     setCurrentPicture: React.Dispatch<React.SetStateAction<'' | 'profile' | 'background'>>;
@@ -16,6 +19,8 @@ const BackgroundPicture = ({
     setBackgroundPicture,
     setShowCropImageModal,
 }: BackgroundPictureProps) => {
+    const user = useUserValue();
+
     const handleClick = () => {
         const fileInput = document.getElementById('backgroundInput');
         if (fileInput) {
@@ -44,8 +49,14 @@ const BackgroundPicture = ({
     return (
         <>
             <img
-                src={backgroundUrl ? backgroundUrl : ''}
-                className={`${backgroundUrl ? 'w-full h-full' : 'hidden'}`}
+                src={
+                    backgroundUrl
+                        ? backgroundUrl
+                        : user?.backgroundImage
+                        ? getUserImage(user, false)
+                        : placeholder
+                }
+                className="w-full h-full"
             />
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex items-center gap-4 ">
                 <input

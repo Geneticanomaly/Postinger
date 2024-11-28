@@ -57,7 +57,6 @@ const EditProfileModal = () => {
     const userMutation = useMutation({
         mutationFn: userServices.update,
         onSuccess: (newUser: User) => {
-            console.log('User updated successfully', newUser);
             if (user) {
                 userDispatch({
                     type: 'SET',

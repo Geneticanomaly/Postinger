@@ -1,6 +1,6 @@
 import background from '../../assets/profile-background.jpg';
 import avatarUrl from '../../assets/avatar-1577909_1280.png';
-import { IoCalendarOutline } from 'react-icons/io5';
+import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5';
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { User } from '../../types';
@@ -24,12 +24,15 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
             <div className="relative w-full border-l border-r border-b border-neutral-700">
                 <img
                     src={user?.backgroundImage ? getUserImage(user, false) : background}
-                    className="w-full h-[200px]"
+                    className="w-full h-[200px] cursor-pointer"
                 />
-                <img
-                    src={user?.profileImage ? getUserImage(user, true) : avatarUrl}
-                    className="absolute w-32 rounded-full left-5 top-[135px] border-[3px] border-neutral-950 cursor-pointer"
-                />
+                <div className="absolute left-5 top-[135px]">
+                    <img
+                        src={user?.profileImage ? getUserImage(user, true) : avatarUrl}
+                        className="w-32 rounded-full  border-[3px] border-neutral-950 cursor-pointer"
+                    />
+                    <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300 cursor-pointer"></div>
+                </div>
                 {isCurrentUser && (
                     <button
                         className="absolute top-[210px] right-2 py-2 px-4 border border-neutral-700 rounded-full
@@ -39,13 +42,22 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
                         Edit profile
                     </button>
                 )}
-                <section className="w-full h-[175px] py-20 px-5 flex flex-col gap-2">
+                <section className="w-full mt-20 px-5 flex flex-col gap-2">
                     <h1 className="font-bold">{user?.username}</h1>
-                    <span className="text-sm text-neutral-500 flex items-center gap-2">
-                        <IoCalendarOutline className="text-base" /> Joined{' '}
-                        {getJoinDate(user?.createdAt)}
-                    </span>
-                    <div className="flex gap-4 text-sm ">
+                    {user?.description && <p>{user.description}</p>}
+                    <div className="flex items-center gap-6">
+                        {user?.residence && (
+                            <span className="text-sm text-neutral-500 flex items-center gap-1">
+                                <IoLocationOutline className="text-base" />
+                                {user?.residence}
+                            </span>
+                        )}
+                        <span className="text-sm text-neutral-500 flex items-center gap-1">
+                            <IoCalendarOutline className="text-base" /> Joined{' '}
+                            {getJoinDate(user?.createdAt)}
+                        </span>
+                    </div>
+                    <div className="flex gap-4 text-sm">
                         <div className="hover:underline cursor-pointer">
                             <p className="text-neutral-500">
                                 <b className="text-white">12</b> Following
@@ -58,7 +70,7 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
                         </div>
                     </div>
                 </section>
-                <footer className="flex">
+                <footer className="flex mt-2">
                     <span
                         className={`relative flex justify-center p-4 w-full hover:bg-neutral-700 transition duration-300 
                                     cursor-pointer ${selectedElement === 'posts' && 'font-bold'}`}
