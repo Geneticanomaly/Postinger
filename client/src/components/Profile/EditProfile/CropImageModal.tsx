@@ -55,28 +55,27 @@ const CropImageModal = ({
 
     const handleClick = async () => {
         setLoading(true);
-        getCroppedImage(imageUrl, croppedImagePixels)
-            .then((croppedImage) => {
-                if (croppedImage instanceof File) {
-                    if (currentPicture === 'profile') {
-                        setProfilePicture(croppedImage);
-                        setProfileUrl(URL.createObjectURL(croppedImage));
-                    } else if (currentPicture === 'background') {
-                        setBackgroundPicture(croppedImage);
-                        setBackgroundUrl(URL.createObjectURL(croppedImage));
-                    }
-                    setLoading(false);
-                    setCurrentPicture('');
-                    setShowCropImageModal(false);
-                } else {
-                    console.error('The returned value is not a valid File');
-                    setLoading(false);
+        try {
+            const croppedImage = await getCroppedImage(imageUrl, croppedImagePixels);
+            if (croppedImage instanceof File) {
+                if (currentPicture === 'profile') {
+                    setProfilePicture(croppedImage);
+                    setProfileUrl(URL.createObjectURL(croppedImage));
+                } else if (currentPicture === 'background') {
+                    setBackgroundPicture(croppedImage);
+                    setBackgroundUrl(URL.createObjectURL(croppedImage));
                 }
-            })
-            .catch((error) => {
-                console.error('Error cropping image:', error);
                 setLoading(false);
-            });
+                setCurrentPicture('');
+                setShowCropImageModal(false);
+            } else {
+                console.error('The returned value is not a valid File');
+                setLoading(false);
+            }
+        } catch (error: unknown) {
+            console.error('Error cropping image:', error);
+            setLoading(false);
+        }
     };
 
     return (

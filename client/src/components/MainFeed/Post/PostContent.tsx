@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { PostData } from '../../../types';
 import PostFooter from './PostFooter';
+
 type PostContentType = {
     post: PostData;
 };

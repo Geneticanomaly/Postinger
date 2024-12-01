@@ -3,7 +3,7 @@ import useWindowWidth from '../../../hooks/useWindowWidth';
 import MainHeader from '../MainHeader';
 import MobileHeader from '../MobileHeader';
 import Post from './Post';
-import PostForm from './PostForm/PostForm';
+import PostForm from '../../PostForm/PostForm';
 import { useQuery } from '@tanstack/react-query';
 import postServices from '../../../services/post';
 import { PostData } from '../../../types';

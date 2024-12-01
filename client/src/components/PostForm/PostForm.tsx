@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import placeholderAvatar from '../../../../assets/avatar-1577909_1280.png';
+import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import { MdOutlineGif } from 'react-icons/md';
 import { VscSmiley } from 'react-icons/vsc';
-import postServices from '../../../../services/post';
+import postServices from '../../services/post';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useUserValue } from '../../../../context/userContext/useUserContext';
-import { getUserImage } from '../../../../helperFunctions';
+import { useUserValue } from '../../context/userContext/useUserContext';
+import { getUserImage } from '../../helperFunctions';
 import FileUpload from './FileUpload';
 import FileModal from './FileModal';
 

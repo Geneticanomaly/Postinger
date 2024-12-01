@@ -1,7 +1,7 @@
 import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import PostFooter from '../MainFeed/Post/PostFooter';
 import { PostData } from '../../types';
-import PostForm from '../MainFeed/Post/PostForm/PostForm';
+import PostForm from '../PostForm/PostForm';
 
 type PostStatusContentType = {
     post: PostData;
