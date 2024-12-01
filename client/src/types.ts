@@ -24,17 +24,34 @@ export type SidebarOption = {
 
 export type PostData = {
     id: number;
-    username: string;
-    title: string;
-    img?: string;
-    video?: string;
-    date: string;
-    avatarUrl: string;
-    replies: number;
-    reposts: number;
+    userId: string;
+    parentPostId: number | null;
+    content: string | null;
+    embeddedLink: string | null;
     likes: number;
-    views: number;
+    comments: number;
+    reposts: number;
+    createdAt: string;
+    updatedAt: string;
+    user: {
+        username: string;
+        profileImage: UserImage | null;
+    };
 };
+
+// export type PostData = {
+//     id: number;
+//     username: string;
+//     title: string;
+//     img?: string;
+//     video?: string;
+//     date: string;
+//     avatarUrl: string;
+//     replies: number;
+//     reposts: number;
+//     likes: number;
+//     views: number;
+// };
 
 export type UpdateUserPayload = {
     username: string;

@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { PostData } from '../../../types';
 import PostFooter from './PostFooter';
+import { getUserImage } from '../../../helperFunctions';
+import placeholderAvatar from '../../../assets/avatar-1577909_1280.png';
 
 type PostContentType = {
     post: PostData;
@@ -15,11 +17,15 @@ const PostContent = ({ post }: PostContentType) => {
                 className="relative w-11 h-10 cursor-pointer"
                 onClick={(e) => {
                     e.stopPropagation();
-                    navigate(`/profile/${post.username}`);
+                    navigate(`/profile/${post.user.username}`);
                 }}
             >
                 <img
-                    src={post.avatarUrl}
+                    src={
+                        post.user.profileImage
+                            ? getUserImage(post.user.profileImage)
+                            : placeholderAvatar
+                    }
                     className="rounded-full w-full h-full transition duration-200"
                 />
                 <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300"></div>
@@ -31,18 +37,18 @@ const PostContent = ({ post }: PostContentType) => {
                             className="font-bold cursor-pointer hover:underline"
                             onClick={(e) => {
                                 e.stopPropagation();
-                                navigate(`/profile/${post.username}`);
+                                navigate(`/profile/${post.user.username}`);
                             }}
                         >
-                            {post.username}
+                            {post.user.username}
                         </h2>
-                        <p className="text-neutral-500">· {post.date}</p>
+                        <p className="text-neutral-500">· {post.createdAt}</p>
                     </section>
-                    <p>{post.title}</p>
+                    <p>{post.content}</p>
                 </section>
 
                 <section className="mb-3 mt-3 rounded-xl ">
-                    {post.img && (
+                    {/* {post.img && (
                         <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                     )}
                     {post.video && (
@@ -63,7 +69,7 @@ const PostContent = ({ post }: PostContentType) => {
                         //     referrerPolicy="strict-origin-when-cross-origin"
                         //     allowFullScreen
                         // ></iframe>
-                    )}
+                    )} */}
                 </section>
                 <PostFooter post={post} />
             </div>

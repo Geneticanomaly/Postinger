@@ -18,7 +18,7 @@ const ProfileButton = () => {
         >
             <div className="flex items-center gap-4">
                 <img
-                    src={user?.profileImage ? getUserImage(user, true) : placeholderAvatar}
+                    src={user?.profileImage ? getUserImage(user.profileImage) : placeholderAvatar}
                     className="rounded-full xl:w-10 w-12"
                 />
                 <span className="hidden xl:inline">{user?.username}</span>

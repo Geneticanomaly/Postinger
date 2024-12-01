@@ -1,5 +1,5 @@
 import { Area } from 'react-easy-crop';
-import { User } from './types';
+import { UserImage } from './types';
 
 export const getCondensedNumber = (amount: number): string => {
     // 1K - 9.9K range
@@ -84,9 +84,8 @@ export const getJoinDate = (createdAt: string | undefined): string => {
     return '';
 };
 
-export const getUserImage = (user: User | undefined, isProfileImage: boolean): string => {
-    if (user) {
-        const image = isProfileImage ? user.profileImage : user.backgroundImage;
+export const getUserImage = (image: UserImage | undefined): string => {
+    if (image) {
         return `data:${image?.mimetype};base64,${image?.buffer}`;
     }
     return '';

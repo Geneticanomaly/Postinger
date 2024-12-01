@@ -26,7 +26,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                     <TbMessageCircle />
                 </span>
                 <p className="text-[13px] text-neutral-500 group-hover/replies:text-[#00aeff] transition duration-200 -ml-1">
-                    {getCondensedNumber(post.replies)}
+                    {getCondensedNumber(post.comments)}
                 </p>
             </section>
             <section
@@ -74,7 +74,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                     <BiBarChart />
                 </span>
                 <p className="text-[13px] text-neutral-500 group-hover/views:text-blue-500 transition duration-200 -ml-1">
-                    {getCondensedNumber(post.views)}
+                    0 {/* {getCondensedNumber(post.views)}  */}
                 </p>
             </section>
             <span

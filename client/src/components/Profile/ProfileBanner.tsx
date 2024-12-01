@@ -23,12 +23,12 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
         <div>
             <div className="relative w-full border-l border-r border-b border-neutral-700">
                 <img
-                    src={user?.backgroundImage ? getUserImage(user, false) : background}
+                    src={user?.backgroundImage ? getUserImage(user.backgroundImage) : background}
                     className="w-full h-[200px] cursor-pointer"
                 />
                 <div className="absolute left-5 top-[135px]">
                     <img
-                        src={user?.profileImage ? getUserImage(user, true) : avatarUrl}
+                        src={user?.profileImage ? getUserImage(user.profileImage) : avatarUrl}
                         className="w-32 rounded-full  border-[3px] border-neutral-950 cursor-pointer"
                     />
                     <div className="absolute inset-0 bg-neutral-950 bg-opacity-10 rounded-full opacity-0 hover:opacity-100 transition duration-300 cursor-pointer"></div>

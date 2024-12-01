@@ -6,9 +6,14 @@ const create = async (formData: FormData) => {
     return res.data;
 };
 
+const getOne = async (postId: number) => {
+    const res = await axios.get(`${baseUrl}/posts/${postId}`);
+    return res.data;
+};
+
 const getAll = async () => {
     const res = await axios.get(`${baseUrl}/posts`);
     return res.data;
 };
 
-export default { create, getAll };
+export default { create, getAll, getOne };

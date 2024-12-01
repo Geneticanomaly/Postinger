@@ -2,6 +2,7 @@ import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import PostFooter from '../MainFeed/Post/PostFooter';
 import { PostData } from '../../types';
 import PostForm from '../PostForm/PostForm';
+import { getUserImage } from '../../helperFunctions';
 
 type PostStatusContentType = {
     post: PostData;
@@ -9,15 +10,19 @@ type PostStatusContentType = {
 
 const PostStatusContent = ({ post }: PostStatusContentType) => {
     return (
-        <div className="flex flex-col w-full p-3 border-l border-r border-b border-neutral-700 gap-3">
+        <div className="flex flex-col w-full px-3 border-l border-r border-b border-neutral-700 gap-3">
             <div className="flex gap-3 mt-4 items-center">
                 <img
-                    src={placeholderAvatar}
+                    src={
+                        post.user.profileImage
+                            ? getUserImage(post.user.profileImage)
+                            : placeholderAvatar
+                    }
                     className="rounded-full w-10 h-10 sm:w-12 sm:h-12 cursor-pointer"
                 />
                 <section className="flex flex-col w-full">
                     <section className="flex sm:text-base text-sm items-center justify-between">
-                        <h2 className="font-bold cursor-pointer">{post.username}</h2>
+                        <h2 className="font-bold cursor-pointer">{post.user.username}</h2>
                         <button
                             className="bg-blue-50 rounded-full text-sm text-neutral-800 py-1 px-4 font-semibold
                         hover:bg-neutral-100 transition duration-200"
@@ -27,9 +32,9 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                     </section>
                 </section>
             </div>
-            <p className="text-lg">This is a thread on how to hit a draw...</p>
+            <p className="text-lg">{post.content}</p>
             <section className="mt-3 rounded-xl">
-                {post.img && (
+                {/* {post.img && (
                     <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                 )}
                 {post.video && (
@@ -39,9 +44,9 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
                     >
                         <source src={post.video} type="video/mp4" />
                     </video>
-                )}
+                )} */}
             </section>
-            <p className="text-neutral-500 hover:underline cursor-pointer">{post.date}</p>
+            <p className="text-neutral-500 hover:underline cursor-pointer">{post.createdAt}</p>
             <div className="p-2 border-b border-t border-neutral-700">
                 <PostFooter post={post} />
             </div>
