@@ -54,7 +54,7 @@ const ProfilePicture = ({
                         profileUrl
                             ? profileUrl
                             : user?.profileImage
-                            ? getUserImage(user, true)
+                            ? getUserImage(user.profileImage)
                             : placeholderAvatar
                     }
                     className="w-full h-full rounded-full border-2 border-black"

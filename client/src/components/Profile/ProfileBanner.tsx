@@ -1,4 +1,4 @@
-import background from '../../assets/profile-background.jpg';
+import backgroundUrl from '../../assets/profile-background.jpg';
 import avatarUrl from '../../assets/avatar-1577909_1280.png';
 import { IoCalendarOutline, IoLocationOutline } from 'react-icons/io5';
 import { useState } from 'react';
@@ -23,7 +23,11 @@ const ProfileBanner = ({ user }: ProfileBannerProps) => {
         <div>
             <div className="relative w-full border-l border-r border-b border-neutral-700">
                 <img
-                    src={user?.backgroundImage ? getUserImage(user.backgroundImage) : background}
+                    src={
+                        user?.backgroundImage?.buffer
+                            ? getUserImage(user.backgroundImage)
+                            : backgroundUrl
+                    }
                     className="w-full h-[200px] cursor-pointer"
                 />
                 <div className="absolute left-5 top-[135px]">

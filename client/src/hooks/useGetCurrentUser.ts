@@ -12,13 +12,14 @@ export const useGetCurrentUser = () => {
         const getCurrentUser = async () => {
             try {
                 const res = await userServices.getCurrentUser();
+                const backgroundImage = res.backgroundImage;
                 userDispatch({
                     type: 'SET',
                     payload: {
                         ...res,
                         backgroundImage: {
-                            mimetype: res.backgroundImage.mimetype,
-                            buffer: res.backgroundImage.buffer,
+                            mimetype: backgroundImage ? backgroundImage.mimetype : null,
+                            buffer: backgroundImage ? backgroundImage.buffer : null,
                         },
                     },
                 });

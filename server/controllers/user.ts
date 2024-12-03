@@ -14,6 +14,11 @@ export const getUsers = async (_req: Request, res: Response) => {
     res.json(users);
 };
 
+type UserWithImages = UserInstance & {
+    profileImage: FileInstance | null;
+    backgroundImage: FileInstance | null;
+};
+
 export const getUser = async (req: Request, res: Response) => {
     const user = await User.findOne({
         where: {
@@ -24,12 +29,19 @@ export const getUser = async (req: Request, res: Response) => {
             { model: File, as: 'backgroundImage' },
         ],
     });
-    res.status(200).json(user);
-};
 
-type UserWithImages = UserInstance & {
-    profileImage: FileInstance | null;
-    backgroundImage: FileInstance | null;
+    if (!user) {
+        res.status(400).json({ error: 'User not found' });
+        return;
+    }
+
+    const userWithImages = user as UserWithImages;
+
+    res.status(200).json({
+        ...user.toJSON(),
+        profileImage: convertToBase64(userWithImages.profileImage),
+        backgroundImage: convertToBase64(userWithImages.backgroundImage),
+    });
 };
 
 export const getCurrentUser = async (req: Request, res: Response) => {

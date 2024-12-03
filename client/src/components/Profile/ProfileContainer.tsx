@@ -21,6 +21,7 @@ const ProfileContainer = () => {
         queryKey: ['otherUser'],
         queryFn: () => userServices.getUser(username),
         enabled: user?.username !== username,
+        staleTime: 1000 * 60 * 1,
     });
 
     const displayUser = user?.username === username ? user : userData;

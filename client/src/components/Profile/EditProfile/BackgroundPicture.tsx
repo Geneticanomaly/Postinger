@@ -52,8 +52,8 @@ const BackgroundPicture = ({
                 src={
                     backgroundUrl
                         ? backgroundUrl
-                        : user?.backgroundImage
-                        ? getUserImage(user, false)
+                        : user?.backgroundImage?.buffer
+                        ? getUserImage(user.backgroundImage)
                         : placeholder
                 }
                 className="w-full h-full"
