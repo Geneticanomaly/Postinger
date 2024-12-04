@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { PostData } from '../../../types';
 import PostFooter from './PostFooter';
-import { getUserImage } from '../../../helperFunctions';
+import { getPostDate, getPostMedia, getUserImage } from '../../../helperFunctions';
 import placeholderAvatar from '../../../assets/avatar-1577909_1280.png';
 
 type PostContentType = {
@@ -10,6 +10,7 @@ type PostContentType = {
 
 const PostContent = ({ post }: PostContentType) => {
     const navigate = useNavigate();
+    const postMedia = getPostMedia(post.media);
 
     return (
         <div className="flex gap-2 p-3">
@@ -42,16 +43,22 @@ const PostContent = ({ post }: PostContentType) => {
                         >
                             {post.user.username}
                         </h2>
-                        <p className="text-neutral-500">· {post.createdAt}</p>
+                        <p className="text-neutral-500">· {getPostDate(post.createdAt)}</p>
                     </section>
                     <p>{post.content}</p>
                 </section>
 
                 <section className="mb-3 mt-3 rounded-xl ">
-                    {/* {post.img && (
-                        <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
-                    )}
-                    {post.video && (
+                    {post.media &&
+                        (postMedia && postMedia.length > 1 ? (
+                            postMedia.map((media) => <img key={media} src={media} />)
+                        ) : (
+                            <img
+                                src={postMedia[0]}
+                                className="w-full h-auto rounded-xl cursor-pointer"
+                            />
+                        ))}
+                    {/* {post.video && (
                         <video
                             className="w-full rounded-xl cursor-pointer border border-neutral-700"
                             controls

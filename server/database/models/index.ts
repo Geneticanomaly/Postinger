@@ -83,17 +83,23 @@ User.hasOne(File, {
     foreignKey: 'userId',
     scope: { fileType: 'profileImage' },
 });
-File.belongsTo(User, { foreignKey: 'userId' });
+File.belongsTo(User, { foreignKey: 'userId', as: 'profileImage' });
+
 User.hasOne(File, {
     as: 'backgroundImage',
     foreignKey: 'userId',
     scope: { fileType: 'backgroundImage' },
 });
-File.belongsTo(User, { foreignKey: 'userId' });
+File.belongsTo(User, { foreignKey: 'userId', as: 'backgroundImage' });
 
 /* Post and File Relationships */
-Post.hasMany(File, { foreignKey: 'postId', onDelete: 'CASCADE' });
-File.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
+Post.hasMany(File, {
+    foreignKey: 'postId',
+    as: 'media',
+    // scope: { fileType: 'postMedia' },
+    onDelete: 'CASCADE',
+});
+File.belongsTo(Post, { foreignKey: 'postId', as: 'media', onDelete: 'CASCADE' });
 
 /* Message and File Relationships */
 Message.hasMany(File, { foreignKey: 'messageId', onDelete: 'CASCADE' });

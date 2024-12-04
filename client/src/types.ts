@@ -37,6 +37,7 @@ export type PostData = {
         username: string;
         profileImage: UserImage | null;
     };
+    media: PostMedia[] | null;
 };
 
 // export type PostData = {
@@ -65,4 +66,9 @@ export type UserImage = {
     mimetype: string;
     buffer: string;
     fileType?: string;
+};
+
+export type PostMedia = {
+    mimetype: string;
+    buffer: string;
 };

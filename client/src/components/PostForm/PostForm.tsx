@@ -33,7 +33,7 @@ const PostForm = () => {
             formData.append('userId', user.id);
             if (text) formData.append('content', text);
             if (file) formData.append('file', file);
-            formData.append('fileType', 'postImage');
+            formData.append('fileType', 'postMedia');
 
             const res = await postServices.create(formData);
             console.log(res);

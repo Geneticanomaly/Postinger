@@ -2,13 +2,15 @@ import placeholderAvatar from '../../assets/avatar-1577909_1280.png';
 import PostFooter from '../MainFeed/Post/PostFooter';
 import { PostData } from '../../types';
 import PostForm from '../PostForm/PostForm';
-import { getUserImage } from '../../helperFunctions';
+import { getPostMedia, getUserImage } from '../../helperFunctions';
 
 type PostStatusContentType = {
     post: PostData;
 };
 
 const PostStatusContent = ({ post }: PostStatusContentType) => {
+    const postMedia = getPostMedia(post.media);
+
     return (
         <div className="flex flex-col w-full px-3 border-l border-r border-b border-neutral-700 gap-3">
             <div className="flex gap-3 mt-4 items-center">
@@ -34,6 +36,15 @@ const PostStatusContent = ({ post }: PostStatusContentType) => {
             </div>
             <p className="text-lg">{post.content}</p>
             <section className="mt-3 rounded-xl">
+                {post.media &&
+                    (postMedia && postMedia.length > 1 ? (
+                        postMedia.map((media) => <img key={media} src={media} />)
+                    ) : (
+                        <img
+                            src={postMedia[0]}
+                            className="w-full h-auto rounded-xl cursor-pointer"
+                        />
+                    ))}
                 {/* {post.img && (
                     <img src={post.img} className="w-full h-auto rounded-xl cursor-pointer" />
                 )}

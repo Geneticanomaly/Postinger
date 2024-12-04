@@ -25,7 +25,6 @@ const PostStatusContainer = () => {
 
     if (isLoading || error) return <div>Loading...</div>;
 
-    console.log('MY POST', post);
     return (
         <div className="w-full sm:w-[500px] md:w-[600px] lg:w-[900px]">
             <div className="flex justify-center gap-4 xl:gap-10">

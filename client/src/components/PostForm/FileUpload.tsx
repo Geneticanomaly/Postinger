@@ -19,6 +19,7 @@ const FileUpload = ({ setFile, setFileUrl }: FileUploadProps) => {
 
             setFile(selectedFile);
             setFileUrl(URL.createObjectURL(selectedFile));
+            e.target.value = '';
         }
     };
 

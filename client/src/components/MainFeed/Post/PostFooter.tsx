@@ -1,7 +1,7 @@
 import { PostData } from '../../../types';
 import { getCondensedNumber } from '../../../helperFunctions';
 import { TbMessageCircle } from 'react-icons/tb';
-import { LiaRetweetSolid } from 'react-icons/lia';
+import { AiOutlineRetweet } from 'react-icons/ai';
 import { BiBarChart } from 'react-icons/bi';
 import { IoMdHeartEmpty } from 'react-icons/io';
 import { IoBookmarkOutline } from 'react-icons/io5';
@@ -39,7 +39,7 @@ const PostFooter = ({ post }: PostFooterType) => {
                     className="p-[7px] rounded-full text-xl text-neutral-500 transition duration-200
                     group-hover/reposts:bg-green-500 group-hover/reposts:bg-opacity-10 group-hover/reposts:text-green-500"
                 >
-                    <LiaRetweetSolid />
+                    <AiOutlineRetweet />
                 </span>
                 <p className="text-[13px] text-neutral-500 group-hover/reposts:text-green-500 transition duration-200 -ml-1">
                     {getCondensedNumber(post.reposts)}

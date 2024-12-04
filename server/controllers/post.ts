@@ -13,17 +13,33 @@ interface PostWithUser extends PostInstance {
         username: string;
         profileImage: FileInstance | null;
     };
+    media: FileInstance | null;
 }
 
 export const getPosts = async (_req: Request, res: Response) => {
     const posts = await Post.findAll({
+        // where: { id: 10 },
         include: [
             {
                 model: User,
                 attributes: ['username'],
-                include: [{ model: File, as: 'profileImage', attributes: ['mimetype', 'buffer'] }],
+                include: [
+                    {
+                        model: File,
+                        as: 'profileImage',
+                        attributes: ['mimetype', 'buffer'],
+                        foreignKey: 'userId',
+                    },
+                ],
+            },
+            {
+                model: File,
+                as: 'media',
+                attributes: ['mimetype', 'buffer'],
+                foreignKey: 'postId',
             },
         ],
+        order: [['createdAt', 'DESC']],
     });
 
     const returnedPosts = (posts as PostWithUser[]).map((post) => {
@@ -33,6 +49,10 @@ export const getPosts = async (_req: Request, res: Response) => {
                 username: post.user.username,
                 profileImage: convertToBase64(post.user.profileImage),
             },
+            // Handle multiple files due to hasMany relationship
+            media: Array.isArray(post.media)
+                ? post.media.map((media) => convertToBase64(media))
+                : convertToBase64(post.media),
         };
     });
 
@@ -47,6 +67,12 @@ export const getPost = async (req: Request<{ id: number }, {}, {}>, res: Respons
                 model: User,
                 attributes: ['username'],
                 include: [{ model: File, as: 'profileImage', attributes: ['mimetype', 'buffer'] }],
+            },
+            {
+                model: File,
+                as: 'media',
+                attributes: ['mimetype', 'buffer'],
+                foreignKey: 'postId',
             },
         ],
     });
@@ -64,6 +90,9 @@ export const getPost = async (req: Request<{ id: number }, {}, {}>, res: Respons
             username: postToReturn.user.username,
             profileImage: convertToBase64(postToReturn.user.profileImage),
         },
+        media: Array.isArray(postToReturn.media)
+            ? postToReturn.media.map((media) => convertToBase64(media))
+            : convertToBase64(postToReturn.media),
     });
 };
 

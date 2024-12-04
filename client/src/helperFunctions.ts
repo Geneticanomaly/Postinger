@@ -1,5 +1,5 @@
 import { Area } from 'react-easy-crop';
-import { UserImage } from './types';
+import { PostMedia, UserImage } from './types';
 
 export const getCondensedNumber = (amount: number): string => {
     // 1K - 9.9K range
@@ -84,9 +84,51 @@ export const getJoinDate = (createdAt: string | undefined): string => {
     return '';
 };
 
+export const getPostDate = (createdAt: string): string => {
+    const date = new Date(createdAt);
+    const now = new Date();
+
+    const timeDifference = now.getTime() - date.getTime();
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(timeDifference / (1000 * 60));
+    const hours = Math.floor(timeDifference / (1000 * 60 * 60));
+
+    // Return time in seconds
+    if (timeDifference < 60 * 1000) {
+        return `${seconds}s`;
+    }
+
+    // Return time in minutes
+    if (timeDifference < 60 * 60 * 1000) {
+        return `${minutes}m`;
+    }
+
+    // Return time in hours
+    if (timeDifference < 24 * 60 * 60 * 1000) {
+        return `${hours}h`;
+    }
+
+    // Return in format M/D/Y
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+    });
+};
+
 export const getUserImage = (image: UserImage | undefined): string => {
     if (image) {
-        return `data:${image?.mimetype};base64,${image?.buffer}`;
+        return `data:${image.mimetype};base64,${image.buffer}`;
+    }
+    return '';
+};
+
+export const getPostMedia = (media: PostMedia[] | null) => {
+    if (media) {
+        const medias = media.map((media) => {
+            return `data:${media.mimetype};base64,${media.buffer}`;
+        });
+        return medias;
     }
     return '';
 };
