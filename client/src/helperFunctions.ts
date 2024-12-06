@@ -123,7 +123,7 @@ export const getUserImage = (image: UserImage | undefined): string => {
     return '';
 };
 
-export const getPostMedia = (media: PostMedia[] | null) => {
+export const getPostMedia = (media: PostMedia[] | null | undefined) => {
     if (media) {
         const medias = media.map((media) => {
             return `data:${media.mimetype};base64,${media.buffer}`;

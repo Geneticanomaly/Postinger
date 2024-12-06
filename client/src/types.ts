@@ -22,7 +22,7 @@ export type SidebarOption = {
     filledLogo?: IconType;
 };
 
-export type PostData = {
+export type BasePost = {
     id: number;
     userId: string;
     parentPostId: number | null;
@@ -33,25 +33,18 @@ export type PostData = {
     reposts: number;
     createdAt: string;
     updatedAt: string;
-    user: {
-        username: string;
-        profileImage: UserImage | null;
-    };
-    media: PostMedia[] | null;
 };
 
-// export type PostData = {
-//     id: number;
-//     username: string;
-//     title: string;
-//     img?: string;
-//     video?: string;
-//     date: string;
-//     avatarUrl: string;
-//     replies: number;
-//     reposts: number;
-//     likes: number;
-//     views: number;
+export type PostData = BasePost & {
+    user: {
+        username: string;
+        profileImage: UserImage | null | undefined;
+    };
+    media?: PostMedia[] | null;
+};
+
+// export type UserPosts = BasePost & {
+//     media: PostMedia[] | null;
 // };
 
 export type UpdateUserPayload = {

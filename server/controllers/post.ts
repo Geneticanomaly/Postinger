@@ -3,22 +3,12 @@ import multer from 'multer';
 require('express-async-errors');
 import models from '../database/models';
 import { convertToBase64 } from '../util/helperFunctions';
-import FileInstance from '../database/models/file';
-import PostInstance from '../database/models/post';
+import { CreatePostRequest, PostWithUser } from '../types';
 
 const { Post, File, User } = models;
 
-interface PostWithUser extends PostInstance {
-    user: {
-        username: string;
-        profileImage: FileInstance | null;
-    };
-    media: FileInstance | null;
-}
-
 export const getPosts = async (_req: Request, res: Response) => {
     const posts = await Post.findAll({
-        // where: { id: 10 },
         include: [
             {
                 model: User,
@@ -96,13 +86,6 @@ export const getPost = async (req: Request<{ id: number }, {}, {}>, res: Respons
     });
 };
 
-type CreatePostRequest = {
-    userId: string;
-    parentPostId: number | null;
-    content: string;
-    fileType: string;
-};
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
@@ -145,4 +128,50 @@ export const createPost = async (req: Request<{}, {}, CreatePostRequest>, res: R
 export const getFiles = async (_req: Request, res: Response) => {
     const files = await File.findAll({ attributes: { exclude: ['buffer'] } });
     res.json(files);
+};
+
+export const getUserPosts = async (req: Request<{ username: string }, {}, {}>, res: Response) => {
+    const username = req.params.username;
+
+    const user = await User.findOne({ where: { username: username } });
+
+    if (!user) {
+        res.status(400).json({ error: 'No such user found!' });
+        return;
+    }
+
+    const posts = await Post.findAll({
+        where: { userId: user.id },
+        include: [
+            {
+                model: User,
+                attributes: ['username'],
+                include: [{ model: File, as: 'profileImage', attributes: ['mimetype', 'buffer'] }],
+            },
+            { model: File, as: 'media', attributes: ['mimetype', 'buffer'], foreignKey: 'postId' },
+        ],
+    });
+
+    const userPosts = (posts as PostWithUser[]).map((post) => {
+        return {
+            ...post.toJSON(),
+            user: {
+                username: post.user.username,
+                profileImage: convertToBase64(post.user.profileImage),
+            },
+            media: Array.isArray(post.media)
+                ? post.media.map((media) => convertToBase64(media))
+                : convertToBase64(post.media),
+        };
+    });
+
+    res.status(200).json(userPosts);
+};
+
+export const getUserReplies = async (_req: Request, res: Response) => {
+    res.status(200).json();
+};
+
+export const getUserLikes = async (_req: Request, res: Response) => {
+    res.status(200).json();
 };

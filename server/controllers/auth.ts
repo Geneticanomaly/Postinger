@@ -4,14 +4,9 @@ import 'express-async-errors';
 import { clearAuthCookies, sendAuthCookies } from '../util/createAuthTokens';
 import { isAuthenticated } from '../util/middleware';
 import models from '../database/models';
+import { RegisterRequest, LoginRequest } from '../types';
 
 const { User, File } = models;
-
-type RegisterRequest = {
-    email: string;
-    password: string;
-    username: string;
-};
 
 export const registerAuth = async (req: Request<{}, {}, RegisterRequest>, res: Response) => {
     const { email, username, password } = req.body;
@@ -28,11 +23,6 @@ export const registerAuth = async (req: Request<{}, {}, RegisterRequest>, res: R
     });
 
     res.status(201).json(user);
-};
-
-type LoginRequest = {
-    email: string;
-    password: string;
 };
 
 export const loginAuth = async (req: Request<{}, {}, LoginRequest>, res: Response) => {

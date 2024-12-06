@@ -16,14 +16,25 @@ const PostStatusContainer = () => {
 
     const {
         data: post,
-        isLoading,
-        error,
+        isLoading: postIsLoading,
+        error: postError,
     } = useQuery<PostData>({
         queryKey: ['post'],
         queryFn: () => postServices.getOne(Number(params.postId)),
     });
 
-    if (isLoading || error) return <div>Loading...</div>;
+    const {
+        data: userPosts,
+        isLoading,
+        error,
+    } = useQuery<PostData[]>({
+        queryKey: ['userPosts'],
+        queryFn: () => postServices.getUserPosts(user?.id),
+    });
+
+    console.log('USERPOSTS', userPosts);
+
+    if (postIsLoading || isLoading || postError || error) return <div>Loading...</div>;
 
     return (
         <div className="w-full sm:w-[500px] md:w-[600px] lg:w-[900px]">
@@ -31,7 +42,7 @@ const PostStatusContainer = () => {
                 <div className="w-full">
                     <Header user={user} />
                     {post ? <PostStatusContent post={post} /> : <Loading isButton={false} />}
-                    <Posts />
+                    <Posts posts={userPosts} />
                 </div>
                 <SideContent />
             </div>

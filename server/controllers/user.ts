@@ -2,21 +2,15 @@ import { Request, Response } from 'express';
 import multer from 'multer';
 import { isAuthenticated } from '../util/middleware';
 require('express-async-errors');
-import UserInstance from '../database/models/user';
-import FileInstance from '../database/models/file';
 import models from '../database/models';
 import { convertToBase64 } from '../util/helperFunctions';
+import { updateUserImageRequest, UserDataRequest, UserWithImages } from '../types';
 
 const { User, File } = models;
 
 export const getUsers = async (_req: Request, res: Response) => {
     const users = await User.findAll();
     res.json(users);
-};
-
-type UserWithImages = UserInstance & {
-    profileImage: FileInstance | null;
-    backgroundImage: FileInstance | null;
 };
 
 export const getUser = async (req: Request, res: Response) => {
@@ -73,12 +67,6 @@ export const getCurrentUser = async (req: Request, res: Response) => {
     });
 };
 
-type UserDataRequest = {
-    username: string;
-    description: string;
-    residence: string;
-};
-
 export const updateUserData = async (req: Request<{}, {}, UserDataRequest>, res: Response) => {
     const { username, description, residence } = req.body;
     const user = await User.findOne({ where: { username: username } });
@@ -101,11 +89,6 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const uploadMiddleware = upload.single('file');
-
-type updateUserImageRequest = {
-    userId: string;
-    fileType: string;
-};
 
 export const updateUserImage = async (
     req: Request<{}, {}, updateUserImageRequest>,

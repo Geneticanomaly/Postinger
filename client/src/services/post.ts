@@ -16,4 +16,9 @@ const getAll = async () => {
     return res.data;
 };
 
-export default { create, getAll, getOne };
+const getUserPosts = async (username: string | undefined) => {
+    const res = await axios.get(`${baseUrl}/userPosts/${username}`);
+    return res.data;
+};
+
+export default { create, getAll, getOne, getUserPosts };
