@@ -14,7 +14,7 @@ const SideContent = () => {
 
     return (
         <div className=" hidden lg:flex flex-col items-center">
-            <form className="sticky top-0.5 z-20">
+            <form className="sticky top-0.5 z-[1]">
                 <div className="flex items-center">
                     <span className="absolute ml-4 mt-1">
                         <IoSearchOutline

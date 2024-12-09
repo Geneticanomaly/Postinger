@@ -27,7 +27,7 @@ const ProfileButton = () => {
             {showModal && <LogoutModal />}
             {showModal && (
                 <div
-                    className="fixed z-20 top-0 left-0 w-full h-full cursor-default"
+                    className="fixed z-10 top-0  left-0 w-full h-full cursor-default"
                     onClick={() => setShowModal(false)}
                 ></div>
             )}
